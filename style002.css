@@ -1,0 +1,1063 @@
+
+body {
+            font-family: "Inter", sans-serif;
+            background-color: #f0f2f5; 
+            display: flex;
+            justify-content: center;
+            align-items: right;
+            min-height: 100vh;
+            padding: 1rem; 
+        }
+       
+        h1 {
+            font-size: 2rem;
+            color: #333; 
+            margin-bottom: 1rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            color: #555; 
+            margin-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.25rem;
+            color: #777; 
+            margin-bottom: 0.5rem;
+        }
+        p {
+            font-size: 1rem;
+            color: #888; /* Light gray text color */
+            margin-bottom: 1rem;
+        }
+        a {
+            color: #007bff; /* Bootstrap primary color */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .div-clas{
+            display: flex;
+        }
+        .flex {
+            display: flex;
+        }
+        .flex-col {
+            flex-direction: column;
+        }
+        .flex-row {
+            flex-direction: row;
+        }
+        .justify-center {
+            justify-content: right;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .items-center {
+            align-items: right;
+        }
+        .items-start {
+            align-items: flex-start;
+        }
+        .items-end {
+            align-items: flex-end;
+        }
+        .min-w-fit {
+            min-width: fit-content;
+        }
+        .w-full {
+            width: 100%;
+        }
+
+        .w-fit {
+            width: fit-content;
+        }
+        .h-full {
+            height: 100%;
+        }   
+        .h-10 {
+            height: 2.5rem;
+        }
+        .h-20 {
+            height: 5rem;
+        }
+        .shadow-sm {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .shadow {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .transition-background {
+            transition: background-color 0.3s ease-in-out;
+        }
+        .transition-colors {
+            transition: color 0.3s ease-in-out;
+        }
+        .transition-transform {
+            transition: transform 0.3s ease-in-out;
+        }
+        .transition-duration-150 {
+            transition-duration: 150ms;
+        }
+        .transition-ease-in-out {
+            transition-timing-function: ease-in-out;
+        }
+        .motion-reduce\\:transition-none {
+            transition: none;
+        }
+        .is-filled {
+            background-color: #f3f4f6;
+        }
+        .is-filled-within {
+            background-color: #e5e7eb;
+        }
+        .is-filled input {
+            background-color: transparent;
+        }
+        .is-filled input:focus {
+            outline: none;
+        }
+        .is-filled input::placeholder {
+            color: #9ca3af;
+        }
+        .is-filled input:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="text"] {
+            color: #111827;
+        }
+        .is-filled input[type="text"]:focus {
+            color: #1f2937;
+        }
+        .is-filled input[type="text"]::placeholder {
+            color: #6b7280;
+        }
+        .is-filled input[type="number"]:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"] {
+            cursor: pointer;
+        }
+        .is-filled input[type="file"]::file-selector-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .is-filled input[type="file"]::file-selector-button:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus {
+            outline: none;
+            background-color: #e5e7eb;
+            color: #111827;
+
+
+}
+        .is-filled input[type="file"]::file-selector-button:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .flex-grow {
+            flex-grow: 1;
+        }
+        .bg-background {
+            background-color: #ffffff;
+        }
+        .rounded-xl {
+            border-radius: 12px;
+        }
+        .overflow-auto {
+            overflow: auto;
+        }
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .swiper-zoom-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .swiper-zoom-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+        .swiper-wrapper {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+        .swiper-slide {
+            flex: 0 0 auto;
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-horizontal {
+            flex-direction: row;
+        }
+        .swiper-vertical {
+            flex-direction: column;
+        }
+        .swiper-pagination {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background-color: #000;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #007aff;
+        }
+        .text-base {
+            font-size: 16px;
+            line-height: 24px;
+        }
+        .text-lg {
+            font-size: 18px;
+            line-height: 28px;
+        }
+        .text-md {
+            font-size: 16px;
+            line-height: 24px;
+        }
+        
+        .text-small {
+            font-size: 14px;
+        }
+        .text-sm {
+            font-size: 16px;
+        }
+        .text-xl {
+            font-size: 20px;
+        }
+        .text-2xl {
+            font-size: 24px;
+        }
+        .text-3xl {
+            font-size: 30px;
+        }
+        .text-slate-500 {
+            color: #6b7280;
+        }
+        .bg-gray-100 {
+            background-color: #f3f4f6;
+        }
+        .bg-gray-300 {
+            background-color: #d1d5db;
+        }
+        .bg-danger {
+            background-color: #f87171;
+        }
+        .text-danger-foreground {
+            color: #ffffff;
+        }
+        .border-2 {
+            border-width: 2px;
+        }
+        .border-background {
+            border-color: #ffffff;
+        }
+        .border-default-200 {
+            border-color: #e5e7eb;
+        }
+        .border-default-400 {
+            border-color: #9ca3af;
+        }
+
+
+.border-default-foreground {
+            border-color: #111827;
+        }
+        .rounded-full {
+            border-radius: 9999px;
+        }
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .px-1 {
+            padding-left: 0.25rem;
+            padding-right: 0.25rem;
+        }
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        .gap-1 {
+            gap: 0.25rem;
+        }
+        .gap-2 {
+            gap: 0.5rem;
+        }
+        .gap-3 {
+            gap: 0.75rem;
+        }
+        .gap-4 {
+            gap: 1rem;
+        }
+        .gap-6 {
+            gap: 1.5rem;
+        }
+        .flex {
+            display: flex;
+        }
+        .flex-col {
+            flex-direction: column;
+        }
+        .flex-row {
+            flex-direction: row;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .items-start {
+            align-items: flex-start;
+        }
+        .items-end {
+            align-items: flex-end;
+        }
+        .min-w-fit {
+            min-width: fit-content;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .w-fit {
+            width: fit-content;
+        }
+        .h-full {
+            height: 100%;
+        }
+        .h-10 {
+            height: 2.5rem;
+        }
+        .h-20 {
+            height: 5rem;
+        }
+        .shadow-sm {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        .shadow {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .transition-background {
+            transition: background-color 0.3s ease-in-out;
+        }
+        .transition-colors {
+            transition: color 0.3s ease-in-out;
+        }
+        .transition-transform {
+            transition: transform 0.3s ease-in-out;
+        }
+        .transition-duration-150 {
+            transition-duration: 150ms;
+        }
+        .transition-ease-in-out {
+            transition-timing-function: ease-in-out;
+        }
+        .motion-reduce\\:transition-none {
+            transition: none;
+        }
+        .is-filled {
+            background-color: #f3f4f6;
+        }
+        .is-filled-within {
+            background-color: #e5e7eb;
+        }
+        .is-filled input {
+            background-color: transparent;
+        }
+        .is-filled input:focus {
+            outline: none;
+        }
+        .is-filled input[type="file"]::file-selector-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .is-filled input[type="file"]::file-selector-button:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus {
+            outline: none;
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+
+
+.is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+
+
+outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+
+
+.is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }  
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+
+
+.is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+
+
+.is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:hover {
+            background-color: #d1d5db;
+            color: #6b7280;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+
+
+.is-filled input[type="file"]::file-selector-button:focus-visible:focus {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus::placeholder {
+            color: transparent;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        .is-filled input[type="file"]::file-selector-button:focus-visible:focus-visible::placeholder {
+            color: transparent;
+        }
+        .h3 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            line-height: 2.25rem;
+        }
+        .h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 2rem;
+        }
+        .h5 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 1.75rem;
+        }
+        .h6 {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5rem;
+        }
+        .text-gray-500 {
+            color: #6b7280;
+        }
+        .text-gray-700 {
+            color: #374151;
+        }
+        .text-gray-900 {
+            color: #111827;
+        }
+        .text-gray-200 {
+            color: #e5e7eb;
+        }
+        .text-gray-100 {
+            color: #f3f4f6;
+        }
+        .text-blue-500 {
+            color: #3b82f6;
+        }
+        .text-blue-600 {
+            color: #2563eb;
+        }
+        .text-blue-700 {
+            color: #1d4ed8;
+        }
+        .text-blue-800 {
+            color: #1e40af;
+        }
+        .text-blue-900 {
+            color: #1e3a8a;
+        }
+        .text-blue-400 {
+            color: #60a5fa;
+        }
+        .text-blue-300 {
+            color: #93c5fd;
+        }
+        .text-blue-200 {
+            color: #bfdbfe;
+        }
+        .text-blue-100 {
+            color: #dbeafe;
+        }
+        .text-green-500 {
+            color: #10b981;
+        }
+        .text-green-400 {
+            color: #6ee7b7;
+        }   
+        .text-green-300 {
+            color: #34d399;
+        }
+        .text-green-200 {
+            color: #a7f3d0;
+        }
+        .text-green-100 {
+            color: #d1fae5;
+        }
+        .text-red-500 {
+            color: #ef4444;
+        }
+        .text-red-600 {
+            color: #dc2626;
+        }
+        .text-red-700 {
+            color: #b91c1c;
+        }
+        .text-red-800 {
+            color: #991b1b;
+        }
+        .text-red-900 {
+            color: #7f1d1d;
+        }
+        .text-red-400 {
+            color: #f87171;
+        }

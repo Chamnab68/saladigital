@@ -1,0 +1,449 @@
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background-color: white;
+  }
+  .crop{
+    margin: auto;
+    display: flex;
+    
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  
+
+  .logo img {
+    height: 40px;
+    margin-left: 85px;
+  }
+
+  .search-box {
+    flex: 1;
+    margin: 0 30px;
+    margin-right: 355px;
+    
+  }
+
+  .search-box input {
+    width: 400px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 26px;
+    border: 1px solid #ccc;
+    font-family: "Khmer OS Siemreap";
+  }
+
+  .nav-icons  img{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    width: 40px;
+    margin-left: 10px;
+    display: flex;
+    
+  }
+
+  .nav-icons span {
+    font-size: 14px;
+    color: #333;
+    font-family: "Khmer OS Siemreap";
+    font-size: 15px;
+    cursor: pointer;
+    font: bold;
+    margin-left: 35px;
+  }
+
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 80px 20px 40px;
+    background: url('https://saladigital.org/_next/image?url=%2Fimages%2Fweteka_video.gif&w=2048&q=75') no-repeat center center;
+    background-size: cover;
+    color: white;
+    line-height: 1.2;
+    overflow: hidden;
+    height: 100vh;
+    border-radius: 5px;
+  }
+  
+  /*  blur  por layer */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 53, 248, 0.4); /* Transparent black overlay */
+    backdrop-filter: blur(6px); /* Optional: apply blur effect */
+    z-index: 1;
+  }
+  
+  
+  .hero * {
+    position: relative;
+    z-index: 2;
+  }
+  
+  
+
+  .hero h1 {
+    font-size: 155px;
+    margin: 0;
+    font: bold;
+    font-family: "Khmer OS Battambang";
+    margin-top: 95px;
+  }
+
+  .hero h4 {
+    font-size: 78px;
+    font-weight: 600;
+    
+    margin: 0;
+    font: bold;
+    font-family: "Khmer OS Battambang";
+    
+  }
+
+  .hero p {
+    max-width: 1200px;
+    margin: 20px auto;
+    font-size: 22px;
+    line-height: 1.6;
+    text-align: center;
+    font-family: "Khmer OS Battambang";
+    padding-top: 20px;
+  }
+
+  .users {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+  }
+
+  .user {
+    text-align: center;
+  }
+
+  .user h2 {
+    font-size: 70px;
+    margin-bottom: 10px;
+    margin: auto;
+    font-family: "Arial Black";
+    
+  }
+
+  .user p {
+    font-size: 28px;
+    margin: 0;
+    margin: auto;
+    font: bold;
+    
+  }
+
+  .btn-login {
+    background-color: #3e7b98;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Khmer OS Siemreap";
+    width: 125px;
+    margin-left: 35px;
+  }
+ .btn-login:hover{
+    background-color: rgb(81, 205, 243);
+    
+ }
+.about h2{
+  font-family: "Khmer OS Siemreap";
+  margin-left: 155px;
+  margin-top: 55px;
+  display: block;
+  
+}
+ 
+ 
+
+/* card*/
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 10px;
+  justify-content: center;
+  padding-bottom: 10px;
+  
+}
+
+
+.card {
+  
+  width: 300px;
+  height: 470px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+ 
+}
+
+
+
+/* កូនកាតសម្រាប់ដាក់រូប */
+.image-inner-card {
+  background-color: #cb4343;
+  border-radius: 15px 15px 15px 15px;
+  overflow: hidden;
+  height: 480px;
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  object-fit: cover;
+  overflow: hidden;
+  width: 275px;
+  
+}
+.image-inner-card:hover {
+  transform: translateY(-5px);
+  
+}
+
+.card img.cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ឲរូបពេញកាត */
+ 
+  display: block;
+}
+.card-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px 0;
+  color: #333;
+  font-family: "Khmer OS Siemreap";
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #444;
+  font-family: "Khmer OS Siemreap";
+  font-weight: bold;
+}
+
+.author img {
+  width: 40px;
+  margin-right: 6px;
+}
+
+.views {
+  font-size: 13px;
+  color: #777;
+  margin-left: 46px;
+  margin-top: 3px;
+}
+
+
+/* sala​ */
+
+.card1 {
+  background-color: white;
+  border-radius: 12px;
+  width: 380px;
+  height: 340px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+}
+
+.banner {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.profile-section {
+  padding: 15px;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-top: -45px;
+  border: 3px solid white;
+  object-fit: cover;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.profile-info h3 {
+  font-size: 15px;
+  margin: 0;
+  font-weight: bold;
+  font-family: "Khmer OS Siemreap";
+}
+
+.verified {
+  color: #3b82f6;
+  font-size: 16px;
+}
+
+.description {
+  font-size: 13px;
+  color: #444;
+  margin-top: 10px;
+  font-family: "Khmer OS Siemreap";
+}
+
+.meta {
+  display: flex;
+  justify-content: space-around;
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  font-family: "Khmer OS Siemreap";
+}
+
+/* me rean​ */
+.card2 {
+  
+  width: 380px;
+  height: 340px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+}
+
+.image-inner-card1{
+  background-color: #cb4343;
+  border-radius: 15px 15px 15px 15px;
+  overflow: hidden;
+  height: 480px;
+  
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  object-fit: cover;
+  overflow: hidden;
+  width: 355px;
+  
+}
+.image-inner-card1:hover {
+  transform: translateY(-5px);
+  
+}
+.image-inner-card2:hover {
+  transform: translateY(-5px);
+  
+}
+
+/* faoter*/
+.footer {
+  background-color: #fff;
+  padding: 40px 20px;
+  border-top: 1px solid #ddd;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-column h4 {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: "Khmer OS Siemreap";
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-family: "Khmer OS Siemreap";
+}
+
+.footer-column img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.footer-column i {
+  margin-right: 8px;
+  font-size: 18px;
+  font-family: "Khmer OS Siemreap";
+}
+
+.partners img {
+  width: 60px;
+  height: auto;
+  margin: 5px 10px 5px 0;
+  vertical-align: middle;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 20px 10px;
+  border-top: 1px solid #ccc;
+  font-size: 14px;
+  color: #444;
+}
+
+p{
+  font-family: "Khmer OS Siemreap";
+}
