@@ -75,9 +75,13 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
       </nav>
 
       <div class="flex items-center gap-3">
-        <button onclick="openModal('login-modal')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-700 shadow-md active:scale-95 transition">
+        <button id="navbar-login-btn" onclick="openModal('login-modal')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-700 shadow-md active:scale-95 transition">
           <i class="bi bi-box-arrow-in-right"></i><span>ចូលគណនី</span>
         </button>
+        <div id="navbar-user" class="hidden items-center gap-2">
+          <span id="navbar-user-name" class="max-w-32 truncate text-sm font-semibold text-slate-700"></span>
+          <button onclick="handleLogout()" class="px-3 py-2 rounded-full text-xs font-semibold text-slate-600 border border-slate-200 hover:bg-slate-50"><i class="bi bi-box-arrow-right"></i> ចាកចេញ</button>
+        </div>
         <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2.5 rounded-xl border border-slate-200 text-slate-600"><i class="bi bi-list text-xl"></i></button>
       </div>
     </div>
@@ -268,14 +272,21 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
 
         <div id="tab-panel-reviews" class="hidden bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
           <h3 class="font-serifKhmer text-xl font-bold"><i class="bi bi-star-half text-amber-500"></i> ការវាយតម្លៃ និងមតិយោបល់</h3>
-          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
+          <div id="review-auth-prompt" class="hidden bg-sky-50 p-5 rounded-2xl border border-sky-100 text-center">
+            <p class="text-sm text-slate-700 mb-4">សូមចូលគណនី ឬចុះឈ្មោះ ជាមុនសិន ដើម្បីផ្តល់មតិយោបល់</p>
+            <div class="flex justify-center gap-3">
+              <button onclick="openModal('login-modal')" class="px-5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs">ចូលគណនី</button>
+              <button onclick="openModal('register-modal')" class="px-5 py-2 rounded-xl border border-sky-600 text-sky-700 hover:bg-sky-100 font-semibold text-xs">ចុះឈ្មោះ</button>
+            </div>
+          </div>
+          <div id="review-form" class="hidden bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
             <div class="flex items-center gap-2 mb-3 text-xs text-slate-600">ផ្តល់ពិន្ទុ៖
               <div id="review-star-selector" class="flex text-amber-400 text-sm gap-1">
                 <i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(1)"></i><i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(2)"></i><i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(3)"></i><i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(4)"></i><i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(5)"></i>
               </div>
             </div>
             <textarea id="user-comment-input" rows="3" placeholder="សូមសរសេរមតិយោបល់របស់អ្នកនៅទីនេះ..." class="w-full p-3 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 mb-2"></textarea>
-            <div class="flex justify-end"><button onclick="submitUserComment()" class="px-5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs"><i class="bi bi-send"></i> ផ្ញើមតិយោបល់</button></div>
+            <div class="flex justify-end"><button id="submit-review-btn" onclick="submitUserComment()" class="px-5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs"><i class="bi bi-send"></i> ផ្ញើមតិយោបល់</button></div>
           </div>
           <div id="detail-comments-container" class="space-y-4"></div>
         </div>
@@ -377,11 +388,30 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
       <button onclick="closeModal('login-modal')" class="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400"><i class="bi bi-x-lg"></i></button>
     </div>
     <form onsubmit="handleLoginSubmit(event)" class="space-y-4 text-xs">
-      <div><label class="block font-medium mb-1">អ៊ីមែល ឬលេខទូរស័ព្ទ</label><input type="text" required placeholder="user@domain.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
-      <div><label class="block font-medium mb-1">ពាក្យសម្ងាត់</label><input type="password" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
-      <button type="submit" class="w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold">ចូលគណនី</button>
+      <div><label class="block font-medium mb-1">អ៊ីមែល</label><input id="login-email" type="email" required autocomplete="email" placeholder="user@domain.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+      <div><label class="block font-medium mb-1">ពាក្យសម្ងាត់</label><input id="login-password" type="password" required autocomplete="current-password" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+      <p id="login-error" class="hidden text-rose-600" role="alert"></p>
+      <button id="login-submit-btn" type="submit" class="w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold">ចូលគណនី</button>
     </form>
-    <div class="mt-4 pt-4 border-t border-slate-100 text-center text-xs text-slate-500">មិនទាន់មានគណនី? <button onclick="closeModal('login-modal');openModal('register-school-modal')" class="text-sky-600 font-semibold">ចុះឈ្មោះថ្មី</button></div>
+    <div class="mt-4 pt-4 border-t border-slate-100 text-center text-xs text-slate-500">មិនទាន់មានគណនី? <button onclick="closeModal('login-modal');openModal('register-modal')" class="text-sky-600 font-semibold">ចុះឈ្មោះថ្មី</button></div>
+  </div>
+</div>
+
+<!-- REGISTER USER MODAL -->
+<div id="register-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+  <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 modal-enter">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="font-serifKhmer text-lg font-bold">បង្កើតគណនីសាលាឌីជីថល</h3>
+      <button onclick="closeModal('register-modal')" class="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <form onsubmit="handleRegisterSubmit(event)" class="space-y-4 text-xs">
+      <div><label class="block font-medium mb-1">ឈ្មោះពេញ</label><input id="register-full-name" type="text" required autocomplete="name" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+      <div><label class="block font-medium mb-1">អ៊ីមែល</label><input id="register-email" type="email" required autocomplete="email" placeholder="user@domain.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+      <div><label class="block font-medium mb-1">ពាក្យសម្ងាត់ (យ៉ាងតិច ៦ តួ)</label><input id="register-password" type="password" required minlength="6" autocomplete="new-password" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+      <p id="register-error" class="hidden text-rose-600" role="alert"></p>
+      <button id="register-submit-btn" type="submit" class="w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold">ចុះឈ្មោះ</button>
+    </form>
+    <div class="mt-4 pt-4 border-t border-slate-100 text-center text-xs text-slate-500">មានគណនីរួចហើយ? <button onclick="closeModal('register-modal');openModal('login-modal')" class="text-sky-600 font-semibold">ចូលគណនី</button></div>
   </div>
 </div>
 
@@ -404,8 +434,14 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ================= DATA =================
+const SUPABASE_URL = 'https://avuwmpyalpxhmxmtxten.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Z8VrGIN5e5sD-cSb910Pgg_lN32sD5_';
+const supabaseClient = window.supabase
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null;
 const AVATAR_SALA = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop";
 const AVATAR_PAILIN = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS49pch7VFU9jqyGnh15p3WqhNQlqa_TveMMSxu5E3H8nGR13fJa84IUlc&s=10";
 
@@ -498,18 +534,24 @@ const SCHOOLS = [
 
 let currentBook = null;
 let selectedRating = 5;
+let currentUser = null;
+let currentReviews = [];
+let reviewsRequestToken = 0;
 
 // ================= INIT & ROUTING =================
-window.addEventListener('DOMContentLoaded', () => { renderCards(); renderSchools(); animateCounters(); handleHashRouting(); });
+window.addEventListener('DOMContentLoaded', async () => {
+  renderCards(); renderSchools(); animateCounters();
+  handleHashRouting();
+  await initializeSupabaseAuth();
+});
 window.addEventListener('hashchange', handleHashRouting);
 
 function handleHashRouting() {
   const hash = window.location.hash;
-  if (hash.startsWith('#detail')) {
-    const id = new URLSearchParams(hash.split('?')[1] || '').get('id');
-    const found = BOOKS_DATA.find(b => b.id === id);
-    if (found) { renderDetailPage(found); return; }
-  }
+  const hashId = hash.startsWith('#detail') ? new URLSearchParams(hash.split('?')[1] || '').get('id') : null;
+  const id = hashId || new URLSearchParams(window.location.search).get('id');
+  const found = BOOKS_DATA.find(b => b.id === id);
+  if (found) { renderDetailPage(found); return; }
   showHomeView();
 }
 function showHomeView() {
@@ -517,9 +559,16 @@ function showHomeView() {
   document.getElementById('detail-view').classList.add('hidden');
   document.title = "សាលាឌីជីថល - ថ្នាលអប់រំ និងចែករំលែកចំណេះដឹងឌីជីថលកម្ពុជា";
 }
-function navigateToHome() { window.location.hash = ''; showHomeView(); scrollToTop(); }
+function navigateToHome() {
+  if (new URLSearchParams(window.location.search).has('id')) {
+    window.history.replaceState(null, '', window.location.pathname);
+  }
+  window.location.hash = '';
+  showHomeView();
+  scrollToTop();
+}
 function navigateToHomeAndScroll(id) {
-  if (!document.getElementById('detail-view').classList.contains('hidden')) { window.location.hash = ''; showHomeView(); }
+  if (!document.getElementById('detail-view').classList.contains('hidden')) navigateToHome();
   setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:'smooth'}); }, 60);
 }
 function showDetailPage(id) { window.location.hash = '#detail?id=' + id; }
@@ -576,6 +625,9 @@ function renderSchools() {
 // ================= DETAIL =================
 function renderDetailPage(b) {
   currentBook = b;
+  selectedRating = 5;
+  setCommentRating(selectedRating);
+  updateReviewAuthGate();
   document.title = b.title + ' - សាលាឌីជីថល';
   document.getElementById('home-view').classList.add('hidden');
   document.getElementById('detail-view').classList.remove('hidden');
@@ -620,7 +672,8 @@ function renderDetailPage(b) {
       <div class="min-w-0"><h5 class="text-xs font-bold truncate">${r.name}</h5><span class="text-[10px] text-slate-400">${r.size} • ${r.type}</span></div>
       <button onclick="downloadBookPdf()" class="shrink-0 px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold text-xs"><i class="bi bi-download"></i> ទាញយក</button>
     </div>`).join('');
-  renderCommentsList();
+  renderCommentsList([]);
+  fetchReviewsForBook(b.id);
   $('related-items-container').innerHTML = BOOKS_DATA.filter(x => x.id !== b.id).slice(0,3).map(it => `
     <div onclick="showDetailPage('${it.id}')" class="flex items-center gap-3 p-2 rounded-2xl hover:bg-slate-50 cursor-pointer">
       <div class="w-14 h-16 rounded-xl overflow-hidden bg-slate-100 shrink-0"><img src="${it.image}" alt="" class="w-full h-full object-cover"></div>
@@ -628,20 +681,126 @@ function renderDetailPage(b) {
     </div>`).join('');
   switchDetailTab('overview', document.querySelector('#detail-nav-tabs .detail-tab-btn'));
 }
-function renderCommentsList() {
-  if (!currentBook) return;
-  document.getElementById('tab-reviews-count').innerText = currentBook.comments.length;
-  document.getElementById('detail-comments-container').innerHTML = currentBook.comments.map(c => `
-    <div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm space-y-2">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-          <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-500 text-white flex items-center justify-center font-bold text-[11px]">${c.name.charAt(0)}</div>
-          <div><h5 class="text-xs font-bold">${c.name}</h5><span class="text-[10px] text-slate-400">${c.date}</span></div>
-        </div>
-        <div class="text-amber-400 text-xs">${'<i class="bi bi-star-fill"></i>'.repeat(c.rating)}</div>
-      </div>
-      <p class="text-xs text-slate-600 leading-relaxed pl-9">${c.comment}</p>
-    </div>`).join('');
+function formatKhmerNumber(number) {
+  return String(number).replace(/\d/g, digit => '០១២៣៤៥៦៧៨៩'[Number(digit)]);
+}
+function formatReviewTimestamp(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  const minutes = Math.max(0, Math.floor((Date.now() - date.getTime()) / 60000));
+  if (minutes < 1) return 'មុននេះបន្តិច';
+  if (minutes < 60) return formatKhmerNumber(minutes) + ' នាទីមុន';
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return formatKhmerNumber(hours) + ' ម៉ោងមុន';
+  const days = Math.floor(hours / 24);
+  if (days === 1) return 'ម្សិលមិញ';
+  if (days <= 30) return formatKhmerNumber(days) + ' ថ្ងៃមុន';
+  return new Intl.DateTimeFormat('km-KH', {year:'numeric', month:'short', day:'numeric'}).format(date);
+}
+function renderCommentsList(reviews = currentReviews) {
+  const count = document.getElementById('tab-reviews-count');
+  const container = document.getElementById('detail-comments-container');
+  count.innerText = reviews.length;
+  container.replaceChildren();
+  reviews.forEach(review => {
+    const card = document.createElement('div');
+    card.className = 'p-4 rounded-2xl bg-white border border-slate-100 shadow-sm space-y-2';
+    const header = document.createElement('div');
+    header.className = 'flex items-center justify-between';
+    const identity = document.createElement('div');
+    identity.className = 'flex items-center gap-2.5';
+    const avatar = document.createElement('div');
+    avatar.className = 'w-7 h-7 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-500 text-white flex items-center justify-center font-bold text-[11px]';
+    avatar.textContent = Array.from(review.user_name || '?')[0];
+    const nameAndDate = document.createElement('div');
+    const name = document.createElement('h5');
+    name.className = 'text-xs font-bold';
+    name.textContent = review.user_name || 'អ្នកប្រើប្រាស់';
+    const date = document.createElement('span');
+    date.className = 'text-[10px] text-slate-400';
+    date.textContent = formatReviewTimestamp(review.created_at);
+    nameAndDate.append(name, date);
+    identity.append(avatar, nameAndDate);
+    const stars = document.createElement('div');
+    stars.className = 'text-amber-400 text-xs';
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement('i');
+      star.className = i <= Number(review.rating) ? 'bi bi-star-fill' : 'bi bi-star text-slate-300';
+      stars.appendChild(star);
+    }
+    header.append(identity, stars);
+    const comment = document.createElement('p');
+    comment.className = 'text-xs text-slate-600 leading-relaxed pl-9';
+    comment.textContent = review.comment || '';
+    card.append(header, comment);
+    container.appendChild(card);
+  });
+}
+async function fetchReviewsForBook(bookId) {
+  const requestToken = ++reviewsRequestToken;
+  const container = document.getElementById('detail-comments-container');
+  currentReviews = [];
+  renderCommentsList(currentReviews);
+  if (!supabaseClient) {
+    container.textContent = 'មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ធមតិយោបល់បានទេ។ សូមផ្ទុកទំព័រឡើងវិញ។';
+    console.error('Supabase client library did not load.');
+    return;
+  }
+  container.textContent = 'កំពុងផ្ទុកមតិយោបល់...';
+  try {
+    const { data, error } = await supabaseClient
+      .from('reviews')
+      .select('book_id, user_id, user_name, rating, comment, created_at')
+      .eq('book_id', bookId)
+      .order('created_at', { ascending: false });
+    if (requestToken !== reviewsRequestToken) return;
+    if (error) {
+      console.error('Failed to fetch reviews:', error);
+      document.getElementById('tab-reviews-count').innerText = '0';
+      container.textContent = 'មិនអាចផ្ទុកមតិយោបល់បានទេ។ សូមព្យាយាមម្តងទៀត។';
+      return;
+    }
+    currentReviews = data || [];
+    renderCommentsList(currentReviews);
+  } catch (error) {
+    if (requestToken !== reviewsRequestToken) return;
+    console.error('Failed to fetch reviews:', error);
+    document.getElementById('tab-reviews-count').innerText = '0';
+    container.textContent = 'មិនអាចផ្ទុកមតិយោបល់បានទេ។ សូមព្យាយាមម្តងទៀត។';
+  }
+}
+function updateReviewAuthGate() {
+  const isLoggedIn = Boolean(currentUser);
+  document.getElementById('review-auth-prompt').classList.toggle('hidden', isLoggedIn);
+  document.getElementById('review-form').classList.toggle('hidden', !isLoggedIn);
+  const loginButton = document.getElementById('navbar-login-btn');
+  const userBlock = document.getElementById('navbar-user');
+  loginButton.classList.toggle('hidden', isLoggedIn);
+  userBlock.classList.toggle('hidden', !isLoggedIn);
+  userBlock.classList.toggle('flex', isLoggedIn);
+  if (isLoggedIn) {
+    const metadataName = currentUser.user_metadata && currentUser.user_metadata.full_name;
+    document.getElementById('navbar-user-name').textContent = metadataName || (currentUser.email || 'អ្នកប្រើប្រាស់').split('@')[0];
+  }
+}
+async function initializeSupabaseAuth() {
+  if (!supabaseClient) {
+    console.error('Supabase client library did not load.');
+    updateReviewAuthGate();
+    return;
+  }
+  supabaseClient.auth.onAuthStateChange((_event, session) => {
+    currentUser = session ? session.user : null;
+    updateReviewAuthGate();
+  });
+  const { data, error } = await supabaseClient.auth.getSession();
+  if (error) {
+    console.error('Failed to restore Supabase session:', error);
+    showToast('មិនអាចផ្ទៀងផ្ទាត់គណនីបានទេ។ សូមផ្ទុកទំព័រឡើងវិញ។', 'bi-exclamation-circle');
+    return;
+  }
+  currentUser = data.session ? data.session.user : null;
+  updateReviewAuthGate();
 }
 function switchDetailTab(tab, btn) {
   document.querySelectorAll('.detail-tab-btn').forEach(b => { b.classList.remove('bg-sky-600','text-white'); b.classList.add('text-slate-600'); });
@@ -773,15 +932,57 @@ function downloadBookPdf() {
 
 // ================= COMMENTS / INTERACTIONS =================
 function setCommentRating(n) {
-  selectedRating = n;
+  selectedRating = Math.max(1, Math.min(5, Number(n) || 1));
   document.querySelectorAll('#review-star-selector i').forEach((ic,i) => ic.className = i < n ? 'bi bi-star-fill cursor-pointer' : 'bi bi-star cursor-pointer text-slate-300');
 }
-function submitUserComment() {
+async function submitUserComment() {
+  if (!currentUser) {
+    updateReviewAuthGate();
+    showToast('សូមចូលគណនីជាមុនសិន ដើម្បីផ្ញើមតិយោបល់', 'bi-exclamation-circle');
+    return;
+  }
+  if (!supabaseClient) {
+    showToast('មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ធមតិយោបល់បានទេ', 'bi-exclamation-circle');
+    return;
+  }
   const input = document.getElementById('user-comment-input');
   const text = input.value.trim();
   if (!text) { showToast('សូមបញ្ចូលមតិយោបល់មុននឹងផ្ញើ', 'bi-exclamation-circle'); return; }
-  currentBook.comments.unshift({name:"អ្នកប្រើប្រាស់ សាលាឌីជីថល", date:"អម្បាញ់មិញ", rating:selectedRating, comment:text});
-  renderCommentsList(); input.value = '';
+  if (!currentBook || selectedRating < 1 || selectedRating > 5) {
+    showToast('សូមជ្រើសរើសពិន្ទុពី ១ ដល់ ៥ ផ្កាយ', 'bi-exclamation-circle');
+    return;
+  }
+  const bookId = currentBook.id;
+  const metadataName = currentUser.user_metadata && currentUser.user_metadata.full_name;
+  const userName = (metadataName || '').trim() || (currentUser.email || '').split('@')[0] || 'អ្នកប្រើប្រាស់';
+  const button = document.getElementById('submit-review-btn');
+  button.disabled = true;
+  button.classList.add('opacity-60', 'cursor-not-allowed');
+  try {
+    const { error } = await supabaseClient.from('reviews').insert({
+      book_id: bookId,
+      user_id: currentUser.id,
+      user_name: userName,
+      rating: selectedRating,
+      comment: text
+    });
+    if (error) {
+      console.error('Failed to submit review:', error);
+      showToast('មិនអាចផ្ញើមតិយោបល់បានទេ។ សូមព្យាយាមម្តងទៀត។', 'bi-exclamation-circle');
+      return;
+    }
+    input.value = '';
+    selectedRating = 5;
+    setCommentRating(selectedRating);
+    if (currentBook && currentBook.id === bookId) await fetchReviewsForBook(bookId);
+  } catch (error) {
+    console.error('Failed to submit review:', error);
+    showToast('មិនអាចផ្ញើមតិយោបល់បានទេ។ សូមពិនិត្យការតភ្ជាប់របស់អ្នក។', 'bi-exclamation-circle');
+    return;
+  } finally {
+    button.disabled = false;
+    button.classList.remove('opacity-60', 'cursor-not-allowed');
+  }
   showToast('បានបញ្ជូនមតិយោបល់ជោគជ័យ!', 'bi-chat-check-fill');
 }
 function toggleFollowAuthor(btn) {
@@ -849,7 +1050,10 @@ function openModal(id) {
 function closeModal(id) {
   const m = document.getElementById(id);
   m.querySelector('.modal-enter').classList.remove('modal-enter-active');
-  setTimeout(() => { m.classList.add('hidden'); m.classList.remove('flex'); document.body.style.overflow = ''; }, 200);
+  setTimeout(() => {
+    m.classList.add('hidden'); m.classList.remove('flex');
+    if (!document.querySelector('.fixed.inset-0.flex:not(.hidden)')) document.body.style.overflow = '';
+  }, 200);
 }
 function showToast(msg, icon = 'bi-check-circle-fill') {
   const t = document.getElementById('toast');
@@ -860,12 +1064,111 @@ function showToast(msg, icon = 'bi-check-circle-fill') {
   window.__toast = setTimeout(() => t.classList.add('translate-y-20','opacity-0','pointer-events-none'), 3500);
 }
 function scrollToTop() { window.scrollTo({top:0, behavior:'smooth'}); }
-function handleLoginSubmit(e) { e.preventDefault(); closeModal('login-modal'); showToast('ចូលគណនីបានជោគជ័យ!', 'bi-person-check-fill'); }
+function setAuthError(id, message) {
+  const element = document.getElementById(id);
+  element.textContent = message;
+  element.classList.toggle('hidden', !message);
+}
+function setAuthFormBusy(buttonId, busy) {
+  const button = document.getElementById(buttonId);
+  button.disabled = busy;
+  button.classList.toggle('opacity-60', busy);
+  button.classList.toggle('cursor-not-allowed', busy);
+}
+function authErrorMessage(error, action) {
+  const message = (error && error.message || '').toLowerCase();
+  if (message.includes('invalid login credentials')) return 'អ៊ីមែល ឬពាក្យសម្ងាត់មិនត្រឹមត្រូវទេ។';
+  if (message.includes('already registered') || message.includes('already been registered')) return 'អ៊ីមែលនេះមានគណនីរួចហើយ។ សូមចូលគណនី។';
+  if (message.includes('password should be at least')) return 'ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច ៦ តួ។';
+  return action === 'login'
+    ? 'មិនអាចចូលគណនីបានទេ។ សូមពិនិត្យព័ត៌មាន ហើយព្យាយាមម្តងទៀត។'
+    : 'មិនអាចបង្កើតគណនីបានទេ។ សូមពិនិត្យព័ត៌មាន ហើយព្យាយាមម្តងទៀត។';
+}
+async function handleLoginSubmit(e) {
+  e.preventDefault();
+  setAuthError('login-error', '');
+  if (!supabaseClient) {
+    setAuthError('login-error', 'មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ធគណនីបានទេ។ សូមផ្ទុកទំព័រឡើងវិញ។');
+    return;
+  }
+  setAuthFormBusy('login-submit-btn', true);
+  try {
+    const { error } = await supabaseClient.auth.signInWithPassword({
+      email: document.getElementById('login-email').value.trim(),
+      password: document.getElementById('login-password').value
+    });
+    if (error) {
+      console.error('Supabase login failed:', error);
+      setAuthError('login-error', authErrorMessage(error, 'login'));
+      return;
+    }
+    closeModal('login-modal');
+    showToast('ចូលគណនីបានជោគជ័យ!', 'bi-person-check-fill');
+  } catch (error) {
+    console.error('Supabase login failed:', error);
+    setAuthError('login-error', authErrorMessage(error, 'login'));
+  } finally {
+    setAuthFormBusy('login-submit-btn', false);
+  }
+}
+async function handleRegisterSubmit(e) {
+  e.preventDefault();
+  setAuthError('register-error', '');
+  if (!supabaseClient) {
+    setAuthError('register-error', 'មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ធគណនីបានទេ។ សូមផ្ទុកទំព័រឡើងវិញ។');
+    return;
+  }
+  const fullName = document.getElementById('register-full-name').value.trim();
+  if (!fullName) {
+    setAuthError('register-error', 'សូមបញ្ចូលឈ្មោះពេញរបស់អ្នក។');
+    return;
+  }
+  setAuthFormBusy('register-submit-btn', true);
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: document.getElementById('register-email').value.trim(),
+      password: document.getElementById('register-password').value,
+      options: { data: { full_name: fullName } }
+    });
+    if (error) {
+      console.error('Supabase registration failed:', error);
+      setAuthError('register-error', authErrorMessage(error, 'register'));
+      return;
+    }
+    closeModal('register-modal');
+    showToast(data.session
+      ? 'បង្កើតគណនីបានជោគជ័យ!'
+      : 'សូមពិនិត្យអ៊ីមែលរបស់អ្នក ដើម្បីបញ្ជាក់ការចុះឈ្មោះ។', 'bi-person-check-fill');
+  } catch (error) {
+    console.error('Supabase registration failed:', error);
+    setAuthError('register-error', authErrorMessage(error, 'register'));
+  } finally {
+    setAuthFormBusy('register-submit-btn', false);
+  }
+}
+async function handleLogout() {
+  if (!supabaseClient) {
+    showToast('មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ធគណនីបានទេ', 'bi-exclamation-circle');
+    return;
+  }
+  try {
+    const { error } = await supabaseClient.auth.signOut();
+    if (error) {
+      console.error('Supabase logout failed:', error);
+      showToast('មិនអាចចាកចេញពីគណនីបានទេ។ សូមព្យាយាមម្តងទៀត។', 'bi-exclamation-circle');
+      return;
+    }
+    showToast('បានចាកចេញពីគណនីហើយ', 'bi-box-arrow-right');
+  } catch (error) {
+    console.error('Supabase logout failed:', error);
+    showToast('មិនអាចចាកចេញពីគណនីបានទេ។ សូមពិនិត្យការតភ្ជាប់របស់អ្នក។', 'bi-exclamation-circle');
+  }
+}
 function handleSchoolRegisterSubmit(e) { e.preventDefault(); closeModal('register-school-modal'); showToast('សំណើបង្កើតសាលាត្រូវបានបញ្ជូនដោយជោគជ័យ!', 'bi-envelope-check-fill'); }
 
 window.addEventListener('keydown', e => {
   const open = !document.getElementById('reader-modal').classList.contains('hidden');
-  if (e.key === 'Escape') { closeModal('login-modal'); closeModal('register-school-modal'); if (open) closeReaderModal(); }
+  if (e.key === 'Escape') { closeModal('login-modal'); closeModal('register-modal'); closeModal('register-school-modal'); if (open) closeReaderModal(); }
   if (open && e.key === 'ArrowRight') nextReaderPage();
   if (open && e.key === 'ArrowLeft') prevReaderPage();
 });
