@@ -80,6 +80,7 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
         </button>
         <div id="navbar-user" class="hidden items-center gap-2">
           <span id="navbar-user-name" class="max-w-32 truncate text-sm font-semibold text-slate-700"></span>
+          <button id="navbar-school-link" onclick="navigateToSchoolDashboard()" class="hidden px-3 py-2 rounded-full text-xs font-semibold text-sky-700 bg-sky-50 hover:bg-sky-100 whitespace-nowrap"><i class="bi bi-building"></i> សាលារបស់ខ្ញុំ</button>
           <button onclick="handleLogout()" class="px-3 py-2 rounded-full text-xs font-semibold text-slate-600 border border-slate-200 hover:bg-slate-50"><i class="bi bi-box-arrow-right"></i> ចាកចេញ</button>
         </div>
         <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2.5 rounded-xl border border-slate-200 text-slate-600"><i class="bi bi-list text-xl"></i></button>
@@ -112,7 +113,7 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
       <p class="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed mb-10">សាលារៀននិម្មិតសម្រាប់គ្រូបង្រៀន និងអ្នកជំនាញចែករំលែកចំណេះដឹង ហើយសិស្សអាចស្វ័យសិក្សាបាន។ អ្នកអាចអានសៀវភៅ ទស្សនាមេរៀនជាវីដេអូ និងបង្កើតសាលារៀនបានដោយឥតគិតថ្លៃ។</p>
       <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
         <a href="#latest-works" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-500 font-semibold shadow-lg hover:-translate-y-0.5 transition"><i class="bi bi-compass"></i> ស្វែងរកមេរៀនឥឡូវនេះ</a>
-        <button onclick="openModal('register-school-modal')" class="px-7 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 font-semibold hover:-translate-y-0.5 transition"><i class="bi bi-plus-circle"></i> បង្កើតសាលារបស់អ្នក</button>
+        <button onclick="handleCreateSchoolClick()" class="px-7 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 font-semibold hover:-translate-y-0.5 transition"><i class="bi bi-plus-circle"></i> បង្កើតសាលារបស់អ្នក</button>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-slate-800/80">
         <div class="p-4 rounded-2xl bg-white/5 border border-white/10"><div class="counter text-3xl lg:text-5xl font-extrabold text-sky-300" data-target="98920">0</div><p class="text-xs sm:text-sm text-slate-400 mt-1">អ្នកប្រើប្រាស់សរុប</p></div>
@@ -164,7 +165,7 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
         <h2 class="font-serifKhmer text-2xl sm:text-3xl font-bold mb-2">តើអ្នកចង់បង្កើតទំព័រសាលារៀន និងផ្ទុកមេរៀនដោយខ្លួនឯងទេ?</h2>
         <p class="text-sky-100 text-sm">ចូលរួមជាមួយសាលាឌីជីថលដើម្បីបង្កើតថ្នាក់រៀននិម្មិត និងចែកចាយធនធានបង្រៀនដោយឥតគិតថ្លៃ។</p>
       </div>
-      <button onclick="openModal('register-school-modal')" class="shrink-0 px-8 py-4 rounded-2xl bg-white hover:bg-slate-100 text-sky-800 font-bold shadow-lg hover:scale-105 transition text-sm"><i class="bi bi-door-open-fill"></i> ស្នើសុំបង្កើតសាលាឥឡូវនេះ</button>
+      <button onclick="handleCreateSchoolClick()" class="shrink-0 px-8 py-4 rounded-2xl bg-white hover:bg-slate-100 text-sky-800 font-bold shadow-lg hover:scale-105 transition text-sm"><i class="bi bi-door-open-fill"></i> ស្នើសុំបង្កើតសាលាឥឡូវនេះ</button>
     </div>
   </section>
 </div>
@@ -311,6 +312,70 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
     </div>
   </section>
 </div>
+
+<!-- ========== SCHOOL MANAGEMENT DASHBOARD ========== -->
+<div id="school-dashboard-view" class="hidden page-fade bg-slate-50">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-8">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <p class="text-xs font-semibold text-sky-600 mb-1"><i class="bi bi-building"></i> គ្រប់គ្រងសាលារៀន</p>
+        <h1 class="font-serifKhmer text-2xl sm:text-3xl font-bold text-slate-900">សាលារបស់ខ្ញុំ</h1>
+      </div>
+      <button onclick="navigateToHome()" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-white hover:border-sky-500 text-slate-600 text-xs font-semibold"><i class="bi bi-arrow-left"></i> ត្រឡប់ទៅទំព័រដើម</button>
+    </div>
+
+    <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 sm:p-8">
+      <div class="flex flex-col sm:flex-row gap-6">
+        <div class="w-full sm:w-48 shrink-0">
+          <div class="w-32 h-32 mx-auto sm:mx-0 rounded-3xl bg-slate-100 border border-slate-200 overflow-hidden">
+            <img id="school-logo-preview" src="" alt="និមិត្តសញ្ញាសាលា" class="hidden w-full h-full object-cover">
+            <div id="school-logo-placeholder" class="w-full h-full flex items-center justify-center text-slate-300"><i class="bi bi-building text-5xl"></i></div>
+          </div>
+          <label for="school-logo-file" class="block text-xs font-semibold text-slate-600 mt-3 mb-1">រូបសញ្ញាសាលា</label>
+          <input id="school-logo-file" type="file" accept="image/*" class="block w-full text-[11px] text-slate-500 file:mr-2 file:px-2 file:py-1.5 file:rounded-lg file:border-0 file:bg-sky-50 file:text-sky-700">
+          <button id="school-logo-upload-btn" type="button" onclick="uploadSchoolLogo()" class="mt-2 w-full px-3 py-2 rounded-xl border border-sky-200 text-sky-700 hover:bg-sky-50 text-xs font-semibold"><i class="bi bi-cloud-arrow-up"></i> បង្ហោះរូបសញ្ញា</button>
+        </div>
+        <form id="school-profile-form" onsubmit="saveSchoolProfile(event)" class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="sm:col-span-2"><label for="school-profile-name" class="block text-xs font-semibold text-slate-600 mb-1">ឈ្មោះសាលារៀន ឬស្ថាប័នអប់រំ</label><input id="school-profile-name" type="text" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+          <div><label for="school-profile-province" class="block text-xs font-semibold text-slate-600 mb-1">រាជធានី / ខេត្ត</label><input id="school-profile-province" type="text" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+          <div><label for="school-profile-phone" class="block text-xs font-semibold text-slate-600 mb-1">លេខទូរស័ព្ទ</label><input id="school-profile-phone" type="tel" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+          <div class="sm:col-span-2"><label for="school-profile-email" class="block text-xs font-semibold text-slate-600 mb-1">អ៊ីមែលផ្លូវការរបស់សាលា</label><input id="school-profile-email" type="email" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+          <div class="sm:col-span-2"><label for="school-profile-description" class="block text-xs font-semibold text-slate-600 mb-1">អំពីសាលារៀន</label><textarea id="school-profile-description" rows="3" placeholder="សរសេរព័ត៌មានសង្ខេបអំពីសាលារៀន..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"></textarea></div>
+          <div class="sm:col-span-2 flex justify-end"><button id="school-profile-save-btn" type="submit" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold"><i class="bi bi-check2-circle"></i> រក្សាទុកព័ត៌មានសាលា</button></div>
+        </form>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-5 sm:p-8">
+      <div class="mb-6">
+        <h2 class="font-serifKhmer text-xl font-bold text-slate-900">បន្ថែមសៀវភៅ និងមេរៀន PDF ថ្មី</h2>
+        <p class="text-xs text-slate-500 mt-1">បំពេញព័ត៌មាន និងបង្ហោះឯកសារដើម្បីចែករំលែកជាមួយអ្នកសិក្សា។</p>
+      </div>
+      <form id="school-book-form" onsubmit="publishSchoolBook(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label for="school-book-title" class="block text-xs font-semibold text-slate-600 mb-1">ចំណងជើងសៀវភៅ / មេរៀន</label><input id="school-book-title" type="text" required maxlength="200" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+        <div><label for="school-book-category" class="block text-xs font-semibold text-slate-600 mb-1">ប្រភេទមុខវិជ្ជា</label><select id="school-book-category" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"><option value="">ជ្រើសរើសប្រភេទ</option><option>AI & នវានុវត្តន៍</option><option>វិទ្យាសាស្ត្រ</option><option>គណិតវិទ្យា</option><option>ភាសាខ្មែរ</option><option>គ្រប់គ្រង</option></select></div>
+        <div class="md:col-span-2"><label for="school-book-description" class="block text-xs font-semibold text-slate-600 mb-1">ការពិពណ៌នាសង្ខេប</label><textarea id="school-book-description" rows="3" required maxlength="3000" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"></textarea></div>
+        <div>
+          <label for="school-book-cover" class="block text-xs font-semibold text-slate-600 mb-1">រូបភាពក្របសៀវភៅ</label>
+          <input id="school-book-cover" type="file" accept="image/*" required onchange="previewSchoolBookCover(this)" class="block w-full text-xs text-slate-500 file:mr-3 file:px-3 file:py-2 file:rounded-lg file:border-0 file:bg-sky-50 file:text-sky-700">
+          <img id="school-book-cover-preview" alt="មើលរូបភាពក្របសៀវភៅ" class="hidden mt-3 h-40 w-32 rounded-xl border border-slate-200 object-cover">
+        </div>
+        <div><label for="school-book-pdf" class="block text-xs font-semibold text-slate-600 mb-1">ឯកសារមេរៀន (PDF File)</label><input id="school-book-pdf" type="file" accept=".pdf,application/pdf" required class="block w-full text-xs text-slate-500 file:mr-3 file:px-3 file:py-2 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700"><p class="text-[11px] text-slate-400 mt-2">អនុញ្ញាតតែឯកសារ PDF ប៉ុណ្ណោះ។</p></div>
+        <div class="md:col-span-2 flex justify-end"><button id="school-book-submit-btn" type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-700 text-white text-sm font-bold"><i class="bi bi-cloud-arrow-up"></i> បង្ហោះសៀវភៅ / មេរៀន</button></div>
+      </form>
+    </div>
+
+    <div>
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <h2 class="font-serifKhmer text-xl font-bold text-slate-900">សៀវភៅ និងមេរៀនរបស់សាលា</h2>
+        <span id="school-books-count" class="text-xs text-slate-500"></span>
+      </div>
+      <div id="school-books-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <p class="text-sm text-slate-500">កំពុងផ្ទុកសៀវភៅ...</p>
+      </div>
+    </div>
+  </section>
+</div>
 </main>
 
 <!-- FOOTER -->
@@ -423,13 +488,14 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
       <button onclick="closeModal('register-school-modal')" class="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400"><i class="bi bi-x-lg"></i></button>
     </div>
     <form onsubmit="handleSchoolRegisterSubmit(event)" class="space-y-3.5 text-xs">
-      <div><label class="block font-medium mb-1">ឈ្មោះសាលារៀន ឬស្ថាប័នអប់រំ</label><input type="text" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
+      <div><label for="school-request-name" class="block font-medium mb-1">ឈ្មោះសាលារៀន ឬស្ថាប័នអប់រំ</label><input id="school-request-name" type="text" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
       <div class="grid grid-cols-2 gap-3">
-        <div><label class="block font-medium mb-1">រាជធានី / ខេត្ត</label><select class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white"><option>ភ្នំពេញ</option><option>បាត់ដំបង</option><option>សៀមរាប</option><option>ប៉ៃលិន</option><option>កណ្តាល</option><option>ខេត្តផ្សេងទៀត</option></select></div>
-        <div><label class="block font-medium mb-1">លេខទូរស័ព្ទ</label><input type="tel" required placeholder="012 xxx xxx" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
+        <div><label for="school-request-province" class="block font-medium mb-1">រាជធានី / ខេត្ត</label><select id="school-request-province" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white"><option>ភ្នំពេញ</option><option>បាត់ដំបង</option><option>សៀមរាប</option><option>ប៉ៃលិន</option><option>កណ្តាល</option><option>ខេត្តផ្សេងទៀត</option></select></div>
+        <div><label for="school-request-phone" class="block font-medium mb-1">លេខទូរស័ព្ទ</label><input id="school-request-phone" type="tel" required placeholder="012 xxx xxx" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
       </div>
-      <div><label class="block font-medium mb-1">អ៊ីមែលផ្លូវការរបស់សាលា</label><input type="email" required placeholder="school@moeys.edu.kh" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
-      <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold">ដាក់ពាក្យស្នើសុំ</button>
+      <div><label for="school-request-email" class="block font-medium mb-1">អ៊ីមែលផ្លូវការរបស់សាលា</label><input id="school-request-email" type="email" required placeholder="school@moeys.edu.kh" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
+      <p id="school-request-error" class="hidden text-rose-600" role="alert"></p>
+      <button id="school-request-submit-btn" type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold">ដាក់ពាក្យស្នើសុំ</button>
     </form>
   </div>
 </div>
@@ -437,7 +503,7 @@ body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ================= DATA =================
-const SUPABASE_URL = 'https://avuwmpyalpxhmxmtxtfn.supabase.co';
+const SUPABASE_URL = 'https://avuwmpyalpxhmxmtxten.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_Z8VrGIN5e5sD-cSb910Pgg_lN32sD5_';
 const supabaseClient = window.supabase
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
@@ -541,26 +607,38 @@ let reviewInteractionsRequestToken = 0;
 let openReplyReviewId = null;
 const reviewReplyDrafts = new Map();
 const busyReactionReviewIds = new Set();
+let currentSchool = null;
+let currentSchoolBooks = [];
+let publicSchoolBooks = [];
+let pendingSchoolFlow = null;
+let schoolSessionUpdateToken = 0;
+let schoolCoverPreviewUrl = null;
 
 // ================= INIT & ROUTING =================
 window.addEventListener('DOMContentLoaded', async () => {
   renderCards(); renderSchools(); animateCounters();
-  handleHashRouting();
   await initializeSupabaseAuth();
+  handleHashRouting();
+  loadPublicSchoolBooks();
 });
 window.addEventListener('hashchange', handleHashRouting);
 
 function handleHashRouting() {
   const hash = window.location.hash;
+  if (hash === '#school-dashboard') {
+    openSchoolDashboard();
+    return;
+  }
   const hashId = hash.startsWith('#detail') ? new URLSearchParams(hash.split('?')[1] || '').get('id') : null;
   const id = hashId || new URLSearchParams(window.location.search).get('id');
-  const found = BOOKS_DATA.find(b => b.id === id);
+  const found = getAllBooks().find(b => b.id === id);
   if (found) { renderDetailPage(found); return; }
   showHomeView();
 }
 function showHomeView() {
   document.getElementById('home-view').classList.remove('hidden');
   document.getElementById('detail-view').classList.add('hidden');
+  document.getElementById('school-dashboard-view').classList.add('hidden');
   document.title = "សាលាឌីជីថល - ថ្នាលអប់រំ និងចែករំលែកចំណេះដឹងឌីជីថលកម្ពុជា";
 }
 function navigateToHome() {
@@ -572,31 +650,42 @@ function navigateToHome() {
   scrollToTop();
 }
 function navigateToHomeAndScroll(id) {
-  if (!document.getElementById('detail-view').classList.contains('hidden')) navigateToHome();
+  if (!document.getElementById('detail-view').classList.contains('hidden') || !document.getElementById('school-dashboard-view').classList.contains('hidden')) navigateToHome();
   setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:'smooth'}); }, 60);
 }
 function showDetailPage(id) { window.location.hash = '#detail?id=' + id; }
 
 // ================= HOME RENDER =================
+function getAllBooks() {
+  return BOOKS_DATA.concat(publicSchoolBooks);
+}
 function renderCards() {
-  document.getElementById('latest-cards-grid').innerHTML = BOOKS_DATA.slice(0,4).map(b => cardHTML(b,false)).join('');
+  const latestBooks = publicSchoolBooks.slice().sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+  document.getElementById('latest-cards-grid').innerHTML = latestBooks.concat(BOOKS_DATA.slice(0,4)).map(b => cardHTML(b,false)).join('');
   document.getElementById('popular-cards-grid').innerHTML = BOOKS_DATA.slice(4,8).map(b => cardHTML(b,true)).join('');
 }
 function cardHTML(b, popular) {
+  const id = escapeHtml(b.id);
+  const title = escapeHtml(b.title);
+  const author = escapeHtml(b.author);
+  const image = escapeHtml(getSafePublicUrl(b.image));
+  const authorAvatar = escapeHtml(getSafePublicUrl(b.authorAvatar));
+  const category = escapeHtml(b.categoryName);
+  const categoryBadgeClass = escapeHtml(b.categoryBadgeClass);
   return `
   <div class="book-card group bg-white rounded-2xl border border-slate-200/70 shadow-sm hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer"
-       onclick="showDetailPage('${b.id}')" data-title="${b.title}" data-author="${b.author}" data-type="${b.type}">
+       onclick="showDetailPage('${id}')" data-title="${title}" data-author="${author}" data-type="${escapeHtml(b.type)}">
     <div class="relative h-56 overflow-hidden card-zoom-wrap bg-slate-100">
-      <img src="${b.image}" alt="${b.title}" class="w-full h-full object-cover card-zoom-img" onerror="this.src='https://placehold.co/400x500/0284c7/ffffff?text=Sala+Digital'">
-      <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[11px] font-semibold text-white shadow-sm ${b.categoryBadgeClass}">${popular ? '#ពេញនិយម • ' : ''}${b.categoryName}</span>
+      <img src="${image}" alt="${title}" class="w-full h-full object-cover card-zoom-img" onerror="this.src='https://placehold.co/400x500/0284c7/ffffff?text=Sala+Digital'">
+      <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[11px] font-semibold text-white shadow-sm ${categoryBadgeClass}">${popular ? '#ពេញនិយម • ' : ''}${category}</span>
       <button onclick="bookmarkItem(this,event)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-slate-600 hover:text-amber-500 flex items-center justify-center shadow"><i class="bi bi-bookmark text-xs"></i></button>
     </div>
     <div class="p-4 flex-1 flex flex-col justify-between">
       <div>
-        <h3 class="font-medium text-slate-800 text-sm line-clamp-2 leading-snug group-hover:text-sky-600 transition">${b.title}</h3>
+        <h3 class="font-medium text-slate-800 text-sm line-clamp-2 leading-snug group-hover:text-sky-600 transition">${title}</h3>
         <div class="flex items-center gap-2 mt-3 pt-3 border-t border-slate-100">
-          <img src="${b.authorAvatar}" class="w-6 h-6 rounded-full object-cover" alt="">
-          <span class="text-xs text-slate-600 font-medium truncate">${b.author}</span>
+          <img src="${authorAvatar}" class="w-6 h-6 rounded-full object-cover" alt="">
+          <span class="text-xs text-slate-600 font-medium truncate">${author}</span>
           <i class="bi bi-patch-check-fill text-sky-500 text-xs ml-auto"></i>
         </div>
       </div>
@@ -626,6 +715,483 @@ function renderSchools() {
   </div>`).join('');
 }
 
+function escapeHtml(value) {
+  return String(value == null ? '' : value).replace(/[&<>"']/g, character => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  })[character]);
+}
+function getSafePublicUrl(value) {
+  if (typeof value !== 'string' || !value.trim()) return '';
+  try {
+    const url = new URL(value, window.location.href);
+    return url.protocol === 'https:' || url.protocol === 'http:' ? url.href : '';
+  } catch (error) {
+    return '';
+  }
+}
+function getSchoolBookCatalogItem(book) {
+  const school = book.school || {};
+  const categories = {
+    'AI & នវានុវត្តន៍':'bg-indigo-600',
+    'វិទ្យាសាស្ត្រ':'bg-emerald-600',
+    'គណិតវិទ្យា':'bg-sky-600',
+    'ភាសាខ្មែរ':'bg-amber-600',
+    'គ្រប់គ្រង':'bg-purple-600'
+  };
+  return {
+    id:'school-book-' + book.id,
+    databaseId:book.id,
+    schoolId:book.school_id,
+    isSchoolBook:true,
+    createdAt:book.created_at,
+    title:book.title,
+    subtitle:book.description,
+    author:school.school_name || 'សាលារៀន',
+    authorRole:'ស្នាដៃសាលារៀន',
+    authorAvatar:getSafePublicUrl(school.logo_url) || AVATAR_SALA,
+    type:'book',
+    categoryName:book.category,
+    categoryBadgeClass:categories[book.category] || 'bg-sky-600',
+    views:'0',
+    downloads:'0',
+    rating:'—',
+    pages:0,
+    fileSize:'PDF',
+    date:book.created_at ? new Intl.DateTimeFormat('km-KH',{year:'numeric',month:'long',day:'numeric'}).format(new Date(book.created_at)) : '',
+    image:getSafePublicUrl(book.cover_url),
+    description:book.description,
+    objectives:[],
+    chapters:[{num:'PDF',title:'ឯកសារមេរៀន',duration:'',preview:book.description}],
+    resources:[{name:book.title + ' (PDF)',size:'PDF',type:'PDF'}],
+    comments:[],
+    pdfUrl:getSafePublicUrl(book.pdf_url),
+    pdfPath:book.pdf_path
+  };
+}
+async function loadPublicSchoolBooks(showError) {
+  if (!supabaseClient) return;
+  try {
+    const { data, error } = await supabaseClient.from('school_books')
+      .select('id, school_id, title, category, description, cover_url, cover_path, pdf_url, pdf_path, created_at, school:schools(school_name, logo_url)')
+      .order('created_at', {ascending:false});
+    if (error) {
+      console.error('Failed to load public school books:', error);
+      if (showError !== false) showToast('មិនអាចផ្ទុកសៀវភៅពីសាលារៀនបានទេ។', 'bi-exclamation-circle');
+      return;
+    }
+    publicSchoolBooks = (data || []).map(getSchoolBookCatalogItem);
+    renderCards();
+    const routeId = new URLSearchParams(window.location.hash.split('?')[1] || '').get('id') || new URLSearchParams(window.location.search).get('id');
+    if (routeId && routeId.startsWith('school-book-')) handleHashRouting();
+  } catch (error) {
+    console.error('Failed to load public school books:', error);
+    if (showError !== false) showToast('មិនអាចផ្ទុកសៀវភៅពីសាលារៀនបានទេ។ សូមពិនិត្យការតភ្ជាប់។', 'bi-exclamation-circle');
+  }
+}
+function updateNavbarSchoolLink() {
+  const link = document.getElementById('navbar-school-link');
+  if (link) link.classList.toggle('hidden', !(currentUser && currentSchool));
+}
+async function loadOwnedSchool(showError) {
+  if (!currentUser) return null;
+  const ownerId = currentUser.id;
+  if (!supabaseClient) {
+    if (showError !== false) showToast('មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ធសាលារៀនបានទេ។', 'bi-exclamation-circle');
+    return undefined;
+  }
+  try {
+    const { data, error } = await supabaseClient.from('schools').select('*')
+      .eq('owner_id', ownerId)
+      .order('created_at', {ascending:true})
+      .limit(1)
+      .maybeSingle();
+    if (error) {
+      console.error('Failed to load owned school:', error);
+      if (showError !== false) showToast('មិនអាចផ្ទុកព័ត៌មានសាលារបស់អ្នកបានទេ។', 'bi-exclamation-circle');
+      return undefined;
+    }
+    if (!currentUser || currentUser.id !== ownerId) return undefined;
+    currentSchool = data;
+    updateNavbarSchoolLink();
+    return currentSchool;
+  } catch (error) {
+    console.error('Failed to load owned school:', error);
+    if (showError !== false) showToast('មិនអាចផ្ទុកព័ត៌មានសាលារបស់អ្នកបានទេ។ សូមពិនិត្យការតភ្ជាប់។', 'bi-exclamation-circle');
+    return undefined;
+  }
+}
+function handleCreateSchoolClick() {
+  if (!currentUser) {
+    pendingSchoolFlow = 'create';
+    openModal('login-modal');
+    return;
+  }
+  loadOwnedSchool().then(school => {
+    if (school === undefined) return;
+    if (school) navigateToSchoolDashboard();
+    else {
+      document.getElementById('school-request-error').classList.add('hidden');
+      openModal('register-school-modal');
+    }
+  });
+}
+function navigateToSchoolDashboard() {
+  if (window.location.hash === '#school-dashboard') openSchoolDashboard();
+  else window.location.hash = '#school-dashboard';
+}
+async function openSchoolDashboard() {
+  if (!currentUser) {
+    pendingSchoolFlow = 'dashboard';
+    showHomeView();
+    openModal('login-modal');
+    return;
+  }
+  const school = currentSchool && currentSchool.owner_id === currentUser.id
+    ? currentSchool
+    : await loadOwnedSchool();
+  if (!school) {
+    if (school === undefined) return;
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    showHomeView();
+    openModal('register-school-modal');
+    return;
+  }
+  document.getElementById('home-view').classList.add('hidden');
+  document.getElementById('detail-view').classList.add('hidden');
+  document.getElementById('school-dashboard-view').classList.remove('hidden');
+  document.title = school.school_name + ' - សាលាឌីជីថល';
+  document.getElementById('school-profile-name').value = school.school_name || '';
+  document.getElementById('school-profile-province').value = school.province || '';
+  document.getElementById('school-profile-phone').value = school.phone || '';
+  document.getElementById('school-profile-email').value = school.official_email || '';
+  document.getElementById('school-profile-description').value = school.description || '';
+  setSchoolLogoPreview(school.logo_url);
+  loadSchoolBooks();
+  window.scrollTo(0,0);
+}
+async function loadSchoolBooks() {
+  const list = document.getElementById('school-books-list');
+  list.innerHTML = '<p class="text-sm text-slate-500">កំពុងផ្ទុកសៀវភៅ...</p>';
+  if (!supabaseClient || !currentSchool) {
+    list.innerHTML = '<p class="text-sm text-slate-500">មិនអាចផ្ទុកសៀវភៅបានទេ។</p>';
+    return;
+  }
+  const schoolId = currentSchool.id;
+  try {
+    const { data, error } = await supabaseClient.from('school_books')
+      .select('id, school_id, title, category, description, cover_url, cover_path, pdf_url, pdf_path, created_at')
+      .eq('school_id', currentSchool.id)
+      .order('created_at', {ascending:false});
+    if (error) {
+      console.error('Failed to load school books:', error);
+      list.innerHTML = '<p class="text-sm text-rose-600">មិនអាចផ្ទុកសៀវភៅបានទេ។ សូមព្យាយាមម្តងទៀត។</p>';
+      return;
+    }
+    if (!currentSchool || currentSchool.id !== schoolId) return;
+    currentSchoolBooks = data || [];
+    renderSchoolBooksList();
+  } catch (error) {
+    console.error('Failed to load school books:', error);
+    list.innerHTML = '<p class="text-sm text-rose-600">មិនអាចផ្ទុកសៀវភៅបានទេ។ សូមពិនិត្យការតភ្ជាប់។</p>';
+  }
+}
+function renderSchoolBooksList() {
+  const list = document.getElementById('school-books-list');
+  document.getElementById('school-books-count').textContent = formatKhmerNumber(currentSchoolBooks.length) + ' ធាតុ';
+  list.replaceChildren();
+  if (!currentSchoolBooks.length) {
+    list.innerHTML = '<div class="sm:col-span-2 lg:col-span-3 bg-white p-8 rounded-2xl border border-dashed border-slate-300 text-center text-sm text-slate-500">មិនទាន់មានសៀវភៅ ឬមេរៀនទេ។ សូមបន្ថែមស្នាដៃដំបូងរបស់អ្នក។</div>';
+    return;
+  }
+  currentSchoolBooks.forEach(book => {
+    const card = document.createElement('article');
+    card.className = 'bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col';
+    const cover = document.createElement('img');
+    cover.src = getSafePublicUrl(book.cover_url) || 'https://placehold.co/400x500/0284c7/ffffff?text=Sala+Digital';
+    cover.alt = book.title;
+    cover.className = 'h-48 w-full object-cover bg-slate-100';
+    const content = document.createElement('div');
+    content.className = 'p-4 flex-1 flex flex-col';
+    const category = document.createElement('span');
+    category.className = 'text-[11px] font-semibold text-sky-600';
+    category.textContent = book.category;
+    const title = document.createElement('h3');
+    title.className = 'font-serifKhmer font-bold text-sm mt-1';
+    title.textContent = book.title;
+    const description = document.createElement('p');
+    description.className = 'text-xs text-slate-500 mt-2 line-clamp-2';
+    description.textContent = book.description;
+    const actions = document.createElement('div');
+    actions.className = 'mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2';
+    const pdfLink = document.createElement('a');
+    pdfLink.href = getSafePublicUrl(book.pdf_url) || '#';
+    pdfLink.target = '_blank';
+    pdfLink.rel = 'noopener';
+    pdfLink.className = 'text-xs font-semibold text-sky-700 hover:underline';
+    pdfLink.innerHTML = '<i class="bi bi-file-earmark-pdf"></i> មើល PDF';
+    if (!getSafePublicUrl(book.pdf_url)) {
+      pdfLink.classList.add('pointer-events-none', 'opacity-50');
+      pdfLink.setAttribute('aria-disabled', 'true');
+    }
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'text-xs font-semibold text-rose-600 hover:text-rose-700';
+    deleteButton.innerHTML = '<i class="bi bi-trash3"></i> លុប';
+    deleteButton.addEventListener('click', () => deleteSchoolBook(book.id));
+    actions.append(pdfLink, deleteButton);
+    content.append(category, title, description, actions);
+    card.append(cover, content);
+    list.appendChild(card);
+  });
+}
+function setSchoolLogoPreview(url) {
+  const image = document.getElementById('school-logo-preview');
+  const placeholder = document.getElementById('school-logo-placeholder');
+  const safeUrl = getSafePublicUrl(url);
+  if (safeUrl) {
+    image.src = safeUrl;
+    image.classList.remove('hidden');
+    placeholder.classList.add('hidden');
+  } else {
+    image.removeAttribute('src');
+    image.classList.add('hidden');
+    placeholder.classList.remove('hidden');
+  }
+}
+function isImageFile(file) {
+  return Boolean(file) && (
+    (file.type && file.type.startsWith('image/'))
+    || /\.(avif|gif|jpe?g|png|svg|webp)$/i.test(file.name)
+  );
+}
+function previewSchoolBookCover(input) {
+  const preview = document.getElementById('school-book-cover-preview');
+  if (schoolCoverPreviewUrl) URL.revokeObjectURL(schoolCoverPreviewUrl);
+  schoolCoverPreviewUrl = null;
+  const file = input.files && input.files[0];
+  if (!file) {
+    preview.classList.add('hidden');
+    preview.removeAttribute('src');
+    return;
+  }
+  if (!isImageFile(file)) {
+    input.value = '';
+    preview.classList.add('hidden');
+    showToast('សូមជ្រើសរើសឯកសាររូបភាពសម្រាប់ក្របសៀវភៅ។', 'bi-exclamation-circle');
+    return;
+  }
+  schoolCoverPreviewUrl = URL.createObjectURL(file);
+  preview.src = schoolCoverPreviewUrl;
+  preview.classList.remove('hidden');
+}
+function createSchoolStoragePath(folder, file) {
+  let extension = file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (!extension) extension = file.type === 'application/pdf' ? 'pdf' : 'img';
+  const randomPart = window.crypto && window.crypto.randomUUID
+    ? window.crypto.randomUUID()
+    : Date.now() + '-' + Math.random().toString(36).slice(2);
+  return currentUser.id + '/' + currentSchool.id + '/' + folder + '/' + randomPart + '.' + extension;
+}
+async function uploadSchoolAsset(bucket, path, file) {
+  const { error } = await supabaseClient.storage.from(bucket).upload(path, file, {
+    cacheControl:'3600',
+    contentType:file.type || undefined,
+    upsert:false
+  });
+  if (error) throw error;
+  const { data } = supabaseClient.storage.from(bucket).getPublicUrl(path);
+  return {path, url:data.publicUrl};
+}
+async function removeSchoolAsset(bucket, path) {
+  if (!path) return true;
+  try {
+    const { error } = await supabaseClient.storage.from(bucket).remove([path]);
+    if (error) {
+      console.error('Failed to clean up uploaded file:', error);
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error('Failed to clean up uploaded file:', error);
+    return false;
+  }
+}
+async function uploadSchoolLogo() {
+  if (!currentUser || !currentSchool) return;
+  const input = document.getElementById('school-logo-file');
+  const file = input.files && input.files[0];
+  if (!file) {
+    showToast('សូមជ្រើសរើសរូបភាពសាលាជាមុនសិន។', 'bi-exclamation-circle');
+    return;
+  }
+  if (!isImageFile(file)) {
+    showToast('សូមជ្រើសរើសឯកសាររូបភាព។', 'bi-exclamation-circle');
+    return;
+  }
+  const button = document.getElementById('school-logo-upload-btn');
+  button.disabled = true;
+  button.textContent = 'កំពុងផ្ទុកឡើង...';
+  let uploaded = null;
+  const previousLogoPath = currentSchool.logo_path;
+  try {
+    uploaded = await uploadSchoolAsset('school-media', createSchoolStoragePath('logo', file), file);
+    const { data, error } = await supabaseClient.from('schools').update({
+      logo_url:uploaded.url,
+      logo_path:uploaded.path,
+      updated_at:new Date().toISOString()
+    }).eq('id', currentSchool.id).eq('owner_id', currentUser.id).select('*').single();
+    if (error) throw error;
+    currentSchool = data;
+    setSchoolLogoPreview(data.logo_url);
+    if (previousLogoPath && previousLogoPath !== data.logo_path) await removeSchoolAsset('school-media', previousLogoPath);
+    await loadPublicSchoolBooks();
+    input.value = '';
+    showToast('បានធ្វើបច្ចុប្បន្នភាពរូបសញ្ញាសាលាជោគជ័យ!', 'bi-check-circle-fill');
+  } catch (error) {
+    console.error('Failed to upload school logo:', error);
+    if (uploaded) await removeSchoolAsset('school-media', uploaded.path);
+    showToast('មិនអាចបង្ហោះរូបសញ្ញាសាលាបានទេ។ សូមព្យាយាមម្តងទៀត។', 'bi-exclamation-circle');
+  } finally {
+    button.disabled = false;
+    button.innerHTML = '<i class="bi bi-cloud-arrow-up"></i> បង្ហោះរូបសញ្ញា';
+  }
+}
+async function saveSchoolProfile(event) {
+  event.preventDefault();
+  if (!currentUser || !currentSchool) return;
+  const button = document.getElementById('school-profile-save-btn');
+  button.disabled = true;
+  button.textContent = 'កំពុងរក្សាទុក...';
+  try {
+    const { data, error } = await supabaseClient.from('schools').update({
+      school_name:document.getElementById('school-profile-name').value.trim(),
+      province:document.getElementById('school-profile-province').value.trim(),
+      phone:document.getElementById('school-profile-phone').value.trim(),
+      official_email:document.getElementById('school-profile-email').value.trim(),
+      description:document.getElementById('school-profile-description').value.trim(),
+      updated_at:new Date().toISOString()
+    }).eq('id', currentSchool.id).eq('owner_id', currentUser.id).select('*').single();
+    if (error) throw error;
+    currentSchool = data;
+    document.title = currentSchool.school_name + ' - សាលាឌីជីថល';
+    updateNavbarSchoolLink();
+    await loadPublicSchoolBooks();
+    showToast('បានរក្សាទុកព័ត៌មានសាលាជោគជ័យ!', 'bi-check-circle-fill');
+  } catch (error) {
+    console.error('Failed to save school profile:', error);
+    showToast('មិនអាចរក្សាទុកព័ត៌មានសាលាបានទេ។ សូមព្យាយាមម្តងទៀត។', 'bi-exclamation-circle');
+  } finally {
+    button.disabled = false;
+    button.innerHTML = '<i class="bi bi-check2-circle"></i> រក្សាទុកព័ត៌មានសាលា';
+  }
+}
+async function publishSchoolBook(event) {
+  event.preventDefault();
+  if (!currentUser || !currentSchool) return;
+  const form = document.getElementById('school-book-form');
+  const coverFile = document.getElementById('school-book-cover').files[0];
+  const pdfFile = document.getElementById('school-book-pdf').files[0];
+  if (!isImageFile(coverFile)) {
+    showToast('សូមជ្រើសរើសរូបភាពក្របសៀវភៅត្រឹមត្រូវ។', 'bi-exclamation-circle');
+    return;
+  }
+  if (!pdfFile || !pdfFile.name.toLowerCase().endsWith('.pdf')) {
+    showToast('សូមជ្រើសរើសឯកសារ PDF ត្រឹមត្រូវ។', 'bi-exclamation-circle');
+    return;
+  }
+  const button = document.getElementById('school-book-submit-btn');
+  button.disabled = true;
+  button.textContent = 'កំពុងផ្ទុកឡើង...';
+  const uploadedAssets = [];
+  try {
+    const cover = await uploadSchoolAsset('school-media', createSchoolStoragePath('covers', coverFile), coverFile);
+    uploadedAssets.push({bucket:'school-media', path:cover.path});
+    const pdf = await uploadSchoolAsset('lesson-pdfs', createSchoolStoragePath('lessons', pdfFile), pdfFile);
+    uploadedAssets.push({bucket:'lesson-pdfs', path:pdf.path});
+    const { error } = await supabaseClient.from('school_books').insert({
+      school_id:currentSchool.id,
+      title:document.getElementById('school-book-title').value.trim(),
+      category:document.getElementById('school-book-category').value,
+      description:document.getElementById('school-book-description').value.trim(),
+      cover_url:cover.url,
+      cover_path:cover.path,
+      pdf_url:pdf.url,
+      pdf_path:pdf.path
+    });
+    if (error) throw error;
+    form.reset();
+    previewSchoolBookCover(document.getElementById('school-book-cover'));
+    await loadSchoolBooks();
+    await loadPublicSchoolBooks();
+    showToast('បានបង្ហោះសៀវភៅ / មេរៀនជោគជ័យ!', 'bi-check-circle-fill');
+  } catch (error) {
+    console.error('Failed to publish school book:', error);
+    for (const asset of uploadedAssets) await removeSchoolAsset(asset.bucket, asset.path);
+    showToast('មិនអាចបង្ហោះសៀវភៅបានទេ។ សូមពិនិត្យព័ត៌មាន និងព្យាយាមម្តងទៀត។', 'bi-exclamation-circle');
+  } finally {
+    button.disabled = false;
+    button.innerHTML = '<i class="bi bi-cloud-arrow-up"></i> បង្ហោះសៀវភៅ / មេរៀន';
+  }
+}
+async function deleteSchoolBook(bookId) {
+  const book = currentSchoolBooks.find(item => item.id === bookId);
+  if (!book || !currentSchool || !currentUser) return;
+  if (!window.confirm('តើអ្នកប្រាកដថាចង់លុបសៀវភៅនេះមែនទេ?')) return;
+  try {
+    const { error } = await supabaseClient.from('school_books').delete()
+      .eq('id', book.id).eq('school_id', currentSchool.id).select('id').single();
+    if (error) throw error;
+    currentSchoolBooks = currentSchoolBooks.filter(item => item.id !== book.id);
+    renderSchoolBooksList();
+    const cleaned = await Promise.all([
+      removeSchoolAsset('school-media', book.cover_path),
+      removeSchoolAsset('lesson-pdfs', book.pdf_path)
+    ]);
+    publicSchoolBooks = publicSchoolBooks.filter(item => item.databaseId !== book.id);
+    renderCards();
+    showToast(cleaned.every(Boolean)
+      ? 'បានលុបសៀវភៅចេញដោយជោគជ័យ។'
+      : 'បានលុបសៀវភៅ ប៉ុន្តែមិនអាចលុបឯកសារមួយចំនួនចេញពីឃ្លាំងបានទេ។', cleaned.every(Boolean) ? 'bi-trash3' : 'bi-exclamation-circle');
+  } catch (error) {
+    console.error('Failed to delete school book:', error);
+    showToast('មិនអាចលុបសៀវភៅនេះបានទេ។ សូមព្យាយាមម្តងទៀត។', 'bi-exclamation-circle');
+  }
+}
+function scheduleSchoolAuthUpdate() {
+  const requestToken = ++schoolSessionUpdateToken;
+  setTimeout(async () => {
+    await refreshReviewInteractions();
+    if (!currentUser) {
+      currentSchool = null;
+      currentSchoolBooks = [];
+      updateNavbarSchoolLink();
+      if (window.location.hash === '#school-dashboard') {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        showHomeView();
+      }
+      return;
+    }
+    const school = await loadOwnedSchool(Boolean(pendingSchoolFlow));
+    if (requestToken !== schoolSessionUpdateToken || school === undefined) return;
+    if (pendingSchoolFlow) {
+      pendingSchoolFlow = null;
+      if (school) navigateToSchoolDashboard();
+      else openModal('register-school-modal');
+    } else if (window.location.hash === '#school-dashboard') {
+      if (school) openSchoolDashboard();
+      else {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        showHomeView();
+        openModal('register-school-modal');
+      }
+    }
+  }, 0);
+}
+
 // ================= DETAIL =================
 function renderDetailPage(b) {
   if (currentBook && currentBook.id !== b.id) {
@@ -639,6 +1205,7 @@ function renderDetailPage(b) {
   document.title = b.title + ' - សាលាឌីជីថល';
   document.getElementById('home-view').classList.add('hidden');
   document.getElementById('detail-view').classList.remove('hidden');
+  document.getElementById('school-dashboard-view').classList.add('hidden');
   window.scrollTo(0,0);
   const $ = id => document.getElementById(id);
   $('detail-breadcrumb-cat').innerText = b.categoryName;
@@ -654,38 +1221,40 @@ function renderDetailPage(b) {
   $('detail-views-count').innerText = b.views;
   $('detail-rating-score').innerText = b.rating;
   $('detail-published-date').innerText = b.date;
-  $('detail-pages-count').innerHTML = `<i class="bi bi-layers"></i> ${b.pages} ទំព័រ`;
+  $('detail-pages-count').innerHTML = b.pages
+    ? `<i class="bi bi-layers"></i> ${escapeHtml(b.pages)} ទំព័រ`
+    : '<i class="bi bi-file-earmark-pdf"></i> ឯកសារ PDF';
   $('detail-file-size').innerHTML = `<i class="bi bi-hdd"></i> ${b.fileSize}`;
   $('detail-download-count').innerText = b.downloads + '+';
   $('detail-meta-id').innerText = 'SLD-' + b.id.toUpperCase();
   $('detail-meta-type').innerText = b.categoryName;
   $('detail-meta-downloads').innerText = b.downloads + ' លើក';
   $('detail-overview-text').innerText = b.description;
-  $('detail-objectives-list').innerHTML = b.objectives.map(o => `<div class="flex items-start gap-2.5 p-3 rounded-2xl bg-emerald-50/60 border border-emerald-100 text-xs text-emerald-900"><i class="bi bi-check-circle-fill text-emerald-600 mt-0.5"></i><span>${o}</span></div>`).join('');
+  $('detail-objectives-list').innerHTML = b.objectives.map(o => `<div class="flex items-start gap-2.5 p-3 rounded-2xl bg-emerald-50/60 border border-emerald-100 text-xs text-emerald-900"><i class="bi bi-check-circle-fill text-emerald-600 mt-0.5"></i><span>${escapeHtml(o)}</span></div>`).join('');
   $('detail-total-chapters-count').innerText = b.chapters.length + ' ជំពូកសរុប';
   $('detail-chapters-container').innerHTML = b.chapters.map((c,i) => `
     <div class="p-4 rounded-2xl border border-slate-200/80 hover:border-sky-300 flex items-center justify-between gap-3">
       <div class="flex items-start gap-3">
         <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs shrink-0">${i+1}</div>
         <div>
-          <div class="flex items-center gap-2"><span class="text-[11px] font-bold text-sky-600">${c.num}</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">${c.duration}</span></div>
-          <h4 class="text-sm font-bold mt-0.5">${c.title}</h4>
-          <p class="text-xs text-slate-500 mt-1">${c.preview}</p>
+          <div class="flex items-center gap-2"><span class="text-[11px] font-bold text-sky-600">${escapeHtml(c.num)}</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">${escapeHtml(c.duration)}</span></div>
+          <h4 class="text-sm font-bold mt-0.5">${escapeHtml(c.title)}</h4>
+          <p class="text-xs text-slate-500 mt-1">${escapeHtml(c.preview)}</p>
         </div>
       </div>
       <button onclick="launchInteractiveReader()" class="shrink-0 text-xs px-3.5 py-1.5 rounded-xl border border-slate-200 hover:border-sky-500 text-sky-600 font-semibold"><i class="bi bi-book-half"></i> អាន</button>
     </div>`).join('');
   $('detail-resources-list').innerHTML = b.resources.map(r => `
     <div class="p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between gap-3">
-      <div class="min-w-0"><h5 class="text-xs font-bold truncate">${r.name}</h5><span class="text-[10px] text-slate-400">${r.size} • ${r.type}</span></div>
+      <div class="min-w-0"><h5 class="text-xs font-bold truncate">${escapeHtml(r.name)}</h5><span class="text-[10px] text-slate-400">${escapeHtml(r.size)} • ${escapeHtml(r.type)}</span></div>
       <button onclick="downloadBookPdf()" class="shrink-0 px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold text-xs"><i class="bi bi-download"></i> ទាញយក</button>
     </div>`).join('');
   renderCommentsList([]);
   fetchReviewsForBook(b.id);
-  $('related-items-container').innerHTML = BOOKS_DATA.filter(x => x.id !== b.id).slice(0,3).map(it => `
-    <div onclick="showDetailPage('${it.id}')" class="flex items-center gap-3 p-2 rounded-2xl hover:bg-slate-50 cursor-pointer">
-      <div class="w-14 h-16 rounded-xl overflow-hidden bg-slate-100 shrink-0"><img src="${it.image}" alt="" class="w-full h-full object-cover"></div>
-      <div class="min-w-0"><span class="text-[10px] font-semibold text-sky-600 block">${it.categoryName}</span><h5 class="text-xs font-bold truncate">${it.title}</h5></div>
+  $('related-items-container').innerHTML = getAllBooks().filter(x => x.id !== b.id).slice(0,3).map(it => `
+    <div onclick="showDetailPage('${escapeHtml(it.id)}')" class="flex items-center gap-3 p-2 rounded-2xl hover:bg-slate-50 cursor-pointer">
+      <div class="w-14 h-16 rounded-xl overflow-hidden bg-slate-100 shrink-0"><img src="${escapeHtml(getSafePublicUrl(it.image))}" alt="" class="w-full h-full object-cover"></div>
+      <div class="min-w-0"><span class="text-[10px] font-semibold text-sky-600 block">${escapeHtml(it.categoryName)}</span><h5 class="text-xs font-bold truncate">${escapeHtml(it.title)}</h5></div>
     </div>`).join('');
   switchDetailTab('overview', document.querySelector('#detail-nav-tabs .detail-tab-btn'));
 }
@@ -1045,6 +1614,7 @@ function updateReviewAuthGate() {
     const metadataName = currentUser.user_metadata && currentUser.user_metadata.full_name;
     document.getElementById('navbar-user-name').textContent = metadataName || (currentUser.email || 'អ្នកប្រើប្រាស់').split('@')[0];
   }
+  updateNavbarSchoolLink();
 }
 async function initializeSupabaseAuth() {
   if (!supabaseClient) {
@@ -1053,9 +1623,16 @@ async function initializeSupabaseAuth() {
     return;
   }
   supabaseClient.auth.onAuthStateChange((_event, session) => {
-    currentUser = session ? session.user : null;
+    const nextUser = session ? session.user : null;
+    const userChanged = currentUser && nextUser && currentUser.id !== nextUser.id;
+    currentUser = nextUser;
+    if (!currentUser || userChanged) {
+      pendingSchoolFlow = null;
+      currentSchool = null;
+      currentSchoolBooks = [];
+    }
     updateReviewAuthGate();
-    setTimeout(() => refreshReviewInteractions(), 0);
+    scheduleSchoolAuthUpdate();
   });
   const { data, error } = await supabaseClient.auth.getSession();
   if (error) {
@@ -1065,6 +1642,7 @@ async function initializeSupabaseAuth() {
   }
   currentUser = data.session ? data.session.user : null;
   updateReviewAuthGate();
+  scheduleSchoolAuthUpdate();
 }
 function switchDetailTab(tab, btn) {
   document.querySelectorAll('.detail-tab-btn').forEach(b => { b.classList.remove('bg-sky-600','text-white'); b.classList.add('text-slate-600'); });
@@ -1091,7 +1669,10 @@ function loadPdfJs() {
 
 async function launchInteractiveReader() {
   if (!currentBook) return;
-  const cfg = PDF_FILES[currentBook.id];
+  const cfg = PDF_FILES[currentBook.id] || (currentBook.pdfUrl ? {
+    url:currentBook.pdfUrl,
+    downloadName:currentBook.title + '.pdf'
+  } : null);
   if (!cfg) { showToast('សៀវភៅនេះមិនទាន់មានឯកសារ PDF ទេ', 'bi-exclamation-circle'); return; }
 
   const token = ++pdfToken;
@@ -1185,7 +1766,10 @@ window.addEventListener('resize', () => {
 
 // ================= DOWNLOAD PDF =================
 function downloadBookPdf() {
-  const cfg = currentBook && PDF_FILES[currentBook.id];
+  const cfg = currentBook && (PDF_FILES[currentBook.id] || (currentBook.pdfUrl ? {
+    url:currentBook.pdfUrl,
+    downloadName:currentBook.title + '.pdf'
+  } : null));
   if (!cfg) { showToast('សៀវភៅនេះមិនទាន់មានឯកសារ PDF ទេ', 'bi-exclamation-circle'); return; }
   const a = document.createElement('a');
   a.href = cfg.url;
@@ -1428,7 +2012,50 @@ async function handleLogout() {
     showToast('មិនអាចចាកចេញពីគណនីបានទេ។ សូមពិនិត្យការតភ្ជាប់របស់អ្នក។', 'bi-exclamation-circle');
   }
 }
-function handleSchoolRegisterSubmit(e) { e.preventDefault(); closeModal('register-school-modal'); showToast('សំណើបង្កើតសាលាត្រូវបានបញ្ជូនដោយជោគជ័យ!', 'bi-envelope-check-fill'); }
+async function handleSchoolRegisterSubmit(event) {
+  event.preventDefault();
+  document.getElementById('school-request-error').classList.add('hidden');
+  if (!currentUser) {
+    closeModal('register-school-modal');
+    pendingSchoolFlow = 'create';
+    openModal('login-modal');
+    return;
+  }
+  const submitButton = document.getElementById('school-request-submit-btn');
+  submitButton.disabled = true;
+  submitButton.textContent = 'កំពុងដាក់ពាក្យ...';
+  try {
+    const { data, error } = await supabaseClient.from('schools').insert({
+      owner_id:currentUser.id,
+      school_name:document.getElementById('school-request-name').value.trim(),
+      province:document.getElementById('school-request-province').value,
+      phone:document.getElementById('school-request-phone').value.trim(),
+      official_email:document.getElementById('school-request-email').value.trim(),
+      description:''
+    }).select('*').single();
+    if (error) {
+      console.error('Failed to create school:', error);
+      document.getElementById('school-request-error').textContent = 'មិនអាចដាក់ពាក្យស្នើសុំបានទេ។ សូមពិនិត្យព័ត៌មាន ឬព្យាយាមម្តងទៀត។';
+      document.getElementById('school-request-error').classList.remove('hidden');
+      return;
+    }
+    currentSchool = data;
+    document.getElementById('school-request-name').value = '';
+    document.getElementById('school-request-phone').value = '';
+    document.getElementById('school-request-email').value = '';
+    closeModal('register-school-modal');
+    updateReviewAuthGate();
+    showToast('បានបង្កើតទំព័រសាលារៀនជោគជ័យ!', 'bi-building-check');
+    navigateToSchoolDashboard();
+  } catch (error) {
+    console.error('Failed to create school:', error);
+    document.getElementById('school-request-error').textContent = 'មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ធបានទេ។ សូមព្យាយាមម្តងទៀត។';
+    document.getElementById('school-request-error').classList.remove('hidden');
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = 'ដាក់ពាក្យស្នើសុំ';
+  }
+}
 
 window.addEventListener('keydown', e => {
   const open = !document.getElementById('reader-modal').classList.contains('hidden');
