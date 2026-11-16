@@ -27,3 +27,56 @@ create policy "Authenticated users can create their own reviews"
 
 grant select on public.reviews to anon, authenticated;
 grant insert on public.reviews to authenticated;
+
+alter table public.review_reactions enable row level security;
+alter table public.review_replies enable row level security;
+
+drop policy if exists "Review reactions are readable by everyone" on public.review_reactions;
+create policy "Review reactions are readable by everyone"
+  on public.review_reactions for select
+  to anon, authenticated
+  using (true);
+
+drop policy if exists "Users can create their own review reactions" on public.review_reactions;
+create policy "Users can create their own review reactions"
+  on public.review_reactions for insert
+  to authenticated
+  with check (
+    auth.uid() = user_id
+    and reaction_type in ('like', 'love', 'helpful')
+  );
+
+drop policy if exists "Users can update their own review reactions" on public.review_reactions;
+create policy "Users can update their own review reactions"
+  on public.review_reactions for update
+  to authenticated
+  using (auth.uid() = user_id)
+  with check (
+    auth.uid() = user_id
+    and reaction_type in ('like', 'love', 'helpful')
+  );
+
+drop policy if exists "Users can delete their own review reactions" on public.review_reactions;
+create policy "Users can delete their own review reactions"
+  on public.review_reactions for delete
+  to authenticated
+  using (auth.uid() = user_id);
+
+drop policy if exists "Review replies are readable by everyone" on public.review_replies;
+create policy "Review replies are readable by everyone"
+  on public.review_replies for select
+  to anon, authenticated
+  using (true);
+
+drop policy if exists "Users can create their own review replies" on public.review_replies;
+create policy "Users can create their own review replies"
+  on public.review_replies for insert
+  to authenticated
+  with check (
+    auth.uid() = user_id
+    and length(trim(reply_text)) > 0
+  );
+
+grant select on public.review_reactions, public.review_replies to anon, authenticated;
+grant insert, update, delete on public.review_reactions to authenticated;
+grant insert on public.review_replies to authenticated;

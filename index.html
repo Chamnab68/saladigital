@@ -537,6 +537,10 @@ let selectedRating = 5;
 let currentUser = null;
 let currentReviews = [];
 let reviewsRequestToken = 0;
+let reviewInteractionsRequestToken = 0;
+let openReplyReviewId = null;
+const reviewReplyDrafts = new Map();
+const busyReactionReviewIds = new Set();
 
 // ================= INIT & ROUTING =================
 window.addEventListener('DOMContentLoaded', async () => {
@@ -624,6 +628,10 @@ function renderSchools() {
 
 // ================= DETAIL =================
 function renderDetailPage(b) {
+  if (currentBook && currentBook.id !== b.id) {
+    openReplyReviewId = null;
+    reviewReplyDrafts.clear();
+  }
   currentBook = b;
   selectedRating = 5;
   setCommentRating(selectedRating);
@@ -702,6 +710,11 @@ function renderCommentsList(reviews = currentReviews) {
   const container = document.getElementById('detail-comments-container');
   count.innerText = reviews.length;
   container.replaceChildren();
+  const reactionTypes = [
+    {type:'like', icon:'👍', label:'ចូលចិត្ត'},
+    {type:'love', icon:'❤️', label:'ស្រឡាញ់'},
+    {type:'helpful', icon:'💡', label:'មានប្រយោជន៍'}
+  ];
   reviews.forEach(review => {
     const card = document.createElement('div');
     card.className = 'p-4 rounded-2xl bg-white border border-slate-100 shadow-sm space-y-2';
@@ -732,7 +745,94 @@ function renderCommentsList(reviews = currentReviews) {
     const comment = document.createElement('p');
     comment.className = 'text-xs text-slate-600 leading-relaxed pl-9';
     comment.textContent = review.comment || '';
-    card.append(header, comment);
+    const actions = document.createElement('div');
+    actions.className = 'pl-9 flex flex-wrap items-center gap-1.5';
+    reactionTypes.forEach(reaction => {
+      const reactionRows = review.reactions || [];
+      const total = reactionRows.filter(row => row.reaction_type === reaction.type).length;
+      const selected = review.userReaction && review.userReaction.reaction_type === reaction.type;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.title = reaction.label;
+      button.setAttribute('aria-label', reaction.label);
+      button.setAttribute('aria-pressed', String(Boolean(selected)));
+      button.disabled = busyReactionReviewIds.has(review.id);
+      button.className = selected
+        ? 'px-2.5 py-1 rounded-full border border-sky-200 bg-sky-50 text-sky-700 text-[11px] font-medium'
+        : 'px-2.5 py-1 rounded-full border border-transparent hover:border-slate-200 hover:bg-slate-50 text-slate-600 text-[11px] font-medium';
+      if (button.disabled) button.classList.add('opacity-60', 'cursor-not-allowed');
+      button.append(document.createTextNode(reaction.icon + ' ' + reaction.label));
+      if (total > 0) {
+        const totalLabel = document.createElement('span');
+        totalLabel.className = 'ml-1 text-[10px] opacity-70';
+        totalLabel.textContent = formatKhmerNumber(total);
+        button.appendChild(totalLabel);
+      }
+      button.addEventListener('click', () => toggleReviewReaction(review.id, reaction.type));
+      actions.appendChild(button);
+    });
+    const replyButton = document.createElement('button');
+    replyButton.type = 'button';
+    replyButton.className = 'px-2.5 py-1 rounded-full text-slate-500 hover:bg-slate-50 hover:text-sky-700 text-[11px] font-medium';
+    replyButton.setAttribute('aria-expanded', String(openReplyReviewId === review.id));
+    replyButton.append(document.createTextNode(' '));
+    const replyIcon = document.createElement('i');
+    replyIcon.className = 'bi bi-reply';
+    replyButton.append(replyIcon, document.createTextNode(' ឆ្លើយតប (' + formatKhmerNumber((review.replies || []).length) + ')'));
+    replyButton.addEventListener('click', () => toggleReviewReplyBox(review.id));
+    actions.appendChild(replyButton);
+    card.append(header, comment, actions);
+
+    if (openReplyReviewId === review.id) {
+      const replyForm = document.createElement('form');
+      replyForm.className = 'ml-9 mt-2 flex items-end gap-2';
+      const replyInput = document.createElement('textarea');
+      replyInput.rows = 2;
+      replyInput.required = true;
+      replyInput.maxLength = 2000;
+      replyInput.placeholder = 'សរសេរការឆ្លើយតបរបស់អ្នក...';
+      replyInput.dataset.reviewId = review.id;
+      replyInput.className = 'review-reply-input flex-1 resize-y p-2.5 rounded-xl border border-slate-200 bg-white text-xs focus:outline-none focus:ring-2 focus:ring-sky-500';
+      replyInput.value = reviewReplyDrafts.get(review.id) || '';
+      replyInput.addEventListener('input', () => reviewReplyDrafts.set(review.id, replyInput.value));
+      const sendReply = document.createElement('button');
+      sendReply.type = 'submit';
+      sendReply.className = 'shrink-0 px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold';
+      sendReply.innerHTML = '<i class="bi bi-send"></i> ផ្ញើ';
+      replyForm.append(replyInput, sendReply);
+      replyForm.addEventListener('submit', event => submitReviewReply(event, review.id));
+      card.appendChild(replyForm);
+    }
+
+    if ((review.replies || []).length) {
+      const replies = document.createElement('div');
+      replies.className = 'ml-9 pl-3 py-2 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl space-y-3';
+      review.replies.forEach(reply => {
+        const replyItem = document.createElement('div');
+        replyItem.className = 'flex items-start gap-2';
+        const replyAvatar = document.createElement('div');
+        replyAvatar.className = 'w-6 h-6 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-400 text-white flex items-center justify-center font-bold text-[10px] shrink-0';
+        replyAvatar.textContent = Array.from(reply.user_name || '?')[0];
+        const replyContent = document.createElement('div');
+        replyContent.className = 'min-w-0 flex-1';
+        const replyHeader = document.createElement('div');
+        replyHeader.className = 'flex flex-wrap items-baseline gap-x-2';
+        const replyName = document.createElement('span');
+        replyName.className = 'text-[11px] font-bold text-slate-700';
+        replyName.textContent = reply.user_name || 'អ្នកប្រើប្រាស់';
+        const replyDate = document.createElement('span');
+        replyDate.className = 'text-[10px] text-slate-400';
+        replyDate.textContent = formatReviewTimestamp(reply.created_at);
+        const replyText = document.createElement('p');
+        replyText.className = 'mt-0.5 text-xs text-slate-600 leading-relaxed whitespace-pre-wrap break-words';
+        replyText.textContent = reply.reply_text || '';
+        replyHeader.append(replyName, replyDate);
+        replyContent.append(replyHeader, replyText);
+        replyItem.append(replyAvatar, replyContent);
+        replies.appendChild(replyItem);
+      });
+      card.appendChild(replies);
+    }
     container.appendChild(card);
   });
 }
@@ -750,7 +850,7 @@ async function fetchReviewsForBook(bookId) {
   try {
     const { data, error } = await supabaseClient
       .from('reviews')
-      .select('book_id, user_id, user_name, rating, comment, created_at')
+      .select('id, book_id, user_id, user_name, rating, comment, created_at')
       .eq('book_id', bookId)
       .order('created_at', { ascending: false });
     if (requestToken !== reviewsRequestToken) return;
@@ -760,8 +860,9 @@ async function fetchReviewsForBook(bookId) {
       container.textContent = 'មិនអាចផ្ទុកមតិយោបល់បានទេ។ សូមព្យាយាមម្តងទៀត។';
       return;
     }
-    currentReviews = data || [];
+    currentReviews = (data || []).map(review => ({...review, reactions:[], userReaction:null, replies:[]}));
     renderCommentsList(currentReviews);
+    await refreshReviewInteractions(requestToken);
   } catch (error) {
     if (requestToken !== reviewsRequestToken) return;
     console.error('Failed to fetch reviews:', error);
@@ -769,8 +870,170 @@ async function fetchReviewsForBook(bookId) {
     container.textContent = 'មិនអាចផ្ទុកមតិយោបល់បានទេ។ សូមព្យាយាមម្តងទៀត។';
   }
 }
+async function refreshReviewInteractions(requestToken = reviewsRequestToken) {
+  const interactionToken = ++reviewInteractionsRequestToken;
+  const reviewIds = currentReviews.map(review => review.id);
+  if (!reviewIds.length || !supabaseClient) return;
+  try {
+    const [reactionResult, replyResult] = await Promise.all([
+      supabaseClient.from('review_reactions')
+        .select('id, review_id, user_id, reaction_type, created_at')
+        .in('review_id', reviewIds),
+      supabaseClient.from('review_replies')
+        .select('id, review_id, user_id, user_name, reply_text, created_at')
+        .in('review_id', reviewIds)
+        .order('created_at', {ascending:true})
+    ]);
+    if (requestToken !== reviewsRequestToken || interactionToken !== reviewInteractionsRequestToken) return;
+    if (reactionResult.error) console.error('Failed to fetch review reactions:', reactionResult.error);
+    if (replyResult.error) console.error('Failed to fetch review replies:', replyResult.error);
+    const reactionsByReview = new Map();
+    (reactionResult.data || []).forEach(reaction => {
+      if (!reactionsByReview.has(reaction.review_id)) reactionsByReview.set(reaction.review_id, []);
+      reactionsByReview.get(reaction.review_id).push(reaction);
+    });
+    const repliesByReview = new Map();
+    (replyResult.data || []).forEach(reply => {
+      if (!repliesByReview.has(reply.review_id)) repliesByReview.set(reply.review_id, []);
+      repliesByReview.get(reply.review_id).push(reply);
+    });
+    currentReviews = currentReviews.map(review => {
+      const reviewReactions = reactionResult.error
+        ? (review.reactions || [])
+        : (reactionsByReview.get(review.id) || []);
+      return {
+        ...review,
+        reactions: reviewReactions,
+        userReaction: reviewReactions.find(reaction => currentUser && reaction.user_id === currentUser.id) || null,
+        replies: replyResult.error
+          ? (review.replies || [])
+          : (repliesByReview.get(review.id) || [])
+      };
+    });
+    renderCommentsList();
+    if (reactionResult.error || replyResult.error) {
+      showToast('មិនអាចផ្ទុកប្រតិកម្ម ឬការឆ្លើយតបបានទេ។ សូមព្យាយាមម្តងទៀត។', 'bi-exclamation-circle');
+    }
+  } catch (error) {
+    if (requestToken !== reviewsRequestToken || interactionToken !== reviewInteractionsRequestToken) return;
+    console.error('Failed to fetch review interactions:', error);
+    showToast('មិនអាចផ្ទុកប្រតិកម្ម និងការឆ្លើយតបបានទេ។ សូមពិនិត្យការតភ្ជាប់។', 'bi-exclamation-circle');
+  }
+}
+function toggleReviewReplyBox(reviewId) {
+  if (!currentUser) {
+    openModal('login-modal');
+    return;
+  }
+  openReplyReviewId = openReplyReviewId === reviewId ? null : reviewId;
+  renderCommentsList();
+  if (openReplyReviewId) {
+    const replyInput = Array.from(document.querySelectorAll('.review-reply-input'))
+      .find(input => input.dataset.reviewId === reviewId);
+    if (replyInput) replyInput.focus();
+  }
+}
+async function toggleReviewReaction(reviewId, reactionType) {
+  if (!currentUser) {
+    openModal('login-modal');
+    return;
+  }
+  if (!supabaseClient) {
+    showToast('មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ធប្រតិកម្មបានទេ', 'bi-exclamation-circle');
+    return;
+  }
+  const review = currentReviews.find(item => item.id === reviewId);
+  if (!review || busyReactionReviewIds.has(reviewId)) return;
+  const ownReaction = review.userReaction;
+  busyReactionReviewIds.add(reviewId);
+  renderCommentsList();
+  try {
+    let result;
+    if (ownReaction && ownReaction.reaction_type === reactionType) {
+      result = await supabaseClient.from('review_reactions')
+        .delete()
+        .eq('id', ownReaction.id)
+        .eq('review_id', reviewId)
+        .eq('user_id', currentUser.id);
+    } else if (ownReaction) {
+      result = await supabaseClient.from('review_reactions')
+        .update({reaction_type:reactionType})
+        .eq('id', ownReaction.id)
+        .eq('review_id', reviewId)
+        .eq('user_id', currentUser.id);
+    } else {
+      result = await supabaseClient.from('review_reactions').insert({
+        review_id: reviewId,
+        user_id: currentUser.id,
+        reaction_type: reactionType
+      });
+    }
+    if (result.error) {
+      console.error('Failed to update review reaction:', result.error);
+      showToast('មិនអាចរក្សាទុកប្រតិកម្មបានទេ។ សូមព្យាយាមម្តងទៀត។', 'bi-exclamation-circle');
+      return;
+    }
+    await refreshReviewInteractions();
+  } catch (error) {
+    console.error('Failed to update review reaction:', error);
+    showToast('មិនអាចរក្សាទុកប្រតិកម្មបានទេ។ សូមពិនិត្យការតភ្ជាប់។', 'bi-exclamation-circle');
+  } finally {
+    busyReactionReviewIds.delete(reviewId);
+    renderCommentsList();
+  }
+}
+async function submitReviewReply(event, reviewId) {
+  event.preventDefault();
+  if (!currentUser) {
+    openModal('login-modal');
+    return;
+  }
+  if (!supabaseClient) {
+    showToast('មិនអាចភ្ជាប់ទៅកាន់ប្រព័ន្ធការឆ្លើយតបបានទេ', 'bi-exclamation-circle');
+    return;
+  }
+  const form = event.currentTarget;
+  const input = form.querySelector('textarea');
+  const replyText = input.value.trim();
+  if (!replyText) {
+    showToast('សូមសរសេរការឆ្លើយតបមុននឹងផ្ញើ', 'bi-exclamation-circle');
+    input.focus();
+    return;
+  }
+  const metadataName = currentUser.user_metadata && currentUser.user_metadata.full_name;
+  const userName = (metadataName || '').trim() || (currentUser.email || '').split('@')[0] || 'អ្នកប្រើប្រាស់';
+  const submitButton = form.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.classList.add('opacity-60', 'cursor-not-allowed');
+  try {
+    const { error } = await supabaseClient.from('review_replies').insert({
+      review_id: reviewId,
+      user_id: currentUser.id,
+      user_name: userName,
+      reply_text: replyText
+    });
+    if (error) {
+      console.error('Failed to submit review reply:', error);
+      showToast('មិនអាចផ្ញើការឆ្លើយតបបានទេ។ សូមព្យាយាមម្តងទៀត។', 'bi-exclamation-circle');
+      return;
+    }
+    reviewReplyDrafts.delete(reviewId);
+    await refreshReviewInteractions();
+    showToast('បានផ្ញើការឆ្លើយតបជោគជ័យ!', 'bi-chat-check-fill');
+  } catch (error) {
+    console.error('Failed to submit review reply:', error);
+    showToast('មិនអាចផ្ញើការឆ្លើយតបបានទេ។ សូមពិនិត្យការតភ្ជាប់។', 'bi-exclamation-circle');
+  } finally {
+    submitButton.disabled = false;
+    submitButton.classList.remove('opacity-60', 'cursor-not-allowed');
+  }
+}
 function updateReviewAuthGate() {
   const isLoggedIn = Boolean(currentUser);
+  if (!isLoggedIn) {
+    openReplyReviewId = null;
+    reviewReplyDrafts.clear();
+  }
   document.getElementById('review-auth-prompt').classList.toggle('hidden', isLoggedIn);
   document.getElementById('review-form').classList.toggle('hidden', !isLoggedIn);
   const loginButton = document.getElementById('navbar-login-btn');
@@ -792,6 +1055,7 @@ async function initializeSupabaseAuth() {
   supabaseClient.auth.onAuthStateChange((_event, session) => {
     currentUser = session ? session.user : null;
     updateReviewAuthGate();
+    setTimeout(() => refreshReviewInteractions(), 0);
   });
   const { data, error } = await supabaseClient.auth.getSession();
   if (error) {
