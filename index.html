@@ -1,2150 +1,874 @@
 <!DOCTYPE html>
 <html lang="km" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>សាលាឌីជីថល - ថ្នាលអប់រំ និងចែករំលែកចំណេះដឹងឌីជីថលកម្ពុជា</title>
-  
-  <!-- Google Fonts: Kantumruy Pro & Noto Serif Khmer -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+Khmer:wght@600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            khmer: ['"Kantumruy Pro"', 'sans-serif'],
-            serifKhmer: ['"Noto Serif Khmer"', 'serif'],
-          },
-          colors: {
-            sala: {
-              50: '#f0f7ff',
-              100: '#e0effe',
-              200: '#bae0fd',
-              500: '#0284c7',
-              600: '#0369a1',
-              700: '#075985',
-              800: '#0c4a6e',
-              900: '#082f49',
-              accent: '#38bdf8',
-              gold: '#f59e0b',
-            }
-          },
-          boxShadow: {
-            'glow': '0 0 25px -5px rgba(2, 132, 199, 0.3)',
-            'card-hover': '0 20px 30px -10px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    body {
-      font-family: 'Kantumruy Pro', sans-serif;
-      overflow-x: hidden;
-    }
-    
-    .bg-grid-pattern {
-      background-size: 32px 32px;
-      background-image: 
-        linear-gradient(to right, rgba(2, 132, 199, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(2, 132, 199, 0.04) 1px, transparent 1px);
-    }
-    
-    .card-zoom-img {
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .card-zoom-wrap:hover .card-zoom-img {
-      transform: scale(1.06);
-    }
-
-    .modal-enter {
-      opacity: 0;
-      transform: scale(0.96);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .modal-enter-active {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .page-fade {
-      animation: fadeIn 0.35s ease-out forwards;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #f1f5f9;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>សាលាឌីជីថល - ថ្នាលអប់រំ និងចែករំលែកចំណេះដឹងឌីជីថលកម្ពុជា</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;500;600;700&family=Noto+Serif+Khmer:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { khmer: ['"Kantumruy Pro"','sans-serif'], serifKhmer: ['"Noto Serif Khmer"','serif'] },
+  boxShadow: { 'card-hover': '0 20px 30px -10px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04)' }
+}}};
+</script>
+<style>
+body{font-family:'Kantumruy Pro',sans-serif;overflow-x:hidden}
+.card-zoom-img{transition:transform .5s}
+.card-zoom-wrap:hover .card-zoom-img{transform:scale(1.06)}
+.modal-enter{opacity:0;transform:scale(.96);transition:all .25s}
+.modal-enter-active{opacity:1;transform:scale(1)}
+.page-fade{animation:fadeIn .35s ease-out forwards}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.line-clamp-1{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sala-500 selection:text-white flex flex-col min-h-screen">
+<body class="bg-slate-50 text-slate-800 antialiased flex flex-col min-h-screen">
 
-  <!-- ======================== TOAST NOTIFICATION CONTAINER ======================== -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 bg-slate-900/95 text-white backdrop-blur-md rounded-2xl shadow-2xl transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none border border-slate-700/50">
-    <i id="toast-icon" class="bi bi-check-circle-fill text-emerald-400 text-lg"></i>
-    <span id="toast-message" class="text-xs sm:text-sm font-medium">ប្រតិបត្តិការជោគជ័យ</span>
+<!-- TOAST -->
+<div id="toast" class="fixed bottom-6 right-6 z-[60] flex items-center gap-3 px-5 py-3.5 bg-slate-900/95 text-white rounded-2xl shadow-2xl transition-all duration-300 translate-y-20 opacity-0 pointer-events-none">
+  <i id="toast-icon" class="bi bi-check-circle-fill text-sky-400 text-lg"></i>
+  <span id="toast-message" class="text-sm font-medium"></span>
+</div>
+
+<!-- TOP BAR -->
+<div class="bg-gradient-to-r from-sky-900 via-sky-800 to-indigo-950 text-white text-xs py-2 px-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
+    <div class="flex items-center gap-2 text-sky-200 min-w-0">
+      <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-sky-500/30 text-sky-300 shrink-0">ថ្មី! 2026</span>
+      <span class="truncate">ស្វាគមន៍មកកាន់ប្រព័ន្ធបណ្ណាល័យឌីជីថល និងការរៀនសូត្រពីចម្ងាយ</span>
+    </div>
+    <a href="#footer" class="hover:text-white shrink-0"><i class="bi bi-patch-question"></i> ជំនួយ</a>
   </div>
+</div>
 
-  <!-- ======================== TOP ANNOUNCEMENT BAR ======================== -->
-  <div class="bg-gradient-to-r from-sala-900 via-sala-800 to-indigo-950 text-white text-xs py-2 px-4 border-b border-sky-900/40">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-      <div class="flex items-center gap-2 text-sky-200">
-        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-sky-500/30 text-sky-300 border border-sky-400/30">
-          ថ្មី! 2026
-        </span>
-        <span class="truncate">ស្វាគមន៍មកកាន់ប្រព័ន្ធបណ្ណាល័យឌីជីថល និងការរៀនសូត្រពីចម្ងាយសម្រាប់លោកគ្រូ អ្នកគ្រូ និងសិស្សានុសិស្ស</span>
+<!-- HEADER -->
+<header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20 gap-4">
+      <a href="javascript:void(0)" onclick="navigateToHome()" class="flex items-center gap-3 group shrink-0">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-600 to-cyan-500 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition">
+          <i class="bi bi-mortarboard-fill text-2xl"></i>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serifKhmer text-2xl font-bold text-slate-900 leading-none">សាលាឌីជីថល</span>
+          <span class="text-[11px] font-medium text-slate-400 mt-0.5">SALA DIGITAL CAMBODIA</span>
+        </div>
+      </a>
+
+      <div class="relative flex-1 max-w-md hidden md:block">
+        <i class="bi bi-search absolute left-4 top-3 text-slate-400 text-sm"></i>
+        <input id="global-search" type="text" placeholder="ស្វែងរកចំណងជើងសៀវភៅ មេរៀន ឬឈ្មោះសាលា..." oninput="handleLiveSearch(this.value)"
+          class="w-full pl-10 pr-10 py-2.5 rounded-full border border-slate-200 bg-slate-100/70 focus:bg-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500">
+        <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3.5 top-3 text-slate-400 hover:text-slate-600"><i class="bi bi-x-circle-fill text-sm"></i></button>
       </div>
-      <div class="flex items-center gap-4 text-slate-300 shrink-0">
-        <a href="#footer" class="hover:text-white transition flex items-center gap-1.5"><i class="bi bi-patch-question"></i> ជំនួយ</a>
-        <span class="text-slate-600">|</span>
-        <button onclick="showToast('បានជ្រើសរើសភាសាខ្មែរ', 'bi-globe-asia-australia')" class="hover:text-white font-medium flex items-center gap-1.5">
-          <i class="bi bi-translate text-sky-400"></i> ភាសាខ្មែរ (KH)
+
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-600">
+        <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('latest-works')" class="hover:text-sky-600"><i class="bi bi-book"></i> សៀវភៅសិក្សា</a>
+        <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('popular-works')" class="hover:text-sky-600"><i class="bi bi-fire text-amber-500"></i> មេរៀនពេញនិយម</a>
+        <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('featured-schools')" class="hover:text-sky-600"><i class="bi bi-building"></i> សាលារៀន</a>
+        <a href="#footer" class="hover:text-sky-600"><i class="bi bi-newspaper"></i> ព័ត៌មាន</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="openModal('login-modal')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-700 shadow-md active:scale-95 transition">
+          <i class="bi bi-box-arrow-in-right"></i><span>ចូលគណនី</span>
         </button>
+        <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="lg:hidden p-2.5 rounded-xl border border-slate-200 text-slate-600"><i class="bi bi-list text-xl"></i></button>
       </div>
     </div>
+    <div class="md:hidden pb-3">
+      <input type="text" placeholder="ស្វែងរកសៀវភៅ ឬមេរៀន..." oninput="handleLiveSearch(this.value)" class="w-full px-4 py-2 rounded-xl bg-slate-100 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500">
+    </div>
   </div>
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-1 text-sm font-medium">
+    <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('latest-works');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-3 py-2 rounded-xl hover:bg-sky-50">សៀវភៅសិក្សា</a>
+    <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('popular-works');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-3 py-2 rounded-xl hover:bg-sky-50">មេរៀនពេញនិយម</a>
+    <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('featured-schools');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-3 py-2 rounded-xl hover:bg-sky-50">សាលារៀន</a>
+  </div>
+</header>
 
-  <!-- ======================== STICKY NAVBAR ======================== -->
-  <header id="main-header" class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300">
+<main class="flex-grow">
+
+<!-- ========== HOME VIEW ========== -->
+<div id="home-view" class="page-fade">
+  <section class="relative bg-slate-950 text-white overflow-hidden py-20 lg:py-28">
+    <div class="absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" alt="" class="w-full h-full object-cover opacity-20 blur-sm" onerror="this.style.display='none'">
+      <div class="absolute inset-0 bg-gradient-to-b from-sky-950/85 via-slate-950/90 to-slate-950"></div>
+    </div>
+    <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sky-300 text-sm mb-6"><i class="bi bi-stars text-amber-300"></i> ថ្នាលបច្ចេកវិទ្យាអប់រំជំនាន់ថ្មី នៃព្រះរាជាណាចក្រកម្ពុជា</div>
+      <h1 class="font-serifKhmer text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4">សាលារៀនបែបឌីជីថល</h1>
+      <h2 class="font-serifKhmer text-xl sm:text-2xl md:text-3xl text-sky-200/90 mb-6">សម្រាប់អ្នកបង្រៀន និងអ្នករៀនជំនាន់ថ្មី</h2>
+      <p class="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed mb-10">សាលារៀននិម្មិតសម្រាប់គ្រូបង្រៀន និងអ្នកជំនាញចែករំលែកចំណេះដឹង ហើយសិស្សអាចស្វ័យសិក្សាបាន។ អ្នកអាចអានសៀវភៅ ទស្សនាមេរៀនជាវីដេអូ និងបង្កើតសាលារៀនបានដោយឥតគិតថ្លៃ។</p>
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+        <a href="#latest-works" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-500 font-semibold shadow-lg hover:-translate-y-0.5 transition"><i class="bi bi-compass"></i> ស្វែងរកមេរៀនឥឡូវនេះ</a>
+        <button onclick="openModal('register-school-modal')" class="px-7 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 font-semibold hover:-translate-y-0.5 transition"><i class="bi bi-plus-circle"></i> បង្កើតសាលារបស់អ្នក</button>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-slate-800/80">
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10"><div class="counter text-3xl lg:text-5xl font-extrabold text-sky-300" data-target="98920">0</div><p class="text-xs sm:text-sm text-slate-400 mt-1">អ្នកប្រើប្រាស់សរុប</p></div>
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10"><div class="counter text-3xl lg:text-5xl font-extrabold text-amber-300" data-target="765">0</div><p class="text-xs sm:text-sm text-slate-400 mt-1">សាលារៀនបានចុះឈ្មោះ</p></div>
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10"><div class="counter text-3xl lg:text-5xl font-extrabold text-emerald-300" data-target="5199">0</div><p class="text-xs sm:text-sm text-slate-400 mt-1">សៀវភៅអេឡិចត្រូនិក</p></div>
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/10"><div class="counter text-3xl lg:text-5xl font-extrabold text-rose-300" data-target="241">0</div><p class="text-xs sm:text-sm text-slate-400 mt-1">មេរៀន និងវគ្គសិក្សា</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+    <div class="bg-white rounded-3xl p-3 sm:p-4 shadow-xl border border-slate-200/80 flex items-center gap-2 overflow-x-auto">
+      <button onclick="filterContent('all',this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-sky-600 text-white whitespace-nowrap">ទាំងអស់</button>
+      <button onclick="filterContent('book',this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap"><i class="bi bi-book"></i> សៀវភៅសិក្សា</button>
+      <button onclick="filterContent('lesson',this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap"><i class="bi bi-play-circle"></i> មេរៀន AI & ICT</button>
+      <button onclick="filterContent('pedagogy',this)" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap"><i class="bi bi-journal-bookmark"></i> វិធីសាស្រ្តបង្រៀន</button>
+    </div>
+  </section>
+
+  <section id="latest-works" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-8 border-b border-slate-200/60 pb-4">
+      <div class="text-sky-600 font-semibold text-xs mb-1"><i class="bi bi-stars"></i> បោះពុម្ពផ្សាយថ្មីៗ</div>
+      <h2 class="font-serifKhmer text-2xl sm:text-3xl font-bold text-slate-900">ស្នាដៃថ្មីចុងក្រោយ</h2>
+    </div>
+    <div id="latest-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </section>
+
+  <section id="popular-works" class="bg-gradient-to-b from-slate-100/70 to-white py-16 border-y border-slate-200/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20 gap-4">
-        
-        <!-- Logo -->
-        <a href="javascript:void(0)" onclick="navigateToHome()" class="flex items-center gap-3 group shrink-0">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-sky-500/25 group-hover:scale-105 transition-transform duration-300">
-            <i class="bi bi-mortarboard-fill text-2xl"></i>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-serifKhmer text-2xl font-bold text-slate-900 tracking-tight leading-none group-hover:text-sky-600 transition-colors">
-              សាលាឌីជីថល
-            </span>
-            <span class="text-[11px] font-medium text-slate-400 tracking-wide mt-0.5">SALA DIGITAL CAMBODIA</span>
-          </div>
-        </a>
-
-        <!-- Live Search Bar -->
-        <div class="relative flex-1 max-w-md hidden md:block">
-          <div class="relative flex items-center">
-            <i class="bi bi-search absolute left-4 text-slate-400 text-sm"></i>
-            <input 
-              id="global-search" 
-              type="text" 
-              placeholder="ស្វែងរកចំណងជើងសៀវភៅ មេរៀន ឬឈ្មោះសាលា..." 
-              class="w-full pl-10 pr-10 py-2.5 rounded-full border border-slate-200 bg-slate-100/70 hover:bg-slate-100 focus:bg-white text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 transition-all"
-              oninput="handleLiveSearch(this.value)"
-            >
-            <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3.5 text-slate-400 hover:text-slate-600">
-              <i class="bi bi-x-circle-fill text-sm"></i>
-            </button>
-          </div>
-
-          <!-- Quick tag dropdown suggestions -->
-          <div id="search-suggestion-box" class="hidden absolute left-0 right-0 top-12 bg-white rounded-2xl shadow-xl border border-slate-200 p-2 z-50 text-xs">
-            <div class="text-[11px] font-semibold text-slate-400 px-3 py-1">ស្វែងរកតាមប្រភេទពេញនិយម៖</div>
-            <div class="flex flex-wrap gap-1.5 p-2">
-              <button onclick="quickFilterSearch('ភាសាខ្មែរ')" class="px-2.5 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-700 font-medium">#ភាសាខ្មែរ</button>
-              <button onclick="quickFilterSearch('AI')" class="px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-medium">#បញ្ញាសិប្បនិម្មិត</button>
-              <button onclick="quickFilterSearch('គម្រោង')" class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium">#គម្រោងអភិវឌ្ឍន៍</button>
-              <button onclick="quickFilterSearch('សុវត្ថិភាព')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 font-medium">#សុវត្ថិភាព</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Navigation Menu -->
-        <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-600">
-          <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('latest-works')" class="hover:text-sky-600 transition flex items-center gap-1.5 py-1 border-b-2 border-transparent hover:border-sky-600">
-            <i class="bi bi-book"></i> សៀវភៅសិក្សា
-          </a>
-          <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('popular-works')" class="hover:text-sky-600 transition flex items-center gap-1.5 py-1 border-b-2 border-transparent hover:border-sky-600">
-            <i class="bi bi-fire text-amber-500"></i> មេរៀនពេញនិយម
-          </a>
-          <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('featured-schools')" class="hover:text-sky-600 transition flex items-center gap-1.5 py-1 border-b-2 border-transparent hover:border-sky-600">
-            <i class="bi bi-building"></i> សាលារៀន
-          </a>
-          <a href="#footer" class="hover:text-sky-600 transition flex items-center gap-1.5 py-1 border-b-2 border-transparent hover:border-sky-600">
-            <i class="bi bi-newspaper"></i> ព័ត៌មាន
-          </a>
-        </nav>
-
-        <!-- Action Buttons -->
-        <div class="flex items-center gap-3">
-          <button onclick="openModal('login-modal')" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-700 hover:to-sky-600 shadow-md shadow-sky-500/20 hover:shadow-lg hover:shadow-sky-500/30 active:scale-95 transition-all">
-            <i class="bi bi-box-arrow-in-right"></i>
-            <span>ចូលគណនី</span>
-          </button>
-
-          <!-- Mobile Hamburger -->
-          <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 focus:outline-none">
-            <i class="bi bi-list text-xl"></i>
-          </button>
-        </div>
-
+      <div class="mb-8 border-b border-slate-200 pb-4">
+        <div class="text-rose-500 font-semibold text-xs mb-1"><i class="bi bi-fire"></i> កំពុងពេញនិយមខ្លាំង</div>
+        <h2 class="font-serifKhmer text-2xl sm:text-3xl font-bold text-slate-900">ស្នាដៃកំពុងពេញនិយម</h2>
       </div>
-
-      <!-- Mobile Search (Small Screens) -->
-      <div class="md:hidden pb-3">
-        <div class="relative">
-          <i class="bi bi-search absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-          <input 
-            type="text" 
-            placeholder="ស្វែងរកសៀវភៅ ឬមេរៀន..." 
-            class="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-100 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500"
-            oninput="handleLiveSearch(this.value)"
-          >
-        </div>
-      </div>
+      <div id="popular-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </div>
+  </section>
 
-    <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2">
-      <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('latest-works'); toggleMobileMenu()" class="block px-3 py-2 rounded-xl text-slate-700 font-medium hover:bg-sky-50 hover:text-sky-600">
-        <i class="bi bi-book mr-2"></i> សៀវភៅសិក្សា
-      </a>
-      <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('popular-works'); toggleMobileMenu()" class="block px-3 py-2 rounded-xl text-slate-700 font-medium hover:bg-sky-50 hover:text-sky-600">
-        <i class="bi bi-fire mr-2 text-amber-500"></i> មេរៀនពេញនិយម
-      </a>
-      <a href="javascript:void(0)" onclick="navigateToHomeAndScroll('featured-schools'); toggleMobileMenu()" class="block px-3 py-2 rounded-xl text-slate-700 font-medium hover:bg-sky-50 hover:text-sky-600">
-        <i class="bi bi-building mr-2"></i> សាលារៀន
-      </a>
-      <a href="#footer" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-xl text-slate-700 font-medium hover:bg-sky-50 hover:text-sky-600">
-        <i class="bi bi-newspaper mr-2"></i> ព័ត៌មាន និងដៃគូ
-      </a>
+  <section id="featured-schools" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-8 border-b border-slate-200/60 pb-4">
+      <div class="text-sky-600 font-semibold text-xs mb-1"><i class="bi bi-buildings"></i> សហគមន៍អប់រំ</div>
+      <h2 class="font-serifKhmer text-2xl sm:text-3xl font-bold text-slate-900">សាលារៀន និងស្ថាប័នឆ្នើម</h2>
     </div>
-  </header>
+    <div id="schools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
 
-  <!-- ======================== MAIN VIEW CONTAINER ======================== -->
-  <main class="flex-grow">
-    
-    <!-- ==================== VIEW 1: HOME PAGE ==================== -->
-    <div id="home-view" class="page-fade">
-      
-      <!-- HERO SECTION -->
-      <section class="relative bg-slate-950 text-white overflow-hidden py-20 lg:py-28">
-        <div class="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop" 
-            alt="Classroom Library Background" 
-            class="w-full h-full object-cover opacity-20 filter blur-sm scale-105 transform motion-safe:animate-pulse duration-[10000ms]"
-            onerror="this.src='https://placehold.co/1920x800/032b43/ffffff?text=Sala+Digital+Hero'"
-          >
-          <div class="absolute inset-0 bg-gradient-to-b from-sky-950/85 via-slate-950/90 to-slate-950"></div>
-          <div class="absolute top-0 right-1/4 w-96 h-96 bg-sky-500/20 rounded-full blur-3xl pointer-events-none"></div>
-          <div class="absolute bottom-10 left-10 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
-        </div>
-
-        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sky-300 text-xs sm:text-sm font-medium mb-6">
-            <i class="bi bi-stars text-amber-300"></i>
-            <span>ថ្នាលបច្ចេកវិទ្យាអប់រំជំនាន់ថ្មី នៃព្រះរាជាណាចក្រកម្ពុជា</span>
-          </div>
-
-          <h1 class="font-serifKhmer text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight sm:leading-tight mb-4 drop-shadow-md">
-            សាលារៀនបែបឌីជីថល
-          </h1>
-          <h2 class="text-xl sm:text-2xl md:text-3xl font-medium text-sky-200/90 mb-6 font-serifKhmer">
-            សម្រាប់អ្នកបង្រៀន និងអ្នករៀនជំនាន់ថ្មី
-          </h2>
-
-          <p class="max-w-3xl mx-auto text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed mb-10 font-normal">
-            សាលារៀននិម្មិតសម្រាប់គ្រូបង្រៀន និងអ្នកជំនាញធ្វើការចែករំលែកចំណេះដឹង ហើយសិស្សអាចស្វ័យសិក្សាបានដោយខ្លួនឯងនៅលើសាលាឌីជីថល។ អ្នកអាចអានសៀវភៅ និងទស្សនាមេរៀនជាវីដេអូ ព្រមទាំងអាចបង្កើតសាលារៀន និងបញ្ចូលមេរៀនបានដោយឥតគិតថ្លៃ។
-          </p>
-
-          <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
-            <a href="#latest-works" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-400 hover:to-cyan-400 text-white font-semibold shadow-lg shadow-sky-500/30 hover:shadow-sky-500/50 hover:-translate-y-0.5 transition-all text-sm sm:text-base flex items-center gap-2">
-              <i class="bi bi-compass"></i>
-              <span>ស្វែងរកមេរៀនឥឡូវនេះ</span>
-            </a>
-            <button onclick="openModal('register-school-modal')" class="px-7 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-semibold hover:-translate-y-0.5 transition-all text-sm sm:text-base flex items-center gap-2">
-              <i class="bi bi-plus-circle"></i>
-              <span>បង្កើតសាលារបស់អ្នក</span>
-            </button>
-          </div>
-
-          <!-- Live Stats Grid -->
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-slate-800/80">
-            <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-sky-500/40 transition">
-              <div class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-200 counter" data-target="98920">0</div>
-              <p class="text-xs sm:text-sm font-medium text-slate-400 mt-1">អ្នកប្រើប្រាស់សរុប</p>
-            </div>
-            <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-sky-500/40 transition">
-              <div class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-200 counter" data-target="765">0</div>
-              <p class="text-xs sm:text-sm font-medium text-slate-400 mt-1">សាលារៀនបានចុះឈ្មោះ</p>
-            </div>
-            <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-sky-500/40 transition">
-              <div class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200 counter" data-target="5199">0</div>
-              <p class="text-xs sm:text-sm font-medium text-slate-400 mt-1">សៀវភៅអេឡិចត្រូនិក</p>
-            </div>
-            <div class="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-sky-500/40 transition">
-              <div class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-200 counter" data-target="241">0</div>
-              <p class="text-xs sm:text-sm font-medium text-slate-400 mt-1">មេរៀន និងវគ្គសិក្សា</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FILTER TABS & CATEGORIES -->
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
-        <div class="bg-white rounded-3xl p-3 sm:p-4 shadow-xl border border-slate-200/80 flex flex-wrap items-center justify-between gap-3">
-          <div class="flex items-center gap-2 overflow-x-auto py-1 w-full md:w-auto" id="filter-tabs">
-            <button onclick="filterContent('all', this)" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-sky-600 text-white transition shadow-sm">
-              ទាំងអស់
-            </button>
-            <button onclick="filterContent('book', this)" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
-              <i class="bi bi-book mr-1"></i> សៀវភៅសិក្សា
-            </button>
-            <button onclick="filterContent('lesson', this)" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
-              <i class="bi bi-play-circle mr-1"></i> មេរៀន AI & ICT
-            </button>
-            <button onclick="filterContent('pedagogy', this)" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition">
-              <i class="bi bi-journal-bookmark mr-1"></i> វិធីសាស្រ្តបង្រៀន
-            </button>
-          </div>
-          <div class="text-xs text-slate-500 font-medium hidden sm:flex items-center gap-2 px-2">
-            <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>ទិន្នន័យត្រូវបានធ្វើបច្ចុប្បន្នភាពរៀងរាល់ថ្ងៃ</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 1: LATEST WORKS -->
-      <section id="latest-works" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4 border-b border-slate-200/60 pb-4">
-          <div>
-            <div class="flex items-center gap-2 text-sky-600 font-semibold text-xs tracking-wider uppercase mb-1">
-              <i class="bi bi-sparkles"></i> បោះពុម្ពផ្សាយថ្មីៗ
-            </div>
-            <h2 class="font-serifKhmer text-2xl sm:text-3xl font-bold text-slate-900">
-              ស្នាដៃថ្មីចុងក្រោយ
-            </h2>
-          </div>
-          <div class="text-sm text-slate-500">
-            ចុចលើកាតណាមួយ ដើម្បីចូលមើលព័ត៌មានលម្អិត និងអានមាតិកាពេញ
-          </div>
-        </div>
-
-        <div id="latest-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <!-- Dynamically populated via JS -->
-        </div>
-      </section>
-
-      <!-- SECTION 2: POPULAR WORKS -->
-      <section id="popular-works" class="bg-gradient-to-b from-slate-100/70 to-white py-16 border-y border-slate-200/60">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4 border-b border-slate-200 pb-4">
-            <div>
-              <div class="flex items-center gap-2 text-rose-500 font-semibold text-xs tracking-wider uppercase mb-1">
-                <i class="bi bi-fire"></i> កំពុងពេញនិយមខ្លាំង
-              </div>
-              <h2 class="font-serifKhmer text-2xl sm:text-3xl font-bold text-slate-900">
-                ស្នាដៃកំពុងពេញនិយម
-              </h2>
-            </div>
-            <div class="text-sm text-slate-500">
-              មានការចូលអាន និងទាញយកច្រើនជាងគេក្នុងខែនេះ
-            </div>
-          </div>
-
-          <div id="popular-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Dynamically populated via JS -->
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION 3: FEATURED INSTITUTIONS -->
-      <section id="featured-schools" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4 border-b border-slate-200/60 pb-4">
-          <div>
-            <div class="flex items-center gap-2 text-sky-600 font-semibold text-xs tracking-wider uppercase mb-1">
-              <i class="bi bi-buildings"></i> សហគមន៍អប់រំ
-            </div>
-            <h2 class="font-serifKhmer text-2xl sm:text-3xl font-bold text-slate-900">
-              សាលារៀន និងស្ថាប័នឆ្នើម
-            </h2>
-          </div>
-          <div class="text-sm text-slate-500">
-            សាលារៀនគំរូដែលបានបង្កើត និងចែករំលែកមាតិកាលើសាលាឌីជីថល
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- School 1 -->
-          <div class="school-card bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col">
-            <div class="h-32 bg-gradient-to-r from-sky-600 to-indigo-700 relative overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-40 mix-blend-overlay" alt="Campus">
-              <span class="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-white/20 backdrop-blur-md text-white border border-white/30">
-                សាលាគំរូ ២០២៥
-              </span>
-            </div>
-            <div class="px-6 pb-6 pt-0 relative flex-1 flex flex-col">
-              <div class="flex justify-between items-end -mt-10 mb-3">
-                <div class="w-16 h-16 rounded-2xl bg-white p-1 shadow-md border border-slate-100 overflow-hidden">
-                  <img src="https://api.saladigital.org/public/orgs/63fc7c5751508ff62e6ce857/images/1f658914-aa1b-4242-9452-85d6831bfa83.png" class="w-full h-full object-cover rounded-xl" alt="School Logo">
-                </div>
-                <button onclick="showToast('បានចុះឈ្មោះតាមដានសាលារួចរាល់!', 'bi-check2-all')" class="text-xs px-3.5 py-1.5 rounded-full border border-sky-500 text-sky-600 hover:bg-sky-50 font-medium transition">
-                  + តាមដាន
-                </button>
-              </div>
-              <div class="flex items-center gap-1.5 mb-2">
-                <h3 class="font-serifKhmer text-base font-bold text-slate-900">ចំរូង៖ អភិបាលកិច្ច និងសុវត្ថិភាព</h3>
-                <i class="bi bi-patch-check-fill text-sky-500 text-sm"></i>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">
-                ជម្រាបជូនបងប្អូនជាទីគោរព សូមអញ្ជើញចូលរួមសិក្សាផ្នែកសុវត្ថិភាពបច្ចេកវិទ្យា ការពារខ្លួន និងការគ្រប់គ្រងទិន្នន័យផ្ទាល់ខ្លួនលើអនឡាញ។
-              </p>
-              <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <div class="flex items-center gap-3">
-                  <span class="flex items-center gap-1 font-medium"><i class="bi bi-people text-slate-400"></i> 1 សំណាក់</span>
-                  <span class="flex items-center gap-1 font-medium"><i class="bi bi-mortarboard text-slate-400"></i> 10 មេរៀន</span>
-                </div>
-                <button onclick="openSchoolModal('ចំរូង៖ អភិបាលកិច្ច និងសុវត្ថិភាព', '1 សំណាក់ • 10 មេរៀន', 'ជម្រាបជូនបងប្អូនជាទីគោរព សូមអញ្ជើញចូលរួមសិក្សាផ្នែកសុវត្ថិភាពបច្ចេកវិទ្យា ការពារខ្លួន និងការគ្រប់គ្រងទិន្នន័យផ្ទាល់ខ្លួនលើអនឡាញ។')" class="text-sky-600 font-semibold hover:underline">
-                  ចូលមើល <i class="bi bi-arrow-right"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- School 2 -->
-          <div class="school-card bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col">
-            <div class="h-32 bg-gradient-to-r from-emerald-600 to-teal-700 relative overflow-hidden">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS49pch7VFU9jqyGnh15p3WqhNQlqa_TveMMSxu5E3H8nGR13fJa84IUlc&s=10" class="w-full h-full object-cover opacity-40 mix-blend-overlay" alt="Campus">
-            </div>
-            <div class="px-6 pb-6 pt-0 relative flex-1 flex flex-col">
-              <div class="flex justify-between items-end -mt-10 mb-3">
-                <div class="w-16 h-16 rounded-2xl bg-white p-1 shadow-md border border-slate-100 overflow-hidden">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS49pch7VFU9jqyGnh15p3WqhNQlqa_TveMMSxu5E3H8nGR13fJa84IUlc&s=10" class="w-full h-full object-cover rounded-xl" alt="School Logo">
-                </div>
-                <button onclick="showToast('បានចុះឈ្មោះតាមដានសាលារួចរាល់!', 'bi-check2-all')" class="text-xs px-3.5 py-1.5 rounded-full border border-sky-500 text-sky-600 hover:bg-sky-50 font-medium transition">
-                  + តាមដាន
-                </button>
-              </div>
-              <div class="flex items-center gap-1.5 mb-2">
-                <h3 class="font-serifKhmer text-base font-bold text-slate-900">វិទ្យាល័យ ហ៊ុន សែន ក្រុងទេពនិម្មិត ប៉ៃលិន</h3>
-                <i class="bi bi-patch-check-fill text-sky-500 text-sm"></i>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">
-                សាលារៀនជំនាន់ថ្មីឈានមុខផ្នែកគរុកោសល្យ និងការបញ្ចូលបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិតក្នុងការបង្រៀនថ្នាក់វិទ្យាសាស្ត្រពិត។
-              </p>
-              <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <div class="flex items-center gap-3">
-                  <span class="flex items-center gap-1 font-medium"><i class="bi bi-people text-slate-400"></i> 1,420 សិស្ស</span>
-                  <span class="flex items-center gap-1 font-medium"><i class="bi bi-mortarboard text-slate-400"></i> 45 មេរៀន</span>
-                </div>
-                <button onclick="openSchoolModal('វិទ្យាល័យ ហ៊ុន សែន ក្រុងទេពនិម្មិត ប៉ៃលិន', '1,420 សិស្ស • 45 មេរៀន', 'សាលារៀនជំនាន់ថ្មីឈានមុខផ្នែកគរុកោសល្យ និងការបញ្ចូលបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិតក្នុងការបង្រៀនថ្នាក់វិទ្យាសាស្ត្រពិត។')" class="text-sky-600 font-semibold hover:underline">
-                  ចូលមើល <i class="bi bi-arrow-right"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- School 3 -->
-          <div class="school-card bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col">
-            <div class="h-32 bg-gradient-to-r from-amber-600 to-orange-700 relative overflow-hidden">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgfMT4CGE39U56esmSj2wbNPJ8erniji4DA0tV2NA82gW910M9Mw8bgag&s=10" class="w-full h-full object-cover opacity-40 mix-blend-overlay" alt="Campus">
-            </div>
-            <div class="px-6 pb-6 pt-0 relative flex-1 flex flex-col">
-              <div class="flex justify-between items-end -mt-10 mb-3">
-                <div class="w-16 h-16 rounded-2xl bg-white p-1 shadow-md border border-slate-100 overflow-hidden">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgfMT4CGE39U56esmSj2wbNPJ8erniji4DA0tV2NA82gW910M9Mw8bgag&s=10" class="w-full h-full object-cover rounded-xl" alt="School Logo">
-                </div>
-                <button onclick="showToast('បានចុះឈ្មោះតាមដានសាលារួចរាល់!', 'bi-check2-all')" class="text-xs px-3.5 py-1.5 rounded-full border border-sky-500 text-sky-600 hover:bg-sky-50 font-medium transition">
-                  + តាមដាន
-                </button>
-              </div>
-              <div class="flex items-center gap-1.5 mb-2">
-                <h3 class="font-serifKhmer text-base font-bold text-slate-900">វិទ្យាស្ថានបច្ចេកវិទ្យាឌីជីថល (IDT)</h3>
-                <i class="bi bi-patch-check-fill text-sky-500 text-sm"></i>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">
-                ថ្នាលបណ្តុះបណ្តាលជំនាញកូដ បច្ចេកវិទ្យាព័ត៌មានវិទ្យា និងការអភិវឌ្ឍប្រព័ន្ធស្វ័យប្រវត្តិកម្មសម្រាប់គ្រូជំនាន់ថ្មី។
-              </p>
-              <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                <div class="flex items-center gap-3">
-                  <span class="flex items-center gap-1 font-medium"><i class="bi bi-people text-slate-400"></i> 890 នាក់</span>
-                  <span class="flex items-center gap-1 font-medium"><i class="bi bi-mortarboard text-slate-400"></i> 28 មេរៀន</span>
-                </div>
-                <button onclick="openSchoolModal('វិទ្យាស្ថានបច្ចេកវិទ្យាឌីជីថល (IDT)', '890 នាក់ • 28 មេរៀន', 'ថ្នាលបណ្តុះបណ្តាលជំនាញកូដ បច្ចេកវិទ្យាព័ត៌មានវិទ្យា និងការអភិវឌ្ឍប្រព័ន្ធស្វ័យប្រវត្តិកម្មសម្រាប់គ្រូជំនាន់ថ្មី។')" class="text-sky-600 font-semibold hover:underline">
-                  ចូលមើល <i class="bi bi-arrow-right"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA BANNER -->
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-12">
-        <div class="bg-gradient-to-r from-sky-700 via-sky-600 to-indigo-800 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
-          <div class="relative z-10 max-w-xl">
-            <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm">
-              សម្រាប់លោកគ្រូ អ្នកគ្រូ & គណៈគ្រប់គ្រង
-            </span>
-            <h2 class="font-serifKhmer text-2xl sm:text-3xl font-bold mt-3 mb-2 leading-tight">
-              តើអ្នកចង់បង្កើតទំព័រសាលារៀន និងផ្ទុកមេរៀនដោយខ្លួនឯងទេ?
-            </h2>
-            <p class="text-sky-100 text-sm leading-relaxed">
-              ចូលរួមជាមួយសាលាឌីជីថលដើម្បីបង្កើតថ្នាក់រៀននិម្មិត គ្រប់គ្រងសិស្ស និងចែកចាយធនធានបង្រៀនដោយឥតគិតថ្លៃ។
-            </p>
-          </div>
-          <div class="relative z-10 shrink-0">
-            <button onclick="openModal('register-school-modal')" class="px-8 py-4 rounded-2xl bg-white hover:bg-slate-100 text-sky-800 font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-sm flex items-center gap-2">
-              <i class="bi bi-door-open-fill"></i>
-              <span>ស្នើសុំបង្កើតសាលាឥឡូវនេះ</span>
-            </button>
-          </div>
-          <div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
-        </div>
-      </section>
-
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-12">
+    <div class="bg-gradient-to-r from-sky-700 via-sky-600 to-indigo-800 rounded-3xl p-8 sm:p-12 text-white shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="max-w-xl">
+        <h2 class="font-serifKhmer text-2xl sm:text-3xl font-bold mb-2">តើអ្នកចង់បង្កើតទំព័រសាលារៀន និងផ្ទុកមេរៀនដោយខ្លួនឯងទេ?</h2>
+        <p class="text-sky-100 text-sm">ចូលរួមជាមួយសាលាឌីជីថលដើម្បីបង្កើតថ្នាក់រៀននិម្មិត និងចែកចាយធនធានបង្រៀនដោយឥតគិតថ្លៃ។</p>
+      </div>
+      <button onclick="openModal('register-school-modal')" class="shrink-0 px-8 py-4 rounded-2xl bg-white hover:bg-slate-100 text-sky-800 font-bold shadow-lg hover:scale-105 transition text-sm"><i class="bi bi-door-open-fill"></i> ស្នើសុំបង្កើតសាលាឥឡូវនេះ</button>
     </div>
+  </section>
+</div>
 
-
-    <!-- ==================== VIEW 2: BOOK / LESSON DETAIL PAGE ==================== -->
-    <div id="detail-view" class="hidden page-fade">
-      
-      <!-- Top Detail Navigation & Breadcrumb -->
-      <div class="bg-white border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
-          <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-500 truncate">
-            <button onclick="navigateToHome()" class="font-medium hover:text-sky-600 flex items-center gap-1.5 transition">
-              <i class="bi bi-house"></i> ទំព័រដើម
-            </button>
-            <i class="bi bi-chevron-right text-[10px] text-slate-400"></i>
-            <span id="detail-breadcrumb-cat" class="text-slate-600 font-medium">សៀវភៅសិក្សា</span>
-            <i class="bi bi-chevron-right text-[10px] text-slate-400"></i>
-            <span id="detail-breadcrumb-title" class="text-slate-900 font-semibold truncate max-w-[200px] sm:max-w-xs">ចំណងជើង</span>
-          </div>
-
-          <button onclick="navigateToHome()" class="shrink-0 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border border-slate-200 hover:border-sky-500 hover:text-sky-600 text-slate-600 font-medium text-xs transition bg-slate-50 hover:bg-white shadow-sm">
-            <i class="bi bi-arrow-left"></i>
-            <span>ត្រឡប់ក្រោយ</span>
-          </button>
-        </div>
+<!-- ========== DETAIL VIEW ========== -->
+<div id="detail-view" class="hidden page-fade">
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2 text-sm text-slate-500 truncate">
+        <button onclick="navigateToHome()" class="hover:text-sky-600"><i class="bi bi-house"></i> ទំព័រដើម</button>
+        <i class="bi bi-chevron-right text-[10px]"></i>
+        <span id="detail-breadcrumb-cat"></span>
+        <i class="bi bi-chevron-right text-[10px]"></i>
+        <span id="detail-breadcrumb-title" class="text-slate-900 font-semibold truncate max-w-[200px] sm:max-w-xs"></span>
       </div>
-
-      <!-- Detail Hero Showcase Banner -->
-      <section class="relative bg-slate-950 text-white overflow-hidden py-12 lg:py-16">
-        <!-- Blurred background cover -->
-        <div class="absolute inset-0 z-0">
-          <img id="detail-hero-backdrop" src="" class="w-full h-full object-cover filter blur-2xl opacity-25 scale-110" alt="Backdrop">
-          <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-900/90"></div>
-          <div class="absolute -top-10 right-10 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        </div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex flex-col md:flex-row items-center md:items-start gap-8 lg:gap-12">
-            
-            <!-- Book 3D-Like Realistic Cover -->
-            <div class="relative shrink-0 group">
-              <div class="w-52 sm:w-60 lg:w-64 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/20 bg-slate-800 transition-transform duration-500 group-hover:scale-[1.02]">
-                <img id="detail-cover-img" src="" alt="Cover" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              </div>
-              <div class="absolute -bottom-3 left-4 right-4 bg-slate-900/90 backdrop-blur-md border border-white/10 rounded-xl px-3 py-2 text-center text-[11px] text-sky-300 font-medium shadow-lg flex items-center justify-around">
-                <span id="detail-file-type"><i class="bi bi-file-earmark-pdf"></i> PDF</span>
-                <span class="text-slate-600">|</span>
-                <span id="detail-pages-count"><i class="bi bi-layers"></i> 124 ទំព័រ</span>
-                <span class="text-slate-600">|</span>
-                <span id="detail-file-size"><i class="bi bi-hdd"></i> 14.8 MB</span>
-              </div>
-            </div>
-
-            <!-- Header Info Details -->
-            <div class="flex-1 text-center md:text-left">
-              <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3">
-                <span id="detail-badge-category" class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-600/90 text-white shadow-sm">
-                  ប្រភេទ
-                </span>
-                <span id="detail-badge-level" class="px-3 py-1 rounded-full text-xs font-medium bg-white/10 border border-white/20 text-sky-200">
-                  កម្រិតមធ្យមសិក្សា
-                </span>
-                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  <i class="bi bi-patch-check-fill"></i> ផ្ទៀងផ្ទាត់ផ្លូវការ
-                </span>
-              </div>
-
-              <h1 id="detail-title" class="font-serifKhmer text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-snug sm:leading-snug mb-3">
-                ចំណងជើងសៀវភៅ ឬមេរៀន
-              </h1>
-
-              <p id="detail-subtitle" class="text-sm sm:text-base text-slate-300 max-w-2xl font-light mb-6 leading-relaxed">
-                ឯកសារមេរៀន និងគរុកោសល្យទំនើបស្របតាមស្តង់ដារក្រសួងអប់រំ យុវជន និងកីឡា។
-              </p>
-
-              <!-- Author / Institution Card -->
-              <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-3.5 inline-flex flex-wrap items-center justify-center md:justify-start gap-4 mb-6">
-                <div class="flex items-center gap-3">
-                  <img id="detail-author-avatar" src="" alt="Author" class="w-10 h-10 rounded-full object-cover ring-2 ring-sky-400">
-                  <div class="text-left">
-                    <h4 id="detail-author-name" class="text-xs sm:text-sm font-bold text-white">ឈ្មោះអ្នកនិពន្ធ ឬស្ថាប័ន</h4>
-                    <span id="detail-author-role" class="text-[11px] text-slate-400">ស្ថាប័នអប់រំផ្លូវការ</span>
-                  </div>
-                </div>
-                <button onclick="toggleFollowAuthor(this)" class="px-3 py-1 rounded-lg bg-sky-600/80 hover:bg-sky-600 text-white text-xs font-semibold transition ml-0 sm:ml-2">
-                  + តាមដាន
-                </button>
-              </div>
-
-              <!-- Metrics Row -->
-              <div class="flex flex-wrap items-center justify-center md:justify-start gap-6 text-xs text-slate-300 border-t border-slate-800 pt-4 mb-6">
-                <div class="flex items-center gap-2">
-                  <i class="bi bi-eye-fill text-sky-400 text-base"></i>
-                  <span><strong id="detail-views-count" class="text-white font-bold">0</strong> ចូលមើល</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <i class="bi bi-star-fill text-amber-400 text-base"></i>
-                  <span><strong id="detail-rating-score" class="text-white font-bold">4.9</strong> (128 ការវាយតម្លៃ)</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <i class="bi bi-calendar-event text-emerald-400 text-base"></i>
-                  <span>បច្ចុប្បន្នភាព៖ <strong id="detail-published-date" class="text-white font-medium">២០២៦</strong></span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <i class="bi bi-cloud-arrow-down-fill text-indigo-400 text-base"></i>
-                  <span><strong id="detail-download-count" class="text-white font-bold">450+</strong> ទាញយក</span>
-                </div>
-              </div>
-
-              <!-- Main Action Buttons Toolbar -->
-              <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
-                <button onclick="launchInteractiveReader()" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-400 hover:to-cyan-400 text-white font-bold text-sm shadow-lg shadow-sky-500/30 hover:shadow-sky-500/50 active:scale-95 transition-all flex items-center gap-2">
-                  <i class="bi bi-book-half text-base"></i>
-                  <span>អានសៀវភៅពេញ (Full Reader)</span>
-                </button>
-
-                <button onclick="downloadBookPdf()" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-semibold text-sm transition flex items-center gap-2">
-                  <i class="bi bi-download"></i>
-                  <span>ទាញយក PDF</span>
-                </button>
-
-                <button id="detail-bookmark-btn" onclick="toggleDetailBookmark()" class="p-3 rounded-2xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white transition hover:text-amber-400" title="រក្សាទុកក្នុងបញ្ជី">
-                  <i class="bi bi-bookmark text-base"></i>
-                </button>
-
-                <button onclick="shareCurrentBook()" class="p-3 rounded-2xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white transition hover:text-sky-300" title="ចែករំលែក">
-                  <i class="bi bi-share text-base"></i>
-                </button>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- Detail Body with Two Columns (Main Content + Sidebar) -->
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          <!-- Left Column: Content Tabs (8 cols) -->
-          <div class="lg:col-span-8 space-y-6">
-            
-            <!-- Detail Tabs Navigation Bar -->
-            <div class="bg-white rounded-2xl p-1.5 border border-slate-200/80 shadow-sm flex items-center gap-1 overflow-x-auto" id="detail-nav-tabs">
-              <button onclick="switchDetailTab('overview', this)" class="detail-tab-btn active px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-sky-600 text-white transition whitespace-nowrap shadow-sm">
-                <i class="bi bi-info-circle mr-1"></i> សង្ខេប & គោលបំណង
-              </button>
-              <button onclick="switchDetailTab('syllabus', this)" class="detail-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition whitespace-nowrap">
-                <i class="bi bi-list-ol mr-1"></i> ជំពូក & មាតិកា
-              </button>
-              <button onclick="switchDetailTab('resources', this)" class="detail-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition whitespace-nowrap">
-                <i class="bi bi-paperclip mr-1"></i> ឯកសារ & ស្លាយ
-              </button>
-              <button onclick="switchDetailTab('reviews', this)" class="detail-tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 hover:bg-slate-100 transition whitespace-nowrap">
-                <i class="bi bi-chat-quote mr-1"></i> មតិយោបល់ (<span id="tab-reviews-count">3</span>)
-              </button>
-            </div>
-
-            <!-- Tab Content Panel: OVERVIEW -->
-            <div id="tab-panel-overview" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
-              <div>
-                <h3 class="font-serifKhmer text-lg sm:text-xl font-bold text-slate-900 mb-3 flex items-center gap-2">
-                  <i class="bi bi-file-text text-sky-600"></i> សេចក្តីផ្តើម និងសេចក្តីសង្ខេប
-                </h3>
-                <p id="detail-overview-text" class="text-sm text-slate-600 leading-relaxed space-y-2">
-                  <!-- Injected via JS -->
-                </p>
-              </div>
-
-              <div class="border-t border-slate-100 pt-6">
-                <h4 class="font-serifKhmer text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-                  <i class="bi bi-bullseye text-emerald-600"></i> គោលបំណងនៃការសិក្សា (Learning Objectives)
-                </h4>
-                <div id="detail-objectives-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <!-- List dynamically generated -->
-                </div>
-              </div>
-
-              <div class="border-t border-slate-100 pt-6">
-                <h4 class="font-serifKhmer text-base font-bold text-slate-900 mb-3 flex items-center gap-2">
-                  <i class="bi bi-people text-indigo-600"></i> ក្រុមគោលដៅ និងកម្រិតសិក្សា
-                </h4>
-                <div class="flex flex-wrap gap-2 text-xs">
-                  <span class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-medium"><i class="bi bi-check-circle text-emerald-500 mr-1"></i> លោកគ្រូ-អ្នកគ្រូ មធ្យមសិក្សា</span>
-                  <span class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-medium"><i class="bi bi-check-circle text-emerald-500 mr-1"></i> និស្សិតគរុកោសល្យ</span>
-                  <span class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-medium"><i class="bi bi-check-circle text-emerald-500 mr-1"></i> អ្នកស្រាវជ្រាវវិស័យអប់រំ</span>
-                  <span class="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-medium"><i class="bi bi-check-circle text-emerald-500 mr-1"></i> សិស្សានុសិស្សស្វ័យសិក្សា</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Tab Content Panel: SYLLABUS -->
-            <div id="tab-panel-syllabus" class="hidden bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
-              <div class="flex items-center justify-between mb-2">
-                <h3 class="font-serifKhmer text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-                  <i class="bi bi-journal-bookmark text-sky-600"></i> បញ្ជីមាតិកាមេរៀន / ជំពូក
-                </h3>
-                <span class="text-xs text-slate-500" id="detail-total-chapters-count">៥ ជំពូកសរុប</span>
-              </div>
-              <p class="text-xs text-slate-500 mb-4">លោកអ្នកអាចចុចលើជំពូកនីមួយៗ ដើម្បីអានជាមុន (Preview) ឬបើកទំព័រ</p>
-
-              <div id="detail-chapters-container" class="space-y-3">
-                <!-- Dynamically generated chapters -->
-              </div>
-            </div>
-
-            <!-- Tab Content Panel: RESOURCES -->
-            <div id="tab-panel-resources" class="hidden bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-4">
-              <h3 class="font-serifKhmer text-lg sm:text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
-                <i class="bi bi-folder2-open text-sky-600"></i> កម្រងឯកសារភ្ជាប់ & ស្លាយបង្រៀន
-              </h3>
-              <p class="text-xs text-slate-500 mb-4">ឯកសារបន្ថែមដែលអាចទាញយកបាន ដើម្បីជាជំនួយក្នុងការបង្រៀនជាក់ស្តែង</p>
-
-              <div class="space-y-3" id="detail-resources-list">
-                <!-- Injected via JS -->
-              </div>
-            </div>
-
-            <!-- Tab Content Panel: REVIEWS -->
-            <div id="tab-panel-reviews" class="hidden bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
-              <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                <div>
-                  <h3 class="font-serifKhmer text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-                    <i class="bi bi-star-half text-amber-500"></i> ការវាយតម្លៃ និងមតិយោបល់
-                  </h3>
-                  <p class="text-xs text-slate-500 mt-1">ចូលរួមបញ្ចេញទស្សនៈ ដើម្បីលើកទឹកចិត្តអ្នកនិពន្ធ</p>
-                </div>
-                <div class="text-right">
-                  <div class="text-2xl font-bold text-amber-500 flex items-center gap-1 justify-end">
-                    <i class="bi bi-star-fill"></i> 4.9 <span class="text-xs text-slate-400">/ 5.0</span>
-                  </div>
-                  <span class="text-[11px] text-slate-400">ផ្អែកលើការវាយតម្លៃសរុប</span>
-                </div>
-              </div>
-
-              <!-- Add Review Form -->
-              <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/80">
-                <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">សរសេរមតិយោបល់របស់អ្នក៖</h4>
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="text-xs text-slate-600">ផ្តល់ពិន្ទុ៖</span>
-                  <div class="flex text-amber-400 text-sm gap-1" id="review-star-selector">
-                    <i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(1)"></i>
-                    <i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(2)"></i>
-                    <i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(3)"></i>
-                    <i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(4)"></i>
-                    <i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(5)"></i>
-                  </div>
-                </div>
-                <textarea id="user-comment-input" rows="3" placeholder="សូមសរសេរមតិយោបល់ ឬសំណួររបស់អ្នកនៅទីនេះ..." class="w-full p-3 rounded-xl border border-slate-200 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white mb-2"></textarea>
-                <div class="flex justify-end">
-                  <button onclick="submitUserComment()" class="px-5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs shadow transition flex items-center gap-1.5">
-                    <i class="bi bi-send"></i>
-                    <span>ផ្ញើមតិយោបល់</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Comments List -->
-              <div id="detail-comments-container" class="space-y-4 pt-2">
-                <!-- Injected via JS -->
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Right Column: Sidebar (Metadata + Related Items) (4 cols) -->
-          <div class="lg:col-span-4 space-y-6">
-            
-            <!-- Quick Facts Card -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
-              <h4 class="font-serifKhmer text-base font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
-                <i class="bi bi-info-square text-sky-600"></i> ព័ត៌មានបច្ចេកទេស
-              </h4>
-              <ul class="space-y-3 text-xs text-slate-600">
-                <li class="flex justify-between items-center py-1">
-                  <span class="text-slate-400">លេខកូដសម្គាល់ (ISBN/ID):</span>
-                  <span id="detail-meta-id" class="font-semibold text-slate-800">SLD-2026-001</span>
-                </li>
-                <li class="flex justify-between items-center py-1">
-                  <span class="text-slate-400">ប្រភេទឯកសារ៖</span>
-                  <span id="detail-meta-type" class="font-semibold text-slate-800">សៀវភៅជំនួយស្មារតី</span>
-                </li>
-                <li class="flex justify-between items-center py-1">
-                  <span class="text-slate-400">ភាសា៖</span>
-                  <span class="font-semibold text-slate-800">ភាសាខ្មែរ (Khmer)</span>
-                </li>
-                <li class="flex justify-between items-center py-1">
-                  <span class="text-slate-400">អាជ្ញាប័ណ្ណ៖</span>
-                  <span class="font-semibold text-emerald-600">Creative Commons (CC-BY)</span>
-                </li>
-                <li class="flex justify-between items-center py-1">
-                  <span class="text-slate-400">ការទាញយកសរុប៖</span>
-                  <span id="detail-meta-downloads" class="font-semibold text-slate-800">1,240 លើក</span>
-                </li>
-              </ul>
-
-              <div class="mt-5 pt-4 border-t border-slate-100">
-                <button onclick="downloadBookPdf()" class="w-full py-2.5 rounded-xl border border-sky-500 text-sky-600 hover:bg-sky-50 font-semibold text-xs transition flex items-center justify-center gap-2">
-                  <i class="bi bi-printer"></i>
-                  <span>បោះពុម្ព ឬរក្សាទុកក្រៅបណ្ដាញ</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Related Lessons / Books -->
-            <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
-              <h4 class="font-serifKhmer text-base font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
-                <span class="flex items-center gap-2">
-                  <i class="bi bi-collection text-amber-500"></i> ស្នាដៃស្រដៀងគ្នា
-                </span>
-                <span class="text-[11px] font-normal text-slate-400">ផ្អែកលើចំណាប់អារម្មណ៍</span>
-              </h4>
-
-              <div id="related-items-container" class="space-y-3.5">
-                <!-- Injected via JS -->
-              </div>
-            </div>
-
-            <!-- Help & Feedback Banner -->
-            <div class="rounded-3xl p-5 bg-gradient-to-br from-indigo-50 to-sky-50 border border-sky-100 text-slate-700">
-              <div class="flex items-start gap-3">
-                <div class="w-8 h-8 rounded-xl bg-sky-600 text-white flex items-center justify-center shrink-0">
-                  <i class="bi bi-question-circle"></i>
-                </div>
-                <div>
-                  <h5 class="text-xs font-bold text-slate-900">មានបញ្ហាក្នុងការអាន?</h5>
-                  <p class="text-[11px] text-slate-500 mt-1 leading-relaxed">
-                    ប្រសិនបើលោកអ្នកជួបបញ្ហាពុម្ពអក្សរ ឬទាញយកមិនបាន សូមទាក់ទងមកកាន់ក្រុមការងារបច្ចេកទេស។
-                  </p>
-                  <a href="#footer" class="inline-block mt-2 text-[11px] font-semibold text-sky-600 hover:underline">
-                    ផ្ញើសំណើជំនួយ &rarr;
-                  </a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-    </div>
-
-  </main>
-
-  <!-- ======================== FOOTER ======================== -->
-  <footer id="footer" class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-        
-        <!-- Col 1: MoEYS & Sala Digital -->
-        <div>
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center text-white">
-              <i class="bi bi-mortarboard-fill text-xl"></i>
-            </div>
-            <span class="font-serifKhmer text-xl font-bold text-white">សាលាឌីជីថល</span>
-          </div>
-          <p class="text-xs text-slate-400 leading-relaxed mb-4">
-            ថ្នាលរៀនសូត្រ និងបណ្ណាល័យឌីជីថលបើកចំហ ក្រោមការគាំទ្រ និងសហការជាមួយក្រសួងអប់រំ យុវជន និងកីឡា ដើម្បីលើកកម្ពស់គុណភាពអប់រំបែបឌីជីថលនៅកម្ពុជា។
-          </p>
-          <div class="flex items-center gap-2 text-xs text-sky-400">
-            <i class="bi bi-shield-check"></i>
-            <span>សុវត្ថិភាពទិន្នន័យស្របតាមបទដ្ឋានជាតិ</span>
-          </div>
-        </div>
-
-        <!-- Col 2: Educational Shortcuts -->
-        <div>
-          <h4 class="font-serifKhmer text-sm font-bold text-white mb-4 flex items-center gap-2">
-            <i class="bi bi-link-45deg text-sky-400"></i> អភិបាលកិច្ចអប់រំ
-          </h4>
-          <ul class="space-y-2.5 text-xs">
-            <li>
-              <a href="https://moeys.gov.kh" target="_blank" class="hover:text-sky-400 transition flex items-center gap-2">
-                <i class="bi bi-box-arrow-up-right text-slate-500"></i> គេហទំព័រក្រសួងអប់រំ (MoEYS)
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" onclick="showToast('កំពុងបើកថ្នាល e-Learning', 'bi-info-circle')" class="hover:text-sky-400 transition flex items-center gap-2">
-                <i class="bi bi-laptop text-slate-500"></i> កម្មវិធីស្វ័យសិក្សា e-Learning
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" onclick="showToast('ថ្នាល Moodle កំពុងដំណើរការ', 'bi-info-circle')" class="hover:text-sky-400 transition flex items-center gap-2">
-                <i class="bi bi-journal-code text-slate-500"></i> ថ្នាលអភិវឌ្ឍសមត្ថភាព Moodle
-              </a>
-            </li>
-            <li>
-              <a href="javascript:void(0)" onclick="showToast('មជ្ឈមណ្ឌលព័ត៌មានអប់រំ', 'bi-info-circle')" class="hover:text-sky-400 transition flex items-center gap-2">
-                <i class="bi bi-collection-play text-slate-500"></i> មជ្ឈមណ្ឌលព័ត៌មានអប់រំ
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Social & Communities -->
-        <div>
-          <h4 class="font-serifKhmer text-sm font-bold text-white mb-4 flex items-center gap-2">
-            <i class="bi bi-share text-sky-400"></i> បណ្តាញសង្គមផ្លូវការ
-          </h4>
-          <div class="grid grid-cols-2 gap-2 text-xs">
-            <a href="javascript:void(0)" onclick="showToast('ចូលរួម Facebook Page', 'bi-facebook')" class="flex items-center gap-2 p-2 rounded-xl bg-slate-800/80 hover:bg-sky-600/30 hover:text-white transition">
-              <i class="bi bi-facebook text-sky-400"></i> Facebook
-            </a>
-            <a href="javascript:void(0)" onclick="showToast('ចូលរួម YouTube Channel', 'bi-youtube')" class="flex items-center gap-2 p-2 rounded-xl bg-slate-800/80 hover:bg-rose-600/30 hover:text-white transition">
-              <i class="bi bi-youtube text-rose-500"></i> YouTube
-            </a>
-            <a href="javascript:void(0)" onclick="showToast('ចូលរួម Telegram Group', 'bi-telegram')" class="flex items-center gap-2 p-2 rounded-xl bg-slate-800/80 hover:bg-sky-500/30 hover:text-white transition">
-              <i class="bi bi-telegram text-sky-400"></i> Telegram
-            </a>
-            <a href="javascript:void(0)" onclick="showToast('ចូលរួម TikTok Channel', 'bi-tiktok')" class="flex items-center gap-2 p-2 rounded-xl bg-slate-800/80 hover:bg-pink-600/30 hover:text-white transition">
-              <i class="bi bi-tiktok text-pink-400"></i> TikTok
-            </a>
-          </div>
-        </div>
-
-        <!-- Col 4: Partners -->
-        <div>
-          <h4 class="font-serifKhmer text-sm font-bold text-white mb-4 flex items-center gap-2">
-            <i class="bi bi-award text-sky-400"></i> ដៃគូសហការ
-          </h4>
-          <p class="text-xs text-slate-400 mb-3">កិច្ចសហការជាមួយស្ថាប័នអន្តរជាតិ និងវិស័យឯកជន</p>
-          <div class="flex flex-wrap items-center gap-2.5">
-            <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-[11px] font-medium text-slate-300">MoEYS</span>
-            <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-[11px] font-medium text-slate-300">KOOMPI</span>
-            <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-[11px] font-medium text-slate-300">ADB</span>
-            <span class="px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-[11px] font-medium text-slate-300">SDC Switzerland</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Footer Bottom -->
-      <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-        <p class="text-center sm:text-left">
-          គ្រប់គ្រងដោយ <strong>ក្រសួងអប់រំ យុវជន និងកីឡា</strong> — រក្សាសិទ្ធិគ្រប់យ៉ាង © ២០២៦
-        </p>
-        <div class="flex items-center gap-6">
-          <a href="javascript:void(0)" onclick="showToast('គោលការណ៍ឯកជនភាព និងសុវត្ថិភាព', 'bi-shield-check')" class="hover:underline">គោលការណ៍ឯកជនភាព</a>
-          <a href="javascript:void(0)" onclick="showToast('លក្ខខណ្ឌប្រើប្រាស់', 'bi-file-text')" class="hover:underline">លក្ខខណ្ឌប្រើប្រាស់</a>
-          <button onclick="scrollToTop()" class="hover:text-sky-400 flex items-center gap-1">
-            <i class="bi bi-arrow-up-circle"></i> ឡើងលើបង្អស់
-          </button>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-
-  <!-- ======================== FULLSCREEN INTERACTIVE BOOK READER MODAL ======================== -->
-  <div id="reader-modal" class="fixed inset-0 z-50 hidden flex flex-col bg-slate-950 text-white transition-opacity">
-    <!-- Reader Top Bar -->
-    <div class="h-16 px-4 sm:px-6 bg-slate-900 border-b border-slate-800 flex items-center justify-between gap-4 shrink-0">
-      <div class="flex items-center gap-3 truncate">
-        <button onclick="closeReaderModal()" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 text-white flex items-center justify-center transition">
-          <i class="bi bi-x-lg text-sm"></i>
-        </button>
-        <div class="truncate">
-          <h3 id="reader-modal-title" class="font-serifKhmer text-sm sm:text-base font-bold text-white truncate">ចំណងជើងសៀវភៅ</h3>
-          <p id="reader-modal-author" class="text-[11px] text-slate-400 truncate">អ្នកនិពន្ធ</p>
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <div class="flex items-center gap-2 sm:gap-4 shrink-0">
-        <div class="hidden sm:flex items-center bg-slate-800 rounded-xl px-2 py-1 text-xs">
-          <button onclick="changeReaderZoom(-0.1)" class="p-1.5 hover:text-sky-400"><i class="bi bi-zoom-out"></i></button>
-          <span id="reader-zoom-level" class="px-2 font-medium">100%</span>
-          <button onclick="changeReaderZoom(0.1)" class="p-1.5 hover:text-sky-400"><i class="bi bi-zoom-in"></i></button>
-        </div>
-        <button onclick="toggleReaderFullscreen()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs">
-          <i class="bi bi-arrows-fullscreen"></i>
-        </button>
-        <button onclick="downloadBookPdf()" class="px-3.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-xs font-semibold flex items-center gap-1.5">
-          <i class="bi bi-download"></i> <span class="hidden sm:inline">ទាញយក PDF</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Reader Main Content Canvas / Sheet -->
-    <div class="flex-1 overflow-auto p-4 sm:p-8 flex items-center justify-center bg-slate-900/50" id="reader-stage-container">
-      <div id="reader-paper" class="w-full max-w-3xl aspect-[1/1.414] bg-white text-slate-900 rounded-2xl shadow-2xl p-8 sm:p-14 flex flex-col justify-between transition-transform duration-200 select-none">
-        
-        <!-- Header in sheet -->
-        <div class="border-b border-slate-200 pb-4 flex justify-between items-center text-xs text-slate-400">
-          <span class="font-semibold text-sky-700">សាលាឌីជីថល (Sala Digital)</span>
-          <span id="reader-page-number-display">ទំព័រ ១ នៃ ២៤</span>
-        </div>
-
-        <!-- Page Dynamic Body -->
-        <div id="reader-page-content" class="my-auto space-y-4">
-          <div class="text-center space-y-3">
-            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800" id="reader-page-badge">ជំពូកទី ១</span>
-            <h2 id="reader-page-heading" class="font-serifKhmer text-2xl sm:text-3xl font-bold text-slate-900">សេចក្តីផ្តើម និងគោលការណ៍គ្រឹះ</h2>
-          </div>
-          <div id="reader-page-body-text" class="text-sm leading-relaxed text-slate-700 text-justify pt-4 space-y-3">
-            <p>ការអភិវឌ្ឍសមត្ថភាពឌីជីថលក្នុងវិស័យអប់រំនៅកម្ពុជា គឺជាសសរស្តម្ភគន្លឹះឆ្ពោះទៅរកសេដ្ឋកិច្ច និងសង្គមឌីជីថលស្របតាមក្របខ័ណ្ឌគោលនយោបាយជាតិ។</p>
-            <p>ឯកសារនេះត្រូវបានចងក្រងឡើងដើម្បីបម្រើដល់ការបង្រៀន និងរៀនប្រកបដោយបរិយាបន្ន នវានុវត្តន៍ និងប្រសិទ្ធភាពខ្ពស់ ឆ្លើយតបនឹងបដិវត្តន៍ឧស្សាហកម្ម ៤.០។</p>
-          </div>
-        </div>
-
-        <!-- Footer in sheet -->
-        <div class="border-t border-slate-200 pt-4 flex justify-between items-center text-xs text-slate-400">
-          <span>ក្រសួងអប់រំ យុវជន និងកីឡា</span>
-          <span>រក្សាសិទ្ធិគ្រប់យ៉ាង ២០២៦</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Reader Bottom Floating Pagination -->
-    <div class="h-16 px-6 bg-slate-900/90 backdrop-blur-md border-t border-slate-800 flex items-center justify-center gap-4 shrink-0">
-      <button onclick="prevReaderPage()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
-        <i class="bi bi-chevron-left"></i> <span>ទំព័រមុន</span>
-      </button>
-
-      <div class="flex items-center gap-2 text-xs">
-        <span id="reader-current-page-txt" class="font-bold text-sky-400">1</span>
-        <span class="text-slate-500">/</span>
-        <span id="reader-total-pages-txt">24</span>
-      </div>
-
-      <button onclick="nextReaderPage()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
-        <span>ទំព័របន្ទាប់</span> <i class="bi bi-chevron-right"></i>
-      </button>
+      <button onclick="navigateToHome()" class="shrink-0 px-3.5 py-1.5 rounded-xl border border-slate-200 hover:border-sky-500 hover:text-sky-600 text-xs font-medium bg-slate-50"><i class="bi bi-arrow-left"></i> ត្រឡប់ក្រោយ</button>
     </div>
   </div>
 
-
-  <!-- ======================== LOGIN MODAL ======================== -->
-  <div id="login-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm transition-opacity">
-    <div class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-slate-200 p-6 modal-enter" id="login-modal-dialog">
-      <div class="flex justify-between items-center mb-6">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-sky-600 flex items-center justify-center text-white">
-            <i class="bi bi-box-arrow-in-right"></i>
-          </div>
-          <div>
-            <h3 class="font-serifKhmer text-lg font-bold text-slate-900">ចូលគណនីសាលាឌីជីថល</h3>
-            <p class="text-[11px] text-slate-400">សម្រាប់លោកគ្រូ អ្នកគ្រូ និងសិស្ស</p>
-          </div>
+  <section class="relative bg-slate-950 text-white overflow-hidden py-12 lg:py-16">
+    <div class="absolute inset-0">
+      <img id="detail-hero-backdrop" src="" class="w-full h-full object-cover blur-2xl opacity-25 scale-110" alt="">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-900/90"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center md:items-start gap-8 lg:gap-12">
+      <div class="relative shrink-0">
+        <div class="w-52 sm:w-60 lg:w-64 aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/20 bg-slate-800">
+          <img id="detail-cover-img" src="" alt="Cover" class="w-full h-full object-cover">
         </div>
-        <button onclick="closeModal('login-modal')" class="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 flex items-center justify-center transition">
-          <i class="bi bi-x-lg text-sm"></i>
-        </button>
+        <div class="absolute -bottom-3 left-4 right-4 bg-slate-900/90 border border-white/10 rounded-xl px-3 py-2 text-[11px] text-sky-300 font-medium flex items-center justify-around">
+          <span><i class="bi bi-file-earmark-pdf"></i> PDF</span><span class="text-slate-600">|</span>
+          <span id="detail-pages-count"></span><span class="text-slate-600">|</span>
+          <span id="detail-file-size"></span>
+        </div>
       </div>
 
-      <form onsubmit="handleLoginSubmit(event)" class="space-y-4 text-xs">
-        <div>
-          <label class="block font-medium text-slate-700 mb-1">អ៊ីមែល ឬលេខទូរស័ព្ទ</label>
-          <input type="text" required placeholder="ឧទាហរណ៍៖ user@domain.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-xs">
+      <div class="flex-1 text-center md:text-left">
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-3">
+          <span id="detail-badge-category" class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-600"></span>
+          <span class="px-3 py-1 rounded-full text-xs bg-white/10 border border-white/20 text-sky-200">កម្រិតមធ្យមសិក្សា</span>
+          <span class="px-3 py-1 rounded-full text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"><i class="bi bi-patch-check-fill"></i> ផ្ទៀងផ្ទាត់ផ្លូវការ</span>
         </div>
-        <div>
-          <div class="flex justify-between mb-1">
-            <label class="font-medium text-slate-700">ពាក្យសម្ងាត់</label>
-            <a href="javascript:void(0)" onclick="showToast('សូមទាក់ទងរដ្ឋបាលសាលាដើម្បីប្តូរពាក្យសម្ងាត់', 'bi-key')" class="text-sky-600 hover:underline">ភ្លេចពាក្យសម្ងាត់?</a>
-          </div>
-          <input type="password" required placeholder="បញ្ចូលពាក្យសម្ងាត់របស់អ្នក" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-xs">
-        </div>
-        <button type="submit" class="w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs shadow-md transition">
-          ចូលគណនី
-        </button>
-      </form>
+        <h1 id="detail-title" class="font-serifKhmer text-2xl sm:text-3xl lg:text-4xl font-bold leading-snug mb-3"></h1>
+        <p id="detail-subtitle" class="text-sm sm:text-base text-slate-300 max-w-2xl mb-6"></p>
 
-      <div class="mt-4 pt-4 border-t border-slate-100 text-center text-xs text-slate-500">
-        មិនទាន់មានគណនីមែនទេ? 
-        <button onclick="closeModal('login-modal'); openModal('register-school-modal')" class="text-sky-600 font-semibold hover:underline">
-          ចុះឈ្មោះថ្មី
-        </button>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-3.5 inline-flex items-center gap-4 mb-6">
+          <img id="detail-author-avatar" src="" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-sky-400">
+          <div class="text-left">
+            <h4 id="detail-author-name" class="text-sm font-bold"></h4>
+            <span id="detail-author-role" class="text-[11px] text-slate-400"></span>
+          </div>
+          <button onclick="toggleFollowAuthor(this)" class="px-3 py-1 rounded-lg bg-sky-600/80 hover:bg-sky-600 text-xs font-semibold">+ តាមដាន</button>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-6 text-xs text-slate-300 border-t border-slate-800 pt-4 mb-6">
+          <span><i class="bi bi-eye-fill text-sky-400 text-base"></i> <strong id="detail-views-count" class="text-white"></strong> ចូលមើល</span>
+          <span><i class="bi bi-star-fill text-amber-400 text-base"></i> <strong id="detail-rating-score" class="text-white"></strong></span>
+          <span><i class="bi bi-calendar-event text-emerald-400 text-base"></i> បច្ចុប្បន្នភាព៖ <strong id="detail-published-date" class="text-white"></strong></span>
+          <span><i class="bi bi-cloud-arrow-down-fill text-indigo-400 text-base"></i> <strong id="detail-download-count" class="text-white"></strong> ទាញយក</span>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
+          <button onclick="launchInteractiveReader()" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-400 font-bold text-sm shadow-lg active:scale-95 transition"><i class="bi bi-book-half"></i> អានសៀវភៅពេញ (Full Reader)</button>
+          <button onclick="downloadBookPdf()" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 font-semibold text-sm"><i class="bi bi-download"></i> ទាញយក PDF</button>
+          <button id="detail-bookmark-btn" onclick="toggleDetailBookmark()" class="p-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20" title="រក្សាទុក"><i class="bi bi-bookmark"></i></button>
+          <button onclick="shareCurrentBook()" class="p-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20" title="ចែករំលែក"><i class="bi bi-share"></i></button>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ======================== REGISTER SCHOOL MODAL ======================== -->
-  <div id="register-school-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm transition-opacity">
-    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-slate-200 p-6 modal-enter" id="register-school-dialog">
-      <div class="flex justify-between items-center mb-5">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white">
-            <i class="bi bi-building-add"></i>
-          </div>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-8 space-y-6">
+        <div id="detail-nav-tabs" class="bg-white rounded-2xl p-1.5 border border-slate-200/80 shadow-sm flex items-center gap-1 overflow-x-auto">
+          <button onclick="switchDetailTab('overview',this)" class="detail-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold bg-sky-600 text-white whitespace-nowrap"><i class="bi bi-info-circle"></i> សង្ខេប & គោលបំណង</button>
+          <button onclick="switchDetailTab('syllabus',this)" class="detail-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap"><i class="bi bi-list-ol"></i> ជំពូក & មាតិកា</button>
+          <button onclick="switchDetailTab('resources',this)" class="detail-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap"><i class="bi bi-paperclip"></i> ឯកសារ & ស្លាយ</button>
+          <button onclick="switchDetailTab('reviews',this)" class="detail-tab-btn px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-100 whitespace-nowrap"><i class="bi bi-chat-quote"></i> មតិយោបល់ (<span id="tab-reviews-count">0</span>)</button>
+        </div>
+
+        <div id="tab-panel-overview" class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
           <div>
-            <h3 class="font-serifKhmer text-lg font-bold text-slate-900">ស្នើសុំបង្កើតទំព័រសាលារៀន</h3>
-            <p class="text-[11px] text-slate-400">ចូលរួមចែករំលែកធនធានបង្រៀនលើសាលាឌីជីថល</p>
+            <h3 class="font-serifKhmer text-xl font-bold mb-3"><i class="bi bi-file-text text-sky-600"></i> សេចក្តីផ្តើម និងសេចក្តីសង្ខេប</h3>
+            <p id="detail-overview-text" class="text-sm text-slate-600 leading-relaxed"></p>
+          </div>
+          <div class="border-t border-slate-100 pt-6">
+            <h4 class="font-serifKhmer text-base font-bold mb-4"><i class="bi bi-bullseye text-emerald-600"></i> គោលបំណងនៃការសិក្សា</h4>
+            <div id="detail-objectives-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
           </div>
         </div>
-        <button onclick="closeModal('register-school-modal')" class="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 flex items-center justify-center transition">
-          <i class="bi bi-x-lg text-sm"></i>
-        </button>
-      </div>
 
-      <form onsubmit="handleSchoolRegisterSubmit(event)" class="space-y-3.5 text-xs">
-        <div>
-          <label class="block font-medium text-slate-700 mb-1">ឈ្មោះសាលារៀន ឬស្ថាប័នអប់រំ</label>
-          <input type="text" required placeholder="ឧទាហរណ៍៖ វិទ្យាល័យ ហ៊ុន សែន..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-medium text-slate-700 mb-1">រាជធានី / ខេត្ត</label>
-            <select class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
-              <option>ភ្នំពេញ</option>
-              <option>បាត់ដំបង</option>
-              <option>សៀមរាប</option>
-              <option>ប៉ៃលិន</option>
-              <option>កណ្តាល</option>
-              <option>ខេត្តផ្សេងទៀត</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-medium text-slate-700 mb-1">លេខទូរស័ព្ទទំនាក់ទំនង</label>
-            <input type="tel" required placeholder="012 xxx xxx" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-          </div>
-        </div>
-        <div>
-          <label class="block font-medium text-slate-700 mb-1">អ៊ីមែលផ្លូវការរបស់សាលា</label>
-          <input type="email" required placeholder="school@moeys.edu.kh" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-        </div>
-        <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs shadow-md transition">
-          ដាក់ពាក្យស្នើសុំ
-        </button>
-      </form>
-    </div>
-  </div>
-
-
-  <!-- ======================== CORE JAVASCRIPT & DATA ======================== -->
-  <script>
-    // ================= DATA STORE =================
-    const BOOKS_DATA = [
-      {
-        id: "book-1",
-        title: "ឧត្តមានុវត្តន៍នៃការអនុវត្ត គម្រោងអភិវឌ្ឍន៍វិស័យអប់រំ ថ្នាក់ជាតិ",
-        subtitle: "យុទ្ធសាស្ត្រគន្លឹះ និងគំរូជោគជ័យក្នុងការធ្វើកំណែទម្រង់សាលារៀននៅកម្ពុជា",
-        author: "សាលា ឌីជីថល",
-        authorRole: "ថ្នាលស្រាវជ្រាវគរុកោសល្យជាតិ",
-        authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop",
-        type: "pedagogy",
-        categoryName: "គម្រោងអភិវឌ្ឍន៍",
-        categoryBadgeClass: "bg-sky-600",
-        views: "497",
-        downloads: "185",
-        rating: "4.9",
-        reviewsCount: 3,
-        pages: 86,
-        fileSize: "12.4 MB",
-        date: "ខែមករា ២០២៦",
-        image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=600&auto=format&fit=crop",
-        description: "សៀវភៅណែនាំស្តីពីឧត្តមានុវត្តន៍នៃការអនុវត្តគម្រោងអភិវឌ្ឍន៍វិស័យអប់រំ ផ្តោតលើការកសាងសមត្ថភាពគ្រូបង្រៀន ការគ្រប់គ្រងហិរញ្ញវត្ថុសាលាផ្អែកលើលទ្ធផល និងការវាយតម្លៃស្តង់ដារគុណភាពអប់រំកម្រិតមូលដ្ឋាន។ ឯកសារនេះផ្ដល់នូវគោលការណ៍ណែនាំជាក់ស្តែងសម្រាប់នាយកសាលា និងគណៈកម្មការទ្រទ្រង់សាលារៀន។",
-        objectives: [
-          "យល់ច្បាស់ពីក្របខ័ណ្ឌវាយតម្លៃគុណភាពសាលារៀនជំនាន់ថ្មី",
-          "របៀបរៀបចំផែនការអភិវឌ្ឍន៍សាលារៀនប្រចាំឆ្នាំ (SIP)",
-          "យន្តការតាមដានការបង្រៀនរបស់លោកគ្រូអ្នកគ្រូដោយតម្លាភាព",
-          "ការកៀរគរសហគមន៍ឱ្យចូលរួមក្នុងការអភិវឌ្ឍហេដ្ឋារចនាសម្ព័ន្ធ"
-        ],
-        chapters: [
-          { num: "ជំពូកទី ១", title: "សេចក្តីផ្តើម និងបរិបទនៃការអភិវឌ្ឍអប់រំ", duration: "១៥ នាទី", preview: "ទិដ្ឋភាពទូទៅនៃផែនការយុទ្ធសាស្ត្រវិស័យអប់រំ ២០២៤-២០២៨ និងទិសដៅគោលនយោបាយ។" },
-          { num: "ជំពូកទី ២", title: "ការគ្រប់គ្រងតាមបែបវិមជ្ឈការនៅកម្រិតសាលា", duration: "២០ នាទី", preview: "ការផ្ទេរអំណាច និងការទទួលខុសត្រូវដល់គណៈគ្រប់គ្រងសាលារៀនមូលដ្ឋាន។" },
-          { num: "ជំពូកទី ៣", title: "ការលើកកម្ពស់គរុកោសល្យ និងវិធីសាស្ត្រសិស្សមជ្ឈមណ្ឌល", duration: "២៥ នាទី", preview: "ការអនុវត្តវិធីសាស្ត្របង្រៀនសកម្ម និងការវាស់ស្ទង់សមត្ថភាពសិស្សជាក់ស្តែង។" },
-          { num: "ជំពូកទី ៤", title: "ការត្រួតពិនិត្យ និងវាយតម្លៃផ្ទៃក្នុង", duration: "១៨ នាទី", preview: "ឧបករណ៍សម្រាប់កត់ត្រាទិន្នន័យអវត្តមាន លទ្ធផលប្រឡង និងកំណើនសមត្ថភាព។" },
-          { num: "ជំពូកទី ៥", title: "ករណីសិក្សាគំរូពីសាលារៀនឆ្នើម", duration: "៣០ នាទី", preview: "បទពិសោធន៍ជាក់ស្តែងពីវិទ្យាល័យដែលបានផ្លាស់ប្តូរមុខមាត់ដោយជោគជ័យ។" }
-        ],
-        resources: [
-          { name: "គំរូទម្រង់ផែនការអភិវឌ្ឍន៍សាលា (Template .DOCX)", size: "2.1 MB", type: "DOCX" },
-          { name: "ស្លាយបទបង្ហាញសង្ខេបសម្រាប់គ្រូឧទ្ទេស (Keynote Slides)", size: "8.5 MB", type: "PPTX" },
-          { name: "តារាងកត់ត្រាការវាយតម្លៃលទ្ធផលសិស្ស (Excel Sheet)", size: "1.4 MB", type: "XLSX" }
-        ],
-        comments: [
-          { name: "លោកគ្រូ សុខុម", date: "២ ថ្ងៃមុន", rating: 5, comment: "ខ្លឹមសារល្អណាស់ និងងាយស្រួលយល់! ខ្ញុំបានយកគំរូ SIP ទៅអនុវត្តនៅសាលារួចហើយ ទទួលបានការគាំទ្រខ្លាំងពីសហគមន៍។" },
-          { name: "អ្នកគ្រូ សុភារី", date: "១ សប្តាហ៍មុន", rating: 5, comment: "ជាឯកសារមានតម្លៃខ្លាំងសម្រាប់លោកនាយក និងអ្នកគ្រប់គ្រងប្លង់មេរៀន។" },
-          { name: "លោកស្រី ម៉ាលីស", date: "២ សប្តាហ៍មុន", rating: 4, comment: "ប្រសិនបើមានវីដេអូពន្យល់បន្ថែមលើជំពូកទី ៣ នឹងកាន់តែពិសេស។" }
-        ]
-      },
-      {
-        id: "book-2",
-        title: "ភាពជាអ្នកដឹកនាំ ៥ កម្រិត សម្រាប់អ្នកគ្រប់គ្រងសាលារៀន",
-        subtitle: "ដំណើរឆ្ពោះទៅកាន់ភាពជាអ្នកដឹកនាំដ៏មានឥទ្ធិពល និងការកសាងក្រុមការងារអប់រំរឹងមាំ",
-        author: "វិទ្យាល័យ ហ៊ុន សែន ក្រុងទេពនិម្មិត ប៉ៃលិន",
-        authorRole: "សាលារៀនគំរូកម្រិតជាតិ",
-        authorAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS49pch7VFU9jqyGnh15p3WqhNQlqa_TveMMSxu5E3H8nGR13fJa84IUlc&s=10",
-        type: "book",
-        categoryName: "ភាពជាអ្នកដឹកនាំ",
-        categoryBadgeClass: "bg-emerald-600",
-        views: "372",
-        downloads: "142",
-        rating: "4.8",
-        reviewsCount: 2,
-        pages: 64,
-        fileSize: "9.2 MB",
-        date: "ខែមករា ២០២៦",
-        image: "https://api.saladigital.org/public/orgs/68380d3adaae3dc94ef0e1f6/images/6374915e-8810-480f-85fb-efcb611599f9.PNG",
-        description: "សៀវភៅណែនាំពីរបៀបកសាងឥទ្ធិពល និងការដឹកនាំស្ថាប័នអប់រំឲ្យទទួលបានជោគជ័យតាមកម្រិតទាំងប្រាំ ចាប់ពីកម្រិតតួនាទី កម្រិតការយល់ព្រម កម្រិតផលិតភាព កម្រិតអភិវឌ្ឍមនុស្ស រហូតដល់កម្រិតកំពូលនៃភាពជាអ្នកដឹកនាំ។ ស័ក្តិសមបំផុតសម្រាប់គណៈគ្រប់គ្រងសាលារៀន និងប្រធានក្រុមបច្ចេកទេស។",
-        objectives: [
-          "ស្វែងយល់ពីកម្រិតទាំង ៥ នៃភាពជាអ្នកដឹកនាំ",
-          "បច្ចេកទេសលើកទឹកចិត្តគ្រូបង្រៀនឱ្យបញ្ចេញសក្តានុពលខ្ពស់",
-          "ការបង្កើតវប្បធម៌ស្ថាប័នប្រកបដោយទំនុកចិត្ត និងការគោរព",
-          "ការបណ្តុះបណ្តាលអ្នកបន្តវេនក្នុងជួរសាលារៀន"
-        ],
-        chapters: [
-          { num: "កម្រិតទី ១", title: "តួនាទី (Position) - មនុស្សធ្វើតាមដោយសារតួនាទី", duration: "១០ នាទី", preview: "ដែនកំណត់នៃភាពជាអ្នកដឹកនាំផ្អែកលើអំណាចផ្លូវការតែមួយមុខ។" },
-          { num: "កម្រិតទី ២", title: "ការយល់ព្រម (Permission) - មនុស្សធ្វើតាមដោយសារទំនាក់ទំនង", duration: "១៥ នាទី", preview: "ការកសាងមិត្តភាព និងការយល់ចិត្តក្នុងចំណោមសហការី។" },
-          { num: "កម្រិតទី ៣", title: "ផលិតភាព (Production) - មនុស្សធ្វើតាមដោយសារលទ្ធផលសម្រេច", duration: "២០ នាទី", preview: "ការដឹកនាំដោយគំរូជាក់ស្តែង និងការបង្កើតស្នាដៃ។" },
-          { num: "កម្រិតទី ៤", title: "ការអភិវឌ្ឍមនុស្ស (People Development)", duration: "២៥ នាទី", preview: "ការជួយគ្រូបង្រៀនឱ្យក្លាយជាអ្នកដឹកនាំជំនាន់ក្រោយ។" },
-          { num: "កម្រិតទី ៥", title: "កម្រិតកំពូល (Pinnacle) - ការគោរពដោយសារតម្លៃផ្ទាល់ខ្លួន", duration: "១៥ នាទី", preview: "ការបន្សល់ទុកកេរដំណែលអប់រំដ៏គំរូសម្រាប់សង្គម។" }
-        ],
-        resources: [
-          { name: "តារាងវាយតម្លៃកម្រិតដឹកនាំខ្លួនឯង (Self-Assessment Test)", size: "1.1 MB", type: "PDF" },
-          { name: "សៀវភៅលំហាត់អនុវត្តកិច្ចការដឹកនាំ (Workbook)", size: "3.4 MB", type: "PDF" }
-        ],
-        comments: [
-          { name: "គណៈគ្រប់គ្រង វណ្ណដា", date: "៣ ថ្ងៃមុន", rating: 5, comment: "ជាកញ្ចក់ឆ្លុះបញ្ចាំងពីភាពជាអ្នកដឹកនាំរបស់ខ្ញុំយ៉ាងពិតប្រាកដ។ អរគុណវិទ្យាល័យប៉ៃលិន!" },
-          { name: "អ្នកគ្រូ ចិន្តា", date: "៥ ថ្ងៃមុន", rating: 5, comment: "ងាយយល់ ខ្លឹមសារខ្លីខ្លឹម និងត្រូវចំចំណុចដែលសាលាកំពុងជួបប្រទះ។" }
-        ]
-      },
-      {
-        id: "book-3",
-        title: "របៀបប្រើបញ្ញាសិប្បនិម្មិត (AI) ជាជំនួយក្នុងការរៀបចំប្លង់មេរៀន",
-        subtitle: "បច្ចេកទេសប្រើ Prompts, ChatGPT និង Copilot ដើម្បីរៀបចំកិច្ចតែងការបង្រៀនបានលឿន និងច្នៃប្រឌិត",
-        author: "វិទ្យាល័យ ហ៊ុន សែន ក្រុងទេពនិម្មិត ប៉ៃលិន",
-        authorRole: "ក្រុមការងារនវានុវត្តន៍ AI",
-        authorAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS49pch7VFU9jqyGnh15p3WqhNQlqa_TveMMSxu5E3H8nGR13fJa84IUlc&s=10",
-        type: "lesson",
-        categoryName: "AI & នវានុវត្តន៍",
-        categoryBadgeClass: "bg-indigo-600",
-        views: "840",
-        downloads: "620",
-        rating: "5.0",
-        reviewsCount: 4,
-        pages: 52,
-        fileSize: "8.1 MB",
-        date: "ខែកុម្ភៈ ២០២៦",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLWNpUMIJhK1MYQv8BY_vrAnDkqNO4z4DYI9CvSnbikSEjXuK2Sbpk8Ag&s=10",
-        description: "ការណែនាំពីបច្ចេកទេស Prompts និងបញ្ញាសិប្បនិម្មិត (AI) ដើម្បីជួយលោកគ្រូអ្នកគ្រូកាត់បន្ថយពេលវេលារៀបចំកិច្ចតែងការបង្រៀន បង្កើតសន្លឹកកិច្ចការឆ្លាតវៃ ល្បែងសិក្សា និងលំហាត់ស្ទង់កម្រិតសិស្សដោយស្វ័យប្រវត្តិ។ រួមបញ្ចូលទាំងក្រមសីលធម៌នៃការប្រើប្រាស់ AI ក្នុងការអប់រំ។",
-        objectives: [
-          "ចេះប្រើប្រាស់ Prompt Engineering សម្រាប់តម្រូវការគរុកោសល្យ",
-          "បង្កើតកិច្ចតែងការបង្រៀនស្តង់ដារក្នុងរយៈពេលក្រោម ១០ នាទី",
-          "ការបង្កើតសន្លឹកកិច្ចការ និងកម្រងសំណួរស្វ័យប្រវត្តិ",
-          "ការយល់ដឹងពីក្រមសីលធម៌ និងការការពារទិន្នន័យឯកជនភាពសិស្ស"
-        ],
-        chapters: [
-          { num: "ជំពូកទី ១", title: "មូលដ្ឋានគ្រឹះនៃ Generative AI ក្នុងថ្នាក់រៀន", duration: "១៥ នាទី", preview: "តើ AI អាចជួយអ្វីខ្លះដល់គ្រូបង្រៀន និងអ្វីខ្លះមិនគួរពឹងផ្អែកលើ AI?" },
-          { num: "ជំពូកទី ២", title: "រូបមន្ត Prompt គរុកោសល្យកម្រិតខ្ពស់", duration: "២០ នាទី", preview: "គំរូ Prompts ចំនួន ៥០ សម្រាប់មុខវិជ្ជាវិទ្យាសាស្ត្រ និងសង្គម។" },
-          { num: "ជំពូកទី ៣", title: "ការបង្កើតសម្ភារឧបទេស និងរូបភាពជាមួយ AI", duration: "១៨ នាទី", preview: "ការប្រើប្រាស់ AI បង្កើតរូបភាពគំនូរជីវចលសម្រាប់មេរៀនបឋម និងមធ្យម។" },
-          { num: "ជំពូកទី ៤", title: "ក្រមសីលធម៌ និងការទប់ស្កាត់ការលួចចម្លង", duration: "១២ នាទី", preview: "ការណែនាំសិស្សឱ្យប្រើ AI ជាឧបករណ៍ជំនួយស្មារតី មិនមែនជាឧបករណ៍ចម្លងកិច្ចការ។" }
-        ],
-        resources: [
-          { name: "កម្រងគំរូ Prompts ចំនួន ៥០ សម្រាប់គ្រូបង្រៀន (PDF)", size: "2.8 MB", type: "PDF" },
-          { name: "ឯកសារស្លាយបណ្តុះបណ្តាល AI សម្រាប់សាលារៀន (PPTX)", size: "11.2 MB", type: "PPTX" }
-        ],
-        comments: [
-          { name: "លោកគ្រូ រតនា", date: "ម្សិលមិញ", rating: 5, comment: "អស្ចារ្យណាស់! ពីមុនខ្ញុំត្រូវចំណាយពេល ៣ ម៉ោងធ្វើកិច្ចតែងការ ឥឡូវសល់ត្រឹម ២០ នាទីប៉ុណ្ណោះ។" },
-          { name: "អ្នកគ្រូ ធីតា", date: "៣ ថ្ងៃមុន", rating: 5, comment: "បច្ចេកទេស Prompts ក្នុងសៀវភៅនេះច្បាស់លាស់ និងត្រូវនឹងកម្មវិធីសិក្សាជាតិយើងផ្ទាល់។" }
-        ]
-      },
-      {
-        id: "book-4",
-        title: "សៀវភៅណែនាំគ្រូបង្រៀនភាសាខ្មែរ កម្រិតមធ្យមសិក្សា",
-        subtitle: "វិធីសាស្ត្របង្រៀនអក្សរសិល្ប៍ វេយ្យាករណ៍ និងការតែងសេចក្តីបែបសកម្ម",
-        author: "ក្រសួងអប់រំ យុវជន និងកីឡា",
-        authorRole: "នាយកដ្ឋានអភិវឌ្ឍន៍កម្មវិធីសិក្សា",
-        authorAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm6QJGrY42ks44IlHhNeqoM11ReH4dNLSCZ-Z2c3w6xp6lXe3ZbEBeJt9f&s=10",
-        type: "pedagogy",
-        categoryName: "ភាសាខ្មែរ",
-        categoryBadgeClass: "bg-amber-600",
-        views: "612",
-        downloads: "530",
-        rating: "4.9",
-        reviewsCount: 3,
-        pages: 110,
-        fileSize: "15.3 MB",
-        date: "ខែធ្នូ ២០២៥",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPl9A__1hBLULCmBsUjTJ9b606eyUAPvaKB7BJW6GI-WnsVa7-f3ZyA6EF&s=10",
-        description: "សៀវភៅគោលគរុកោសល្យ និងវិធីសាស្ត្រពន្យល់វេយ្យាករណ៍ខ្មែរឲ្យសិស្សយល់លឿន រួមបញ្ចូលទាំងបច្ចេកទេសវិភាគអក្សរសិល្ប៍ទំនើប និងបុរាណ របៀបបង្រៀនសរសេរតែងសេចក្តីពន្យល់ ប្រៀបធៀប និងពិភាក្សា។",
-        objectives: [
-          "ពង្រឹងការបង្រៀនវេយ្យាករណ៍ខ្មែរតាមវិធីសាស្ត្រវិចារវិភាគ",
-          "បច្ចេកទេសជួយសិស្សឱ្យចេះស្រឡាញ់ការអានសៀវភៅអក្សរសិល្ប៍",
-          "ការណែនាំជំហាននៃការសរសេរតែងសេចក្តីឱ្យត្រូវទម្រង់ និងក្បួនខ្នាត",
-          "ការវាស់ស្ទង់សមត្ថភាពអក្ខរកម្មភាសាជាតិ"
-        ],
-        chapters: [
-          { num: "ជំពូកទី ១", title: "គោលការណ៍គ្រឹះនៃការបង្រៀនភាសាខ្មែរ", duration: "២០ នាទី", preview: "ការរួមបញ្ចូលគ្នារវាងការស្តាប់ ការនិយាយ ការអាន និងការសរសេរ។" },
-          { num: "ជំពូកទី ២", title: "វិធីសាស្ត្របង្រៀនវេយ្យាករណ៍ដោយមិនចាំបាច់ទន្ទេញ", duration: "២៥ នាទី", preview: "ការរៀនតាមរយៈបរិបទប្រយោគ និងការប្រើប្រាស់ជាក់ស្តែង។" },
-          { num: "ជំពូកទី ៣", title: "ការបង្រៀនវិភាគតួអង្គក្នុងស្នាដៃអក្សរសិល្ប៍", duration: "៣០ នាទី", preview: "ការបណ្តុះការគិតបែបស៊ីជម្រៅតាមរយៈអក្សរសិល្ប៍គំរូ។" }
-        ],
-        resources: [
-          { name: "គំរូកិច្ចតែងការបង្រៀនភាសាខ្មែរ (PDF)", size: "4.2 MB", type: "PDF" },
-          { name: "កម្រងលំហាត់វេយ្យាករណ៍សម្រាប់សិស្ស (DOCX)", size: "1.9 MB", type: "DOCX" }
-        ],
-        comments: [
-          { name: "លោកគ្រូ គឹមសាន", date: "៤ ថ្ងៃមុន", rating: 5, comment: "ជាកម្រងឯកសារដ៏កម្រ និងមានប្រយោជន៍ក្រៃលែងសម្រាប់គ្រូបង្រៀនទូទាំងប្រទេស។" }
-        ]
-      },
-      {
-        id: "book-5",
-        title: "ផ្តោតលើកិច្ចការមួយ (Deep Work & Productivity) សម្រាប់សិស្ស-និស្សិត",
-        subtitle: "របៀបពង្រឹងការផ្តោតអារម្មណ៍ និងការកម្ចាត់ភាពរំខានក្នុងយុគសម័យឌីជីថល",
-        author: "សាលា ឌីជីថល",
-        authorRole: "ផ្នែកជំនាញទន់ & ផលិតភាព",
-        authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop",
-        type: "book",
-        categoryName: "ស្វ័យអភិវឌ្ឍន៍",
-        categoryBadgeClass: "bg-rose-600",
-        views: "926",
-        downloads: "810",
-        rating: "4.9",
-        reviewsCount: 5,
-        pages: 78,
-        fileSize: "7.5 MB",
-        date: "ខែមករា ២០២៦",
-        image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=600&auto=format&fit=crop",
-        description: "សៀវភៅបកប្រែសម្រួល និងស្រាវជ្រាវស្តីពីថាមពលនៃការផ្តោតលើកិច្ចការមួយក្នុងពេលតែមួយ។ បង្រៀនសិស្សានុសិស្សពីរបៀបរៀបចំកាលវិភាគសិក្សា ការកាត់បន្ថយការញៀនទូរស័ព្ទ និងការបង្កើតបរិយាកាសសិក្សាដែលមានប្រសិទ្ធភាពខ្ពស់បំផុត។",
-        objectives: [
-          "យល់ពីយន្តការខួរក្បាលក្នុងការផ្តោតអារម្មណ៍ (Flow State)",
-          "បច្ចេកទេស Pomodoro កម្រិតខ្ពស់ និង Time Blocking",
-          "ការលុបបំបាត់ការរំខានពីបណ្តាញសង្គមក្នុងម៉ោងសិក្សា",
-          "ការកសាងទម្លាប់អានសៀវភៅប្រចាំថ្ងៃឱ្យបានជាប់លាប់"
-        ],
-        chapters: [
-          { num: "ជំពូកទី ១", title: "មូលហេតុដែលយើងងាយបាត់បង់ការផ្តោតអារម្មណ៍", duration: "១៥ នាទី", preview: "ឥទ្ធិពលនៃការជូនដំណឹងទូរស័ព្ទ និង Dopamine លើខួរក្បាល។" },
-          { num: "ជំពូកទី ២", title: "ក្បួន ៤ យ៉ាងនៃការធ្វើការងារស៊ីជម្រៅ (Deep Work)", duration: "២០ នាទី", preview: "របៀបបែងចែកពេលវេលាដាច់ដោយឡែកសម្រាប់ការគិតស្ងប់ស្ងាត់។" },
-          { num: "ជំពូកទី ៣", title: "ការសម្រាកប្រកបដោយប្រសិទ្ធភាព", duration: "១៥ នាទី", preview: "ការសម្រាកខួរក្បាលដោយមិនប្រើប្រាស់អេក្រង់ឌីជីថល។" }
-        ],
-        resources: [
-          { name: "តារាងតាមដានទម្លាប់ប្រចាំថ្ងៃ (Habit Tracker Sheet)", size: "900 KB", type: "PDF" }
-        ],
-        comments: [
-          { name: "និស្សិត សីហា", date: "១ សប្តាហ៍មុន", rating: 5, comment: "អានហើយមានអារម្មណ៍ចង់បិទទូរស័ព្ទទៅអានសៀវភៅភ្លាមៗ! ជួយដល់ការរៀនរបស់ខ្ញុំខ្លាំងណាស់។" }
-        ]
-      },
-      {
-        id: "book-6",
-        title: "សទ្ទានុក្រម វិទ្យាសាស្រ្តនយោបាយ និងទំនាក់ទំនងអន្តរជាតិ",
-        subtitle: "ការប្រមូលផ្តុំពាក្យបច្ចេកទេស និងនិយមន័យសំខាន់ៗជាភាសាខ្មែរ-អង់គ្លេស",
-        author: "សាលា ឌីជីថល",
-        authorRole: "ផ្នែកស្រាវជ្រាវវិទ្យាសាស្ត្រសង្គម",
-        authorAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop",
-        type: "book",
-        categoryName: "វិទ្យាសាស្ត្រនយោបាយ",
-        categoryBadgeClass: "bg-sky-700",
-        views: "714",
-        downloads: "420",
-        rating: "4.7",
-        reviewsCount: 2,
-        pages: 140,
-        fileSize: "18.2 MB",
-        date: "ខែកុម្ភៈ ២០២៦",
-        image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop",
-        description: "សទ្ទានុក្រមពាក្យគន្លឹះផ្នែកវិទ្យាសាស្ត្រនយោបាយ ទ្រឹស្តីរដ្ឋ ច្បាប់រដ្ឋធម្មនុញ្ញ និងទំនាក់ទំនងអន្តរជាតិ។ មានការពន្យល់យ៉ាងច្បាស់លាស់ជាមួយឧទាហរណ៍ជាក់ស្តែង សម្រាប់និស្សិតច្បាប់ និងទំនាក់ទំនងអន្តរជាតិ។",
-        objectives: [
-          "យល់ដឹងពីសទ្ទានុក្រមច្បាប់ និងវិទ្យាសាស្ត្រនយោបាយស្ដង់ដារ",
-          "របៀបប្រើប្រាស់ពាក្យបច្ចេកទេសក្នុងការសរសេរសារណាស្រាវជ្រាវ",
-          "ការយល់ដឹងពីស្ថាប័នអន្តរជាតិ និងច្បាប់សន្ធិសញ្ញា"
-        ],
-        chapters: [
-          { num: "ផ្នែកទី ១", title: "ពាក្យបច្ចេកទេសទាក់ទងនឹងទ្រឹស្តីរដ្ឋ និងអធិបតេយ្យភាព", duration: "៣០ នាទី", preview: "និយមន័យនៃអំណាច ស្ថាប័ននីតិប្បញ្ញត្តិ និងនីតិប្រតិបត្តិ។" },
-          { num: "ផ្នែកទី ២", title: "ការទូត និងអង្គការអន្តរជាតិ", duration: "៣៥ នាទី", preview: "យន្តការអង្គការសហប្រជាជាតិ អាស៊ាន និងច្បាប់អន្តរជាតិ។" }
-        ],
-        resources: [
-          { name: "កម្រងសទ្ទានុក្រមពេញលេញ Searchable PDF", size: "18.2 MB", type: "PDF" }
-        ],
-        comments: [
-          { name: "និស្សិត ចាន់រ៉ា", date: "៥ ថ្ងៃមុន", rating: 5, comment: "ឯកសារនេះមានតម្លៃណាស់សម្រាប់និស្សិតច្បាប់ដូចជាខ្ញុំ! និយមន័យច្បាស់ៗល្អណាស់។" }
-        ]
-      },
-      {
-        id: "book-7",
-        title: "វិធីស្រាវជ្រាវក្នុងការធ្វើម្ហូបងាយៗ និងវិទ្យាសាស្ត្រចំណីអាហារ",
-        subtitle: "ការបញ្ចូលការរៀនបែប STEM និងគីមីចំណីអាហារក្នុងជីវភាពរស់នៅប្រចាំថ្ងៃ",
-        author: "វិទ្យាល័យ ហ៊ុន សែន ក្រុងទេពនិម្មិត ប៉ៃលិន",
-        authorRole: "ក្លឹបយុវជន STEM",
-        authorAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS49pch7VFU9jqyGnh15p3WqhNQlqa_TveMMSxu5E3H8nGR13fJa84IUlc&s=10",
-        type: "lesson",
-        categoryName: "ជីវវិទ្យា & STEM",
-        categoryBadgeClass: "bg-amber-600",
-        views: "580",
-        downloads: "310",
-        rating: "4.8",
-        reviewsCount: 2,
-        pages: 45,
-        fileSize: "6.8 MB",
-        date: "ខែមករា ២០២៦",
-        image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600&auto=format&fit=crop",
-        description: "សៀវភៅពិសោធន៍វិទ្យាសាស្ត្រក្នុងផ្ទះបាយ ដែលភ្ជាប់ទំនាក់ទំនងរវាងទ្រឹស្តីគីមីវិទ្យា ជីវវិទ្យា និងអាហារូបត្ថម្ភ។ សិស្សានុសិស្សអាចរៀនសូត្រពីប្រតិកម្មគីមីនៃការឡើងមេនំប៉័ង ការរក្សាទុកអាហារ និងសុវត្ថិភាពចំណីអាហារ។",
-        objectives: [
-          "ស្វែងយល់ពីប្រតិកម្មគីមីក្នុងការចម្អិនអាហារ",
-          "ការអនុវត្តវិធីសាស្ត្រស្រាវជ្រាវបែបវិទ្យាសាស្ត្រក្នុងជីវិតរស់នៅ",
-          "ការយល់ដឹងពីអាហារូបត្ថម្ភ និងសុវត្ថិភាពចំណីអាហារ"
-        ],
-        chapters: [
-          { num: "មេរៀនទី ១", title: "វិទ្យាសាស្ត្រនៃកម្តៅ និងការចម្អិន", duration: "១៥ នាទី", preview: "ប្រតិកម្ម Maillard និងការប្រែប្រួលប្រូតេអ៊ីន។" },
-          { num: "មេរៀនទី ២", title: "បាក់តេរីល្អ និងការផ្អាប់ចំណីអាហារ", duration: "២០ នាទី", preview: "ការធ្វើជ្រក់ និងយ៉ាអួតាមបែបវិទ្យាសាស្ត្រ។" }
-        ],
-        resources: [
-          { name: "សន្លឹកកិច្ចការពិសោធន៍ STEM ក្នុងផ្ទះបាយ (PDF)", size: "1.5 MB", type: "PDF" }
-        ],
-        comments: [
-          { name: "កញ្ញា ស្រីនិច", date: "២ សប្តាហ៍មុន", rating: 5, comment: "គួរឱ្យចាប់អារម្មណ៍ណាស់! ប្អូនៗរៀន STEM ដោយសប្បាយរីករាយ។" }
-        ]
-      },
-      {
-        id: "book-8",
-        title: "វិធីសាស្ត្រគ្រប់គ្រងថ្នាក់រៀនសតវត្សរ៍ទី២១ សម្រាប់លោកគ្រូអ្នកគ្រូ",
-        subtitle: "ការបង្កើតបរិយាកាសសិក្សាវិជ្ជមាន ការគ្រប់គ្រងវិន័យដោយការយល់ចិត្ត និងការប្រើប្រាស់បច្ចេកវិទ្យា",
-        author: "វិទ្យាស្ថានជាតិអប់រំ",
-        authorRole: "ដេប៉ាតឺម៉ង់គរុកោសល្យជាន់ខ្ពស់",
-        authorAvatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx4s0xNickidVuB20q2JqIqHAA3dFSIXTyiTkd23A8GeopHN7iOH3tVw7q&s=10",
-        type: "pedagogy",
-        categoryName: "វិធីសាស្ត្របង្រៀន",
-        categoryBadgeClass: "bg-purple-600",
-        views: "1140",
-        downloads: "980",
-        rating: "5.0",
-        reviewsCount: 6,
-        pages: 94,
-        fileSize: "13.8 MB",
-        date: "ខែកុម្ភៈ ២០២៦",
-        image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop",
-        description: "ការណែនាំពីយុទ្ធសាស្ត្រគ្រប់គ្រងថ្នាក់រៀនទំនើប ដែលប្តូរពីការដាក់ពិន័យមកជាការបណ្តុះវិន័យវិជ្ជមាន។ បច្ចេកទេសដោះស្រាយទំនាស់ក្នុងថ្នាក់ ការរៀបចំតុរៀនឱ្យមានអន្តរកម្ម និងការបង្កើតកិច្ចព្រមព្រៀងក្នុងថ្នាក់រៀន។",
-        objectives: [
-          "បង្កើតកិច្ចព្រមព្រៀងថ្នាក់រៀនប្រកបដោយការចូលរួមពីសិស្ស",
-          "បច្ចេកទេសគ្រប់គ្រងអារម្មណ៍គ្រូ និងសិស្សក្នុងស្ថានភាពតានតឹង",
-          "ការប្រើប្រាស់ឧបករណ៍ឌីជីថល (Google Classroom, Canva) ក្នុងថ្នាក់",
-          "ការកសាងទំនាក់ទំនងរឹងមាំរវាងគ្រូ និងអាណាព្យាបាល"
-        ],
-        chapters: [
-          { num: "ជំពូកទី ១", title: "មូលដ្ឋានគ្រឹះនៃវិន័យវិជ្ជមាន", duration: "២០ នាទី", preview: "ភាពខុសគ្នារវាងការដាក់ទណ្ឌកម្ម និងការបណ្តុះវិន័យ។" },
-          { num: "ជំពូកទី ២", title: "ការរៀបចំលំហរូបវន្ត និងលំហឌីជីថលក្នុងថ្នាក់", duration: "១៥ នាទី", preview: "របៀបរៀបចំតុ និងកៅអីដើម្បីជំរុញការងារជាក្រុម។" },
-          { num: "ជំពូកទី ៣", title: "ការលើកទឹកចិត្ត និងការវាយតម្លៃអាកប្បកិរិយា", duration: "២៥ នាទី", preview: "ប្រព័ន្ធពិន្ទុលើកទឹកចិត្ត និងការសរសើរចំគោលដៅ។" }
-        ],
-        resources: [
-          { name: "គំរូប័ណ្ណកិច្ចព្រមព្រៀងថ្នាក់រៀន (Class Contract PDF)", size: "1.2 MB", type: "PDF" },
-          { name: "ស្លាយបណ្តុះបណ្តាលគរុកោសល្យវិន័យវិជ្ជមាន (PPTX)", size: "7.8 MB", type: "PPTX" }
-        ],
-        comments: [
-          { name: "លោកគ្រូ ប៊ុនធឿន", date: "១ សប្តាហ៍មុន", rating: 5, comment: "សៀវភៅនេះបានផ្លាស់ប្តូរបរិយាកាសថ្នាក់រៀនរបស់ខ្ញុំទាំងស្រុង! សិស្សសប្បាយចិត្តជាងមុនច្រើន។" }
-        ]
-      }
-    ];
-
-    // Current State
-    let currentBook = null;
-    let currentReaderPage = 1;
-    let currentReaderZoom = 1;
-    let selectedRating = 5;
-
-    // ================= INITIALIZATION =================
-    window.addEventListener('DOMContentLoaded', () => {
-      renderCards();
-      animateCounters();
-      handleHashRouting();
-    });
-
-    window.addEventListener('hashchange', () => {
-      handleHashRouting();
-    });
-
-    // ================= ROUTING SYSTEM =================
-    function handleHashRouting() {
-      const hash = window.location.hash;
-      if (hash.startsWith('#detail')) {
-        const params = new URLSearchParams(hash.split('?')[1]);
-        const bookId = params.get('id');
-        if (bookId) {
-          const found = BOOKS_DATA.find(b => b.id === bookId);
-          if (found) {
-            renderDetailPage(found);
-            return;
-          }
-        }
-      }
-      // Default to Home View
-      showHomeView();
-    }
-
-    function showHomeView() {
-      document.getElementById('home-view').classList.remove('hidden');
-      document.getElementById('detail-view').classList.add('hidden');
-      document.title = "សាលាឌីជីថល - ថ្នាលអប់រំ និងចែករំលែកចំណេះដឹងឌីជីថលកម្ពុជា";
-    }
-
-    function navigateToHome() {
-      window.location.hash = '';
-      showHomeView();
-      scrollToTop();
-    }
-
-    function navigateToHomeAndScroll(sectionId) {
-      if (!document.getElementById('detail-view').classList.contains('hidden')) {
-        window.location.hash = '';
-        showHomeView();
-      }
-      setTimeout(() => {
-        const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 50);
-    }
-
-    function showDetailPage(bookId) {
-      window.location.hash = `#detail?id=${bookId}`;
-    }
-
-    // ================= RENDER HOMEPAGE CARDS =================
-    function renderCards() {
-      const latestGrid = document.getElementById('latest-cards-grid');
-      const popularGrid = document.getElementById('popular-cards-grid');
-
-      if (!latestGrid || !popularGrid) return;
-
-      const latestItems = BOOKS_DATA.slice(0, 4);
-      const popularItems = BOOKS_DATA.slice(4, 8);
-
-      latestGrid.innerHTML = latestItems.map(book => createCardHTML(book, false)).join('');
-      popularGrid.innerHTML = popularItems.map(book => createCardHTML(book, true)).join('');
-    }
-
-    function createCardHTML(book, isPopular) {
-      return `
-        <div class="book-card group bg-white rounded-2xl border border-slate-200/70 shadow-sm hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer"
-             onclick="showDetailPage('${book.id}')"
-             data-title="${book.title}" 
-             data-author="${book.author}" 
-             data-type="${book.type}">
-          
-          <div class="relative h-56 overflow-hidden card-zoom-wrap bg-slate-100">
-            <img 
-              src="${book.image}" 
-              alt="${book.title}" 
-              class="w-full h-full object-cover card-zoom-img"
-              onerror="this.src='https://placehold.co/400x500/0284c7/ffffff?text=${encodeURIComponent(book.categoryName)}'"
-            >
-            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[11px] font-semibold text-white shadow-sm ${book.categoryBadgeClass}">
-              ${isPopular ? '#ពេញនិយម • ' : ''}${book.categoryName}
-            </span>
-            <button onclick="bookmarkItem(this, event, '${book.id}')" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-slate-600 hover:text-amber-500 flex items-center justify-center transition backdrop-blur-sm shadow">
-              <i class="bi bi-bookmark text-xs"></i>
-            </button>
-          </div>
-
-          <div class="p-4 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 class="font-medium text-slate-800 text-sm line-clamp-2 leading-snug group-hover:text-sky-600 transition">
-                ${book.title}
-              </h3>
-              
-              <div class="flex items-center gap-2 mt-3 pt-3 border-t border-slate-100">
-                <img src="${book.authorAvatar}" class="w-6 h-6 rounded-full object-cover" alt="Avatar">
-                <span class="text-xs text-slate-600 font-medium truncate">${book.author}</span>
-                <i class="bi bi-patch-check-fill text-sky-500 text-xs ml-auto" title="ផ្ទៀងផ្ទាត់រួច"></i>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between mt-3 text-xs text-slate-400">
-              <span><i class="bi bi-eye mr-1"></i> ${book.views} មើល</span>
-              <span class="text-sky-600 font-semibold group-hover:underline flex items-center gap-1">
-                មើលលម្អិត <i class="bi bi-arrow-right"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    // ================= DETAIL PAGE RENDERING =================
-    function renderDetailPage(book) {
-      currentBook = book;
-      document.title = `${book.title} - សាលាឌីជីថល`;
-
-      // Toggle views
-      document.getElementById('home-view').classList.add('hidden');
-      document.getElementById('detail-view').classList.remove('hidden');
-      scrollToTop();
-
-      // Breadcrumb
-      document.getElementById('detail-breadcrumb-cat').innerText = book.categoryName;
-      document.getElementById('detail-breadcrumb-title').innerText = book.title;
-
-      // Hero Elements
-      document.getElementById('detail-hero-backdrop').src = book.image;
-      document.getElementById('detail-cover-img').src = book.image;
-      document.getElementById('detail-badge-category').innerText = book.categoryName;
-      document.getElementById('detail-title').innerText = book.title;
-      document.getElementById('detail-subtitle').innerText = book.subtitle;
-      document.getElementById('detail-author-avatar').src = book.authorAvatar;
-      document.getElementById('detail-author-name').innerText = book.author;
-      document.getElementById('detail-author-role').innerText = book.authorRole;
-      document.getElementById('detail-views-count').innerText = book.views;
-      document.getElementById('detail-rating-score').innerText = book.rating;
-      document.getElementById('detail-published-date').innerText = book.date;
-      document.getElementById('detail-pages-count').innerHTML = `<i class="bi bi-layers"></i> ${book.pages} ទំព័រ`;
-      document.getElementById('detail-file-size').innerHTML = `<i class="bi bi-hdd"></i> ${book.fileSize}`;
-      document.getElementById('detail-download-count').innerText = `${book.downloads}+`;
-
-      // Meta sidebar
-      document.getElementById('detail-meta-id').innerText = `SLD-${book.id.toUpperCase()}`;
-      document.getElementById('detail-meta-type').innerText = book.categoryName;
-      document.getElementById('detail-meta-downloads').innerText = `${book.downloads} លើក`;
-
-      // Overview Tab Text
-      document.getElementById('detail-overview-text').innerHTML = `
-        <p class="leading-relaxed text-slate-700">${book.description}</p>
-        <p class="leading-relaxed text-slate-700 mt-3">ខ្លឹមសារទាំងអស់ត្រូវបានរៀបចំឡើងយ៉ាងផ្ចិតផ្ចង់ ដោយរួមបញ្ចូលទ្រឹស្តីគរុកោសល្យទាន់សម័យ និងឧទាហរណ៍ជាក់ស្តែងងាយអនុវត្តក្នុងថ្នាក់រៀនជាក់ស្តែង។</p>
-      `;
-
-      // Learning Objectives List
-      const objectivesContainer = document.getElementById('detail-objectives-list');
-      objectivesContainer.innerHTML = (book.objectives || []).map(obj => `
-        <div class="flex items-start gap-2.5 p-3 rounded-2xl bg-emerald-50/60 border border-emerald-100 text-xs text-emerald-900">
-          <i class="bi bi-check-circle-fill text-emerald-600 mt-0.5"></i>
-          <span>${obj}</span>
-        </div>
-      `).join('');
-
-      // Chapters List
-      const chaptersContainer = document.getElementById('detail-chapters-container');
-      document.getElementById('detail-total-chapters-count').innerText = `${(book.chapters || []).length} ជំពូកសរុប`;
-      chaptersContainer.innerHTML = (book.chapters || []).map((ch, idx) => `
-        <div class="p-4 rounded-2xl border border-slate-200/80 hover:border-sky-300 hover:bg-sky-50/30 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group">
-          <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-sky-600 group-hover:text-white text-slate-600 flex items-center justify-center font-bold text-xs shrink-0 transition">
-              ${idx + 1}
-            </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <span class="text-[11px] font-bold text-sky-600 uppercase tracking-wider">${ch.num}</span>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 font-medium">${ch.duration}</span>
-              </div>
-              <h4 class="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">${ch.title}</h4>
-              <p class="text-xs text-slate-500 mt-1 line-clamp-1">${ch.preview}</p>
-            </div>
-          </div>
-          <button onclick="previewChapter('${ch.title}', '${ch.num}', '${encodeURIComponent(ch.preview)}')" class="shrink-0 text-xs px-3.5 py-1.5 rounded-xl border border-slate-200 hover:border-sky-500 text-sky-600 hover:bg-white font-semibold transition self-start sm:self-center">
-            <i class="bi bi-book-half mr-1"></i> អានសង្ខេប
-          </button>
-        </div>
-      `).join('');
-
-      // Resources List
-      const resourcesContainer = document.getElementById('detail-resources-list');
-      resourcesContainer.innerHTML = (book.resources || []).map(res => `
-        <div class="p-3.5 rounded-2xl border border-slate-200 hover:border-sky-300 bg-white flex items-center justify-between gap-3">
-          <div class="flex items-center gap-3 truncate">
-            <div class="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 font-bold text-xs">
-              <i class="bi bi-file-earmark-arrow-down text-lg"></i>
-            </div>
-            <div class="truncate">
-              <h5 class="text-xs font-bold text-slate-800 truncate">${res.name}</h5>
-              <span class="text-[10px] text-slate-400">${res.size} • ទម្រង់ ${res.type}</span>
-            </div>
-          </div>
-          <button onclick="downloadResource('${res.name}')" class="shrink-0 px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold text-xs transition flex items-center gap-1.5">
-            <i class="bi bi-download"></i> ទាញយក
-          </button>
-        </div>
-      `).join('');
-
-      // Reviews Tab & Count
-      document.getElementById('tab-reviews-count').innerText = (book.comments || []).length;
-      renderCommentsList();
-
-      // Related Items in Sidebar
-      renderRelatedItems(book);
-
-      // Reset Tab to Overview
-      const firstTabBtn = document.querySelector('#detail-nav-tabs .detail-tab-btn');
-      if (firstTabBtn) switchDetailTab('overview', firstTabBtn);
-    }
-
-    // Render Comments in Detail View
-    function renderCommentsList() {
-      if (!currentBook) return;
-      const commentsContainer = document.getElementById('detail-comments-container');
-      commentsContainer.innerHTML = (currentBook.comments || []).map(cmt => `
-        <div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm space-y-2">
+        <div id="tab-panel-syllabus" class="hidden bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-3">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2.5">
-              <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-500 text-white flex items-center justify-center font-bold text-[11px]">
-                ${cmt.name.charAt(0)}
-              </div>
-              <div>
-                <h5 class="text-xs font-bold text-slate-800">${cmt.name}</h5>
-                <span class="text-[10px] text-slate-400">${cmt.date}</span>
-              </div>
-            </div>
-            <div class="flex text-amber-400 text-xs">
-              ${'<i class="bi bi-star-fill"></i>'.repeat(cmt.rating)}
-            </div>
+            <h3 class="font-serifKhmer text-xl font-bold"><i class="bi bi-journal-bookmark text-sky-600"></i> បញ្ជីមាតិកា</h3>
+            <span class="text-xs text-slate-500" id="detail-total-chapters-count"></span>
           </div>
-          <p class="text-xs text-slate-600 leading-relaxed pl-9">${cmt.comment}</p>
+          <div id="detail-chapters-container" class="space-y-3"></div>
         </div>
-      `).join('');
-    }
 
-    // Render Related items in sidebar
-    function renderRelatedItems(activeBook) {
-      const container = document.getElementById('related-items-container');
-      const related = BOOKS_DATA.filter(b => b.id !== activeBook.id).slice(0, 3);
-
-      container.innerHTML = related.map(item => `
-        <div onclick="showDetailPage('${item.id}')" class="flex items-center gap-3 p-2 rounded-2xl hover:bg-slate-50 transition cursor-pointer border border-transparent hover:border-slate-200">
-          <div class="w-14 h-16 rounded-xl overflow-hidden bg-slate-100 shrink-0">
-            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
-          </div>
-          <div class="flex-1 truncate">
-            <span class="text-[10px] font-semibold text-sky-600 block mb-0.5">${item.categoryName}</span>
-            <h5 class="text-xs font-bold text-slate-800 truncate">${item.title}</h5>
-            <span class="text-[10px] text-slate-400 flex items-center gap-2 mt-1">
-              <span><i class="bi bi-eye"></i> ${item.views}</span>
-              <span><i class="bi bi-star-fill text-amber-400"></i> ${item.rating}</span>
-            </span>
-          </div>
+        <div id="tab-panel-resources" class="hidden bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-3">
+          <h3 class="font-serifKhmer text-xl font-bold"><i class="bi bi-folder2-open text-sky-600"></i> ឯកសារភ្ជាប់ & ស្លាយបង្រៀន</h3>
+          <div id="detail-resources-list" class="space-y-3"></div>
         </div>
-      `).join('');
-    }
 
-    // ================= DETAIL PAGE TABS SWITCHER =================
-    function switchDetailTab(tabId, btn) {
-      document.querySelectorAll('.detail-tab-btn').forEach(b => {
-        b.classList.remove('active', 'bg-sky-600', 'text-white', 'shadow-sm');
-        b.classList.add('text-slate-600');
-      });
-      btn.classList.add('active', 'bg-sky-600', 'text-white', 'shadow-sm');
-      btn.classList.remove('text-slate-600');
-
-      // Panels
-      ['overview', 'syllabus', 'resources', 'reviews'].forEach(id => {
-        const panel = document.getElementById(`tab-panel-${id}`);
-        if (panel) {
-          if (id === tabId) panel.classList.remove('hidden');
-          else panel.classList.add('hidden');
-        }
-      });
-    }
-
-    // ================= INTERACTIVE READER MODAL =================
-    function launchInteractiveReader() {
-      if (!currentBook) return;
-      currentReaderPage = 1;
-      currentReaderZoom = 1;
-
-      document.getElementById('reader-modal-title').innerText = currentBook.title;
-      document.getElementById('reader-modal-author').innerText = `${currentBook.author} • ${currentBook.categoryName}`;
-      document.getElementById('reader-total-pages-txt').innerText = currentBook.pages || '24';
-      
-      updateReaderPageDisplay();
-
-      const modal = document.getElementById('reader-modal');
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      showToast('បានបើកកម្មវិធីអានសៀវភៅឌីជីថល (Reader Mode)', 'bi-book');
-    }
-
-    function closeReaderModal() {
-      const modal = document.getElementById('reader-modal');
-      modal.classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-
-    function updateReaderPageDisplay() {
-      if (!currentBook) return;
-      const totalPages = currentBook.pages || 24;
-      document.getElementById('reader-current-page-txt').innerText = currentReaderPage;
-      document.getElementById('reader-page-number-display').innerText = `ទំព័រ ${currentReaderPage} នៃ ${totalPages}`;
-
-      const heading = document.getElementById('reader-page-heading');
-      const badge = document.getElementById('reader-page-badge');
-      const body = document.getElementById('reader-page-body-text');
-
-      if (currentReaderPage === 1) {
-        badge.innerText = `គម្រប & សេចក្តីផ្តើម`;
-        heading.innerText = currentBook.title;
-        body.innerHTML = `
-          <div class="text-center py-4">
-            <p class="text-slate-600 text-sm font-medium mb-2">${currentBook.subtitle}</p>
-            <p class="text-xs text-sky-700 font-semibold mb-6">រៀបរៀងដោយ៖ ${currentBook.author}</p>
-            <div class="max-w-md mx-auto text-xs text-slate-500 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-200">
-              ${currentBook.description}
+        <div id="tab-panel-reviews" class="hidden bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+          <h3 class="font-serifKhmer text-xl font-bold"><i class="bi bi-star-half text-amber-500"></i> ការវាយតម្លៃ និងមតិយោបល់</h3>
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80">
+            <div class="flex items-center gap-2 mb-3 text-xs text-slate-600">ផ្តល់ពិន្ទុ៖
+              <div id="review-star-selector" class="flex text-amber-400 text-sm gap-1">
+                <i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(1)"></i><i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(2)"></i><i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(3)"></i><i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(4)"></i><i class="bi bi-star-fill cursor-pointer" onclick="setCommentRating(5)"></i>
+              </div>
             </div>
+            <textarea id="user-comment-input" rows="3" placeholder="សូមសរសេរមតិយោបល់របស់អ្នកនៅទីនេះ..." class="w-full p-3 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 mb-2"></textarea>
+            <div class="flex justify-end"><button onclick="submitUserComment()" class="px-5 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-xs"><i class="bi bi-send"></i> ផ្ញើមតិយោបល់</button></div>
           </div>
-        `;
-      } else {
-        const chapterIdx = Math.min(currentReaderPage - 2, (currentBook.chapters || []).length - 1);
-        const ch = (currentBook.chapters && currentBook.chapters[chapterIdx]) || {
-          num: `ជំពូកទី ${currentReaderPage - 1}`,
-          title: `ខ្លឹមសារមេរៀនបន្តនៃឯកសារ`,
-          preview: `បន្តការស្រាវជ្រាវ និងការអនុវត្តជាក់ស្តែងក្នុងថ្នាក់រៀនដោយប្រើប្រាស់វិធីសាស្ត្រគរុកោសល្យទំនើប។`
-        };
+          <div id="detail-comments-container" class="space-y-4"></div>
+        </div>
+      </div>
 
-        badge.innerText = ch.num;
-        heading.innerText = ch.title;
-        body.innerHTML = `
-          <p class="text-sm font-medium text-slate-800">${ch.preview}</p>
-          <p class="text-sm text-slate-600">ការរៀបចំយុទ្ធសាស្ត្រនេះតម្រូវឱ្យមានការសហការយ៉ាងជិតស្និទ្ធរវាងសហគមន៍អប់រំ គណៈគ្រប់គ្រងសាលា និងអាណាព្យាបាលសិស្ស។ តាមរយៈការកត់ត្រាទិន្នន័យជាក់ស្តែង និងការតាមដានជាប្រចាំ សាលារៀននឹងសម្រេចបាននូវលទ្ធផលខ្ពស់ក្នុងការប្រឡង និងការកសាងសមត្ថភាពសតវត្សរ៍ទី២១។</p>
-          <div class="p-3 bg-sky-50 rounded-xl border border-sky-100 text-xs text-sky-800">
-            <strong>កំណត់សម្គាល់គរុកោសល្យ៖</strong> លោកគ្រូ-អ្នកគ្រូអាចទាញយកសន្លឹកកិច្ចការបន្ថែមពីផ្ទាំងឯកសារភ្ជាប់ ដើម្បីឱ្យសិស្សអនុវត្តជាក្រុម។
-          </div>
-        `;
-      }
+      <div class="lg:col-span-4 space-y-6">
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+          <h4 class="font-serifKhmer text-base font-bold mb-4 pb-3 border-b border-slate-100"><i class="bi bi-info-square text-sky-600"></i> ព័ត៌មានបច្ចេកទេស</h4>
+          <ul class="space-y-3 text-xs text-slate-600">
+            <li class="flex justify-between"><span class="text-slate-400">លេខកូដ (ID):</span><span id="detail-meta-id" class="font-semibold text-slate-800"></span></li>
+            <li class="flex justify-between"><span class="text-slate-400">ប្រភេទ៖</span><span id="detail-meta-type" class="font-semibold text-slate-800"></span></li>
+            <li class="flex justify-between"><span class="text-slate-400">ភាសា៖</span><span class="font-semibold text-slate-800">ភាសាខ្មែរ (Khmer)</span></li>
+            <li class="flex justify-between"><span class="text-slate-400">ការទាញយក៖</span><span id="detail-meta-downloads" class="font-semibold text-slate-800"></span></li>
+          </ul>
+          <button onclick="downloadBookPdf()" class="mt-5 w-full py-2.5 rounded-xl border border-sky-500 text-sky-600 hover:bg-sky-50 font-semibold text-xs"><i class="bi bi-download"></i> ទាញយក PDF</button>
+        </div>
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+          <h4 class="font-serifKhmer text-base font-bold mb-4 pb-3 border-b border-slate-100"><i class="bi bi-collection text-amber-500"></i> ស្នាដៃស្រដៀងគ្នា</h4>
+          <div id="related-items-container" class="space-y-3.5"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
 
-      // Smooth reset scroll on stage
-      document.getElementById('reader-stage-container').scrollTop = 0;
-    }
+<!-- FOOTER -->
+<footer id="footer" class="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-xl bg-sky-600 flex items-center justify-center text-white"><i class="bi bi-mortarboard-fill text-xl"></i></div><span class="font-serifKhmer text-xl font-bold text-white">សាលាឌីជីថល</span></div>
+        <p class="text-xs text-slate-400 leading-relaxed">ថ្នាលរៀនសូត្រ និងបណ្ណាល័យឌីជីថលបើកចំហ ក្រោមការគាំទ្រពីក្រសួងអប់រំ យុវជន និងកីឡា។</p>
+      </div>
+      <div>
+        <h4 class="font-serifKhmer text-sm font-bold text-white mb-4">អភិបាលកិច្ចអប់រំ</h4>
+        <ul class="space-y-2.5 text-xs"><li><a href="https://moeys.gov.kh" target="_blank" rel="noopener" class="hover:text-sky-400"><i class="bi bi-box-arrow-up-right"></i> គេហទំព័រក្រសួងអប់រំ (MoEYS)</a></li></ul>
+      </div>
+      <div>
+        <h4 class="font-serifKhmer text-sm font-bold text-white mb-4">បណ្តាញសង្គមផ្លូវការ</h4>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <a href="javascript:void(0)" onclick="showToast('Facebook','bi-facebook')" class="p-2 rounded-xl bg-slate-800/80 hover:bg-sky-600/30"><i class="bi bi-facebook text-sky-400"></i> Facebook</a>
+          <a href="javascript:void(0)" onclick="showToast('YouTube','bi-youtube')" class="p-2 rounded-xl bg-slate-800/80 hover:bg-rose-600/30"><i class="bi bi-youtube text-rose-500"></i> YouTube</a>
+          <a href="javascript:void(0)" onclick="showToast('Telegram','bi-telegram')" class="p-2 rounded-xl bg-slate-800/80 hover:bg-sky-500/30"><i class="bi bi-telegram text-sky-400"></i> Telegram</a>
+          <a href="javascript:void(0)" onclick="showToast('TikTok','bi-tiktok')" class="p-2 rounded-xl bg-slate-800/80 hover:bg-pink-600/30"><i class="bi bi-tiktok text-pink-400"></i> TikTok</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-serifKhmer text-sm font-bold text-white mb-4">ដៃគូសហការ</h4>
+        <div class="flex flex-wrap gap-2.5"><span class="px-3 py-1.5 rounded-lg bg-slate-800 text-[11px]">MoEYS</span><span class="px-3 py-1.5 rounded-lg bg-slate-800 text-[11px]">KOOMPI</span><span class="px-3 py-1.5 rounded-lg bg-slate-800 text-[11px]">ADB</span><span class="px-3 py-1.5 rounded-lg bg-slate-800 text-[11px]">SDC Switzerland</span></div>
+      </div>
+    </div>
+    <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+      <p>គ្រប់គ្រងដោយ <strong>ក្រសួងអប់រំ យុវជន និងកីឡា</strong> — រក្សាសិទ្ធិគ្រប់យ៉ាង © ២០២៦</p>
+      <button onclick="scrollToTop()" class="hover:text-sky-400"><i class="bi bi-arrow-up-circle"></i> ឡើងលើបង្អស់</button>
+    </div>
+  </div>
+</footer>
 
-    function prevReaderPage() {
-      if (currentReaderPage > 1) {
-        currentReaderPage--;
-        updateReaderPageDisplay();
-      } else {
-        showToast('លោកអ្នកកំពុងស្ថិតនៅទំព័រដំបូងបង្អស់', 'bi-info-circle');
-      }
-    }
+<!-- ========== PDF READER MODAL ========== -->
+<div id="reader-modal" class="fixed inset-0 z-50 hidden flex-col bg-slate-950 text-white">
+  <div class="h-16 px-4 sm:px-6 bg-slate-900 border-b border-slate-800 flex items-center justify-between gap-4 shrink-0">
+    <div class="flex items-center gap-3 min-w-0">
+      <button onclick="closeReaderModal()" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center shrink-0"><i class="bi bi-x-lg text-sm"></i></button>
+      <div class="min-w-0">
+        <h3 id="reader-modal-title" class="font-serifKhmer text-sm sm:text-base font-bold truncate"></h3>
+        <p id="reader-modal-author" class="text-[11px] text-slate-400 truncate"></p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 sm:gap-4 shrink-0">
+      <div class="hidden sm:flex items-center bg-slate-800 rounded-xl px-2 py-1 text-xs">
+        <button onclick="changeReaderZoom(-0.1)" class="p-1.5 hover:text-sky-400"><i class="bi bi-zoom-out"></i></button>
+        <span id="reader-zoom-level" class="px-2 font-medium">100%</span>
+        <button onclick="changeReaderZoom(0.1)" class="p-1.5 hover:text-sky-400"><i class="bi bi-zoom-in"></i></button>
+      </div>
+      <button onclick="toggleReaderFullscreen()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs"><i class="bi bi-arrows-fullscreen"></i></button>
+      <button onclick="downloadBookPdf()" class="px-3.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-xs font-semibold"><i class="bi bi-download"></i> <span class="hidden sm:inline">ទាញយក PDF</span></button>
+    </div>
+  </div>
 
-    function nextReaderPage() {
-      const total = currentBook ? (currentBook.pages || 24) : 24;
-      if (currentReaderPage < total) {
-        currentReaderPage++;
-        updateReaderPageDisplay();
-      } else {
-        showToast('លោកអ្នកបានមកដល់ទំព័របញ្ចប់នៃឯកសារ', 'bi-check2-circle');
-      }
-    }
+  <div id="reader-stage-container" class="flex-1 overflow-auto p-4 sm:p-8 bg-slate-900/50 flex">
+    <div id="pdf-loading" class="m-auto text-slate-300 text-sm"><i class="bi bi-arrow-repeat inline-block animate-spin"></i> កំពុងផ្ទុកឯកសារ PDF...</div>
+    <canvas id="pdf-canvas" class="hidden m-auto bg-white rounded-lg shadow-2xl"></canvas>
+    <iframe id="pdf-iframe" class="hidden m-auto bg-white rounded-lg w-full max-w-4xl h-full"></iframe>
+  </div>
 
-    function changeReaderZoom(delta) {
-      currentReaderZoom = Math.max(0.7, Math.min(1.5, currentReaderZoom + delta));
-      const paper = document.getElementById('reader-paper');
-      if (paper) {
-        paper.style.transform = `scale(${currentReaderZoom})`;
-      }
-      document.getElementById('reader-zoom-level').innerText = `${Math.round(currentReaderZoom * 100)}%`;
-    }
+  <div class="h-16 px-6 bg-slate-900/90 border-t border-slate-800 flex items-center justify-center gap-4 shrink-0">
+    <button onclick="prevReaderPage()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold"><i class="bi bi-chevron-left"></i> ទំព័រមុន</button>
+    <div class="flex items-center gap-2 text-xs"><span id="reader-current-page-txt" class="font-bold text-sky-400">1</span><span class="text-slate-500">/</span><span id="reader-total-pages-txt">-</span></div>
+    <button onclick="nextReaderPage()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold">ទំព័របន្ទាប់ <i class="bi bi-chevron-right"></i></button>
+  </div>
+</div>
 
-    function toggleReaderFullscreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
-      }
-    }
+<!-- LOGIN MODAL -->
+<div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+  <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 modal-enter">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="font-serifKhmer text-lg font-bold">ចូលគណនីសាលាឌីជីថល</h3>
+      <button onclick="closeModal('login-modal')" class="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <form onsubmit="handleLoginSubmit(event)" class="space-y-4 text-xs">
+      <div><label class="block font-medium mb-1">អ៊ីមែល ឬលេខទូរស័ព្ទ</label><input type="text" required placeholder="user@domain.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+      <div><label class="block font-medium mb-1">ពាក្យសម្ងាត់</label><input type="password" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-sky-500"></div>
+      <button type="submit" class="w-full py-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold">ចូលគណនី</button>
+    </form>
+    <div class="mt-4 pt-4 border-t border-slate-100 text-center text-xs text-slate-500">មិនទាន់មានគណនី? <button onclick="closeModal('login-modal');openModal('register-school-modal')" class="text-sky-600 font-semibold">ចុះឈ្មោះថ្មី</button></div>
+  </div>
+</div>
 
-    function previewChapter(title, num, previewEnc) {
-      const preview = decodeURIComponent(previewEnc);
-      launchInteractiveReader();
-      document.getElementById('reader-page-badge').innerText = num;
-      document.getElementById('reader-page-heading').innerText = title;
-      document.getElementById('reader-page-body-text').innerHTML = `
-        <p class="text-sm text-slate-800 leading-relaxed font-medium">${preview}</p>
-        <p class="text-xs text-slate-600 mt-3">លោកអ្នកអាចចុច "ទំព័របន្ទាប់" ឬទាញយកឯកសារ PDF ពេញលេញដើម្បីអានជំពូកនេះយ៉ាងក្បោះក្បាយ។</p>
-      `;
-    }
+<!-- REGISTER SCHOOL MODAL -->
+<div id="register-school-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+  <div class="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6 modal-enter">
+    <div class="flex justify-between items-center mb-5">
+      <h3 class="font-serifKhmer text-lg font-bold">ស្នើសុំបង្កើតទំព័រសាលារៀន</h3>
+      <button onclick="closeModal('register-school-modal')" class="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-400"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <form onsubmit="handleSchoolRegisterSubmit(event)" class="space-y-3.5 text-xs">
+      <div><label class="block font-medium mb-1">ឈ្មោះសាលារៀន ឬស្ថាប័នអប់រំ</label><input type="text" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="block font-medium mb-1">រាជធានី / ខេត្ត</label><select class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-white"><option>ភ្នំពេញ</option><option>បាត់ដំបង</option><option>សៀមរាប</option><option>ប៉ៃលិន</option><option>កណ្តាល</option><option>ខេត្តផ្សេងទៀត</option></select></div>
+        <div><label class="block font-medium mb-1">លេខទូរស័ព្ទ</label><input type="tel" required placeholder="012 xxx xxx" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
+      </div>
+      <div><label class="block font-medium mb-1">អ៊ីមែលផ្លូវការរបស់សាលា</label><input type="email" required placeholder="school@moeys.edu.kh" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"></div>
+      <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold">ដាក់ពាក្យស្នើសុំ</button>
+    </form>
+  </div>
+</div>
 
-    // ================= COMMENTS & INTERACTION =================
-    function setCommentRating(stars) {
-      selectedRating = stars;
-      const icons = document.querySelectorAll('#review-star-selector i');
-      icons.forEach((ic, idx) => {
-        if (idx < stars) {
-          ic.className = 'bi bi-star-fill cursor-pointer';
-        } else {
-          ic.className = 'bi bi-star cursor-pointer text-slate-300';
-        }
-      });
-    }
+<script>
+// ================= DATA =================
+const AVATAR_SALA = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop";
+const AVATAR_PAILIN = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS49pch7VFU9jqyGnh15p3WqhNQlqa_TveMMSxu5E3H8nGR13fJa84IUlc&s=10";
 
-    function submitUserComment() {
-      const input = document.getElementById('user-comment-input');
-      const text = input ? input.value.trim() : '';
+// ★ PDF នៃសៀវភៅនីមួយៗ — ដាក់ឯកសារ PDF នៅក្បែរ index.html (ឬក្នុងថត /pdf/)
+//   បន្ថែមសៀវភៅផ្សេងទៀតដោយបន្ថែមបន្ទាត់ថ្មីនៅទីនេះ
+const PDF_FILES = {
+  "book-3": { url: "2025-06-26-00006706.pdf", downloadName: "How-to-Use-AI-for-Lesson-Preparation.pdf" }
+};
 
-      if (!text) {
-        showToast('សូមបញ្ចូលមតិយោបល់របស់អ្នកមុននឹងផ្ញើ', 'bi-exclamation-circle');
-        return;
-      }
+const BOOKS_DATA = [
+  { id:"book-1", title:"ឧត្តមានុវត្តន៍នៃការអនុវត្ត គម្រោងអភិវឌ្ឍន៍វិស័យអប់រំ ថ្នាក់ជាតិ", subtitle:"យុទ្ធសាស្ត្រគន្លឹះ និងគំរូជោគជ័យក្នុងការធ្វើកំណែទម្រង់សាលារៀននៅកម្ពុជា",
+    author:"សាលា ឌីជីថល", authorRole:"ថ្នាលស្រាវជ្រាវគរុកោសល្យជាតិ", authorAvatar:AVATAR_SALA, type:"pedagogy", categoryName:"គម្រោងអភិវឌ្ឍន៍", categoryBadgeClass:"bg-sky-600",
+    views:"497", downloads:"185", rating:"4.9", pages:86, fileSize:"12.4 MB", date:"ខែមករា ២០២៦",
+    image:"https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=600&auto=format&fit=crop",
+    description:"សៀវភៅណែនាំស្តីពីឧត្តមានុវត្តន៍នៃការអនុវត្តគម្រោងអភិវឌ្ឍន៍វិស័យអប់រំ ផ្តោតលើការកសាងសមត្ថភាពគ្រូបង្រៀន និងការវាយតម្លៃស្តង់ដារគុណភាពអប់រំកម្រិតមូលដ្ឋាន។",
+    objectives:["យល់ច្បាស់ពីក្របខ័ណ្ឌវាយតម្លៃគុណភាពសាលារៀន","របៀបរៀបចំផែនការអភិវឌ្ឍន៍សាលារៀនប្រចាំឆ្នាំ (SIP)","យន្តការតាមដានការបង្រៀនដោយតម្លាភាព","ការកៀរគរសហគមន៍ចូលរួមអភិវឌ្ឍសាលា"],
+    chapters:[{num:"ជំពូកទី ១",title:"សេចក្តីផ្តើម និងបរិបទនៃការអភិវឌ្ឍអប់រំ",duration:"១៥ នាទី",preview:"ទិដ្ឋភាពទូទៅនៃផែនការយុទ្ធសាស្ត្រវិស័យអប់រំ ២០២៤-២០២៨។"},{num:"ជំពូកទី ២",title:"ការគ្រប់គ្រងតាមបែបវិមជ្ឈការនៅកម្រិតសាលា",duration:"២០ នាទី",preview:"ការផ្ទេរអំណាច និងការទទួលខុសត្រូវដល់គណៈគ្រប់គ្រងសាលា។"}],
+    resources:[{name:"គំរូទម្រង់ផែនការអភិវឌ្ឍន៍សាលា (DOCX)",size:"2.1 MB",type:"DOCX"}],
+    comments:[{name:"លោកគ្រូ សុខុម",date:"២ ថ្ងៃមុន",rating:5,comment:"ខ្លឹមសារល្អណាស់ និងងាយស្រួលយល់!"}] },
+  { id:"book-2", title:"ភាពជាអ្នកដឹកនាំ ៥ កម្រិត សម្រាប់អ្នកគ្រប់គ្រងសាលារៀន", subtitle:"ដំណើរឆ្ពោះទៅកាន់ភាពជាអ្នកដឹកនាំដ៏មានឥទ្ធិពល និងការកសាងក្រុមការងារអប់រំរឹងមាំ",
+    author:"វិទ្យាល័យ ហ៊ុន សែន ក្រុងទេពនិម្មិត ប៉ៃលិន", authorRole:"សាលារៀនគំរូកម្រិតជាតិ", authorAvatar:AVATAR_PAILIN, type:"book", categoryName:"ភាពជាអ្នកដឹកនាំ", categoryBadgeClass:"bg-emerald-600",
+    views:"372", downloads:"142", rating:"4.8", pages:64, fileSize:"9.2 MB", date:"ខែមករា ២០២៦",
+    image:"https://api.saladigital.org/public/orgs/68380d3adaae3dc94ef0e1f6/images/6374915e-8810-480f-85fb-efcb611599f9.PNG",
+    description:"សៀវភៅណែនាំពីរបៀបកសាងឥទ្ធិពល និងការដឹកនាំស្ថាប័នអប់រំឲ្យទទួលបានជោគជ័យតាមកម្រិតទាំងប្រាំ។",
+    objectives:["ស្វែងយល់ពីកម្រិតទាំង ៥ នៃភាពជាអ្នកដឹកនាំ","បច្ចេកទេសលើកទឹកចិត្តគ្រូបង្រៀន"],
+    chapters:[{num:"កម្រិតទី ១",title:"តួនាទី (Position)",duration:"១០ នាទី",preview:"ដែនកំណត់នៃភាពជាអ្នកដឹកនាំផ្អែកលើអំណាចផ្លូវការ។"},{num:"កម្រិតទី ២",title:"ការយល់ព្រម (Permission)",duration:"១៥ នាទី",preview:"ការកសាងមិត្តភាព និងការយល់ចិត្តក្នុងចំណោមសហការី។"}],
+    resources:[{name:"តារាងវាយតម្លៃកម្រិតដឹកនាំខ្លួនឯង (PDF)",size:"1.1 MB",type:"PDF"}],
+    comments:[{name:"អ្នកគ្រូ ចិន្តា",date:"៥ ថ្ងៃមុន",rating:5,comment:"ងាយយល់ និងត្រូវចំចំណុចដែលសាលាកំពុងជួបប្រទះ។"}] },
+  { id:"book-3", title:"របៀបប្រើបញ្ញាសិប្បនិម្មិត (AI) ជាជំនួយក្នុងការរៀបចំប្លង់មេរៀន", subtitle:"បច្ចេកទេសប្រើ Prompts, ChatGPT និង Copilot ដើម្បីរៀបចំកិច្ចតែងការបង្រៀនបានលឿន និងច្នៃប្រឌិត",
+    author:"វិទ្យាល័យ ហ៊ុន សែន ក្រុងទេពនិម្មិត ប៉ៃលិន", authorRole:"ក្រុមការងារនវានុវត្តន៍ AI", authorAvatar:AVATAR_PAILIN, type:"lesson", categoryName:"AI & នវានុវត្តន៍", categoryBadgeClass:"bg-indigo-600",
+    views:"840", downloads:"620", rating:"5.0", pages:45, fileSize:"8.1 MB", date:"ខែកុម្ភៈ ២០២៦",
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLWNpUMIJhK1MYQv8BY_vrAnDkqNO4z4DYI9CvSnbikSEjXuK2Sbpk8Ag&s=10",
+    description:"ការណែនាំពីបច្ចេកទេស Prompts និងបញ្ញាសិប្បនិម្មិត (AI) ដើម្បីជួយលោកគ្រូអ្នកគ្រូកាត់បន្ថយពេលវេលារៀបចំកិច្ចតែងការបង្រៀន បង្កើតសន្លឹកកិច្ចការឆ្លាតវៃ និងលំហាត់ស្ទង់កម្រិតសិស្សដោយស្វ័យប្រវត្តិ។",
+    objectives:["ចេះប្រើ Prompt Engineering សម្រាប់តម្រូវការគរុកោសល្យ","បង្កើតកិច្ចតែងការបង្រៀនក្នុងរយៈពេលក្រោម ១០ នាទី","ការបង្កើតសន្លឹកកិច្ចការ និងកម្រងសំណួរស្វ័យប្រវត្តិ","ការយល់ដឹងពីក្រមសីលធម៌ និងឯកជនភាពសិស្ស"],
+    chapters:[{num:"ជំពូកទី ១",title:"មូលដ្ឋានគ្រឹះនៃ AI ក្នុងថ្នាក់រៀន",duration:"១៥ នាទី",preview:"តើ AI អាចជួយអ្វីខ្លះដល់គ្រូបង្រៀន?"},{num:"ជំពូកទី ២",title:"AI Tools សម្រាប់បង្កើតផែនការមេរៀន",duration:"២០ នាទី",preview:"MagicSchool AI, Education Copilot, Curipod, Diffit។"},{num:"ជំពូកទី ៣",title:"របៀបសរសេរ Prompts មានប្រសិទ្ធភាព",duration:"១៨ នាទី",preview:"គំរូ Prompts សម្រាប់មុខវិជ្ជាផ្សេងៗ។"}],
+    resources:[{name:"សៀវភៅ AI ជំនួយការរៀបចំមេរៀន (PDF)",size:"8.1 MB",type:"PDF"}],
+    comments:[{name:"លោកគ្រូ រតនា",date:"ម្សិលមិញ",rating:5,comment:"អស្ចារ្យណាស់! ពីមុនចំណាយ ៣ ម៉ោង ឥឡូវសល់ត្រឹម ២០ នាទី។"},{name:"អ្នកគ្រូ ធីតា",date:"៣ ថ្ងៃមុន",rating:5,comment:"បច្ចេកទេស Prompts ច្បាស់លាស់ និងត្រូវនឹងកម្មវិធីសិក្សាជាតិ។"}] },
+  { id:"book-4", title:"សៀវភៅណែនាំគ្រូបង្រៀនភាសាខ្មែរ កម្រិតមធ្យមសិក្សា", subtitle:"វិធីសាស្ត្របង្រៀនអក្សរសិល្ប៍ វេយ្យាករណ៍ និងការតែងសេចក្តីបែបសកម្ម",
+    author:"ក្រសួងអប់រំ យុវជន និងកីឡា", authorRole:"នាយកដ្ឋានអភិវឌ្ឍន៍កម្មវិធីសិក្សា", authorAvatar:AVATAR_SALA, type:"pedagogy", categoryName:"ភាសាខ្មែរ", categoryBadgeClass:"bg-amber-600",
+    views:"612", downloads:"530", rating:"4.9", pages:110, fileSize:"15.3 MB", date:"ខែធ្នូ ២០២៥",
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPl9A__1hBLULCmBsUjTJ9b606eyUAPvaKB7BJW6GI-WnsVa7-f3ZyA6EF&s=10",
+    description:"សៀវភៅគោលគរុកោសល្យ និងវិធីសាស្ត្រពន្យល់វេយ្យាករណ៍ខ្មែរឲ្យសិស្សយល់លឿន រួមទាំងបច្ចេកទេសវិភាគអក្សរសិល្ប៍។",
+    objectives:["ពង្រឹងការបង្រៀនវេយ្យាករណ៍ខ្មែរតាមវិធីសាស្ត្រវិចារវិភាគ","ការណែនាំជំហាននៃការសរសេរតែងសេចក្តី"],
+    chapters:[{num:"ជំពូកទី ១",title:"គោលការណ៍គ្រឹះនៃការបង្រៀនភាសាខ្មែរ",duration:"២០ នាទី",preview:"ការរួមបញ្ចូលការស្តាប់ ការនិយាយ ការអាន និងការសរសេរ។"}],
+    resources:[{name:"គំរូកិច្ចតែងការបង្រៀនភាសាខ្មែរ (PDF)",size:"4.2 MB",type:"PDF"}],
+    comments:[{name:"លោកគ្រូ គឹមសាន",date:"៤ ថ្ងៃមុន",rating:5,comment:"ជាកម្រងឯកសារមានប្រយោជន៍ក្រៃលែងសម្រាប់គ្រូបង្រៀន។"}] },
+  { id:"book-5", title:"ផ្តោតលើកិច្ចការមួយ (Deep Work & Productivity) សម្រាប់សិស្ស-និស្សិត", subtitle:"របៀបពង្រឹងការផ្តោតអារម្មណ៍ និងកម្ចាត់ភាពរំខានក្នុងយុគសម័យឌីជីថល",
+    author:"សាលា ឌីជីថល", authorRole:"ផ្នែកជំនាញទន់ & ផលិតភាព", authorAvatar:AVATAR_SALA, type:"book", categoryName:"ស្វ័យអភិវឌ្ឍន៍", categoryBadgeClass:"bg-rose-600",
+    views:"926", downloads:"810", rating:"4.9", pages:78, fileSize:"7.5 MB", date:"ខែមករា ២០២៦",
+    image:"https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=600&auto=format&fit=crop",
+    description:"សៀវភៅស្តីពីថាមពលនៃការផ្តោតលើកិច្ចការមួយក្នុងពេលតែមួយ ការរៀបចំកាលវិភាគសិក្សា និងការកាត់បន្ថយការញៀនទូរស័ព្ទ។",
+    objectives:["យល់ពីយន្តការខួរក្បាលក្នុងការផ្តោតអារម្មណ៍","បច្ចេកទេស Pomodoro និង Time Blocking"],
+    chapters:[{num:"ជំពូកទី ១",title:"មូលហេតុដែលយើងងាយបាត់បង់ការផ្តោតអារម្មណ៍",duration:"១៥ នាទី",preview:"ឥទ្ធិពលនៃការជូនដំណឹងទូរស័ព្ទលើខួរក្បាល។"}],
+    resources:[{name:"តារាងតាមដានទម្លាប់ប្រចាំថ្ងៃ (PDF)",size:"900 KB",type:"PDF"}],
+    comments:[{name:"និស្សិត សីហា",date:"១ សប្តាហ៍មុន",rating:5,comment:"ជួយដល់ការរៀនរបស់ខ្ញុំខ្លាំងណាស់។"}] },
+  { id:"book-6", title:"សទ្ទានុក្រម វិទ្យាសាស្រ្តនយោបាយ និងទំនាក់ទំនងអន្តរជាតិ", subtitle:"ការប្រមូលផ្តុំពាក្យបច្ចេកទេស និងនិយមន័យសំខាន់ៗជាភាសាខ្មែរ-អង់គ្លេស",
+    author:"សាលា ឌីជីថល", authorRole:"ផ្នែកស្រាវជ្រាវវិទ្យាសាស្ត្រសង្គម", authorAvatar:AVATAR_SALA, type:"book", categoryName:"វិទ្យាសាស្ត្រនយោបាយ", categoryBadgeClass:"bg-sky-700",
+    views:"714", downloads:"420", rating:"4.7", pages:140, fileSize:"18.2 MB", date:"ខែកុម្ភៈ ២០២៦",
+    image:"https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop",
+    description:"សទ្ទានុក្រមពាក្យគន្លឹះផ្នែកវិទ្យាសាស្ត្រនយោបាយ ទ្រឹស្តីរដ្ឋ និងទំនាក់ទំនងអន្តរជាតិ សម្រាប់និស្សិត។",
+    objectives:["យល់ដឹងពីសទ្ទានុក្រមច្បាប់ និងវិទ្យាសាស្ត្រនយោបាយ","ប្រើពាក្យបច្ចេកទេសក្នុងការសរសេរសារណា"],
+    chapters:[{num:"ផ្នែកទី ១",title:"ពាក្យបច្ចេកទេសទ្រឹស្តីរដ្ឋ និងអធិបតេយ្យភាព",duration:"៣០ នាទី",preview:"និយមន័យនៃអំណាច និងស្ថាប័នរដ្ឋ។"}],
+    resources:[{name:"សទ្ទានុក្រមពេញលេញ (PDF)",size:"18.2 MB",type:"PDF"}],
+    comments:[{name:"និស្សិត ចាន់រ៉ា",date:"៥ ថ្ងៃមុន",rating:5,comment:"មានតម្លៃណាស់សម្រាប់និស្សិតច្បាប់!"}] },
+  { id:"book-7", title:"វិធីស្រាវជ្រាវក្នុងការធ្វើម្ហូបងាយៗ និងវិទ្យាសាស្ត្រចំណីអាហារ", subtitle:"ការបញ្ចូលការរៀនបែប STEM និងគីមីចំណីអាហារក្នុងជីវភាពប្រចាំថ្ងៃ",
+    author:"វិទ្យាល័យ ហ៊ុន សែន ក្រុងទេពនិម្មិត ប៉ៃលិន", authorRole:"ក្លឹបយុវជន STEM", authorAvatar:AVATAR_PAILIN, type:"lesson", categoryName:"ជីវវិទ្យា & STEM", categoryBadgeClass:"bg-amber-600",
+    views:"580", downloads:"310", rating:"4.8", pages:45, fileSize:"6.8 MB", date:"ខែមករា ២០២៦",
+    image:"https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600&auto=format&fit=crop",
+    description:"សៀវភៅពិសោធន៍វិទ្យាសាស្ត្រក្នុងផ្ទះបាយ ដែលភ្ជាប់ទំនាក់ទំនងរវាងគីមីវិទ្យា ជីវវិទ្យា និងអាហារូបត្ថម្ភ។",
+    objectives:["ស្វែងយល់ពីប្រតិកម្មគីមីក្នុងការចម្អិនអាហារ","យល់ពីអាហារូបត្ថម្ភ និងសុវត្ថិភាពចំណីអាហារ"],
+    chapters:[{num:"មេរៀនទី ១",title:"វិទ្យាសាស្ត្រនៃកម្តៅ និងការចម្អិន",duration:"១៥ នាទី",preview:"ប្រតិកម្ម Maillard និងការប្រែប្រួលប្រូតេអ៊ីន។"}],
+    resources:[{name:"សន្លឹកកិច្ចការពិសោធន៍ STEM (PDF)",size:"1.5 MB",type:"PDF"}],
+    comments:[{name:"កញ្ញា ស្រីនិច",date:"២ សប្តាហ៍មុន",rating:5,comment:"ប្អូនៗរៀន STEM ដោយសប្បាយរីករាយ។"}] },
+  { id:"book-8", title:"វិធីសាស្ត្រគ្រប់គ្រងថ្នាក់រៀនសតវត្សរ៍ទី២១ សម្រាប់លោកគ្រូអ្នកគ្រូ", subtitle:"ការបង្កើតបរិយាកាសសិក្សាវិជ្ជមាន និងការគ្រប់គ្រងវិន័យដោយការយល់ចិត្ត",
+    author:"វិទ្យាស្ថានជាតិអប់រំ", authorRole:"ដេប៉ាតឺម៉ង់គរុកោសល្យជាន់ខ្ពស់", authorAvatar:AVATAR_SALA, type:"pedagogy", categoryName:"វិធីសាស្ត្របង្រៀន", categoryBadgeClass:"bg-purple-600",
+    views:"1140", downloads:"980", rating:"5.0", pages:94, fileSize:"13.8 MB", date:"ខែកុម្ភៈ ២០២៦",
+    image:"https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=600&auto=format&fit=crop",
+    description:"យុទ្ធសាស្ត្រគ្រប់គ្រងថ្នាក់រៀនទំនើប ដែលប្តូរពីការដាក់ពិន័យមកជាការបណ្តុះវិន័យវិជ្ជមាន។",
+    objectives:["បង្កើតកិច្ចព្រមព្រៀងថ្នាក់រៀនជាមួយសិស្ស","ប្រើឧបករណ៍ឌីជីថលក្នុងថ្នាក់"],
+    chapters:[{num:"ជំពូកទី ១",title:"មូលដ្ឋានគ្រឹះនៃវិន័យវិជ្ជមាន",duration:"២០ នាទី",preview:"ភាពខុសគ្នារវាងការដាក់ទណ្ឌកម្ម និងការបណ្តុះវិន័យ។"}],
+    resources:[{name:"គំរូប័ណ្ណកិច្ចព្រមព្រៀងថ្នាក់រៀន (PDF)",size:"1.2 MB",type:"PDF"}],
+    comments:[{name:"លោកគ្រូ ប៊ុនធឿន",date:"១ សប្តាហ៍មុន",rating:5,comment:"បានផ្លាស់ប្តូរបរិយាកាសថ្នាក់រៀនរបស់ខ្ញុំទាំងស្រុង!"}] }
+];
 
-      if (currentBook) {
-        if (!currentBook.comments) currentBook.comments = [];
-        currentBook.comments.unshift({
-          name: "អ្នកប្រើប្រាស់ សាលាឌីជីថល",
-          date: "អម្បាញ់មិញ",
-          rating: selectedRating,
-          comment: text
-        });
+const SCHOOLS = [
+  {name:"ចំរូង៖ អភិបាលកិច្ច និងសុវត្ថិភាព", logo:"https://api.saladigital.org/public/orgs/63fc7c5751508ff62e6ce857/images/1f658914-aa1b-4242-9452-85d6831bfa83.png", grad:"from-sky-600 to-indigo-700", stats:["1 សំណាក់","10 មេរៀន"], desc:"សូមអញ្ជើញចូលរួមសិក្សាផ្នែកសុវត្ថិភាពបច្ចេកវិទ្យា ការពារខ្លួន និងការគ្រប់គ្រងទិន្នន័យផ្ទាល់ខ្លួនលើអនឡាញ។"},
+  {name:"វិទ្យាល័យ ហ៊ុន សែន ក្រុងទេពនិម្មិត ប៉ៃលិន", logo:AVATAR_PAILIN, grad:"from-emerald-600 to-teal-700", stats:["1,420 សិស្ស","45 មេរៀន"], desc:"សាលារៀនជំនាន់ថ្មីឈានមុខផ្នែកគរុកោសល្យ និងការបញ្ចូលបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិតក្នុងការបង្រៀន។"},
+  {name:"វិទ្យាស្ថានបច្ចេកវិទ្យាឌីជីថល (IDT)", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgfMT4CGE39U56esmSj2wbNPJ8erniji4DA0tV2NA82gW910M9Mw8bgag&s=10", grad:"from-amber-600 to-orange-700", stats:["890 នាក់","28 មេរៀន"], desc:"ថ្នាលបណ្តុះបណ្តាលជំនាញកូដ បច្ចេកវិទ្យាព័ត៌មានវិទ្យា និងស្វ័យប្រវត្តិកម្មសម្រាប់គ្រូជំនាន់ថ្មី។"}
+];
 
-        renderCommentsList();
-        document.getElementById('tab-reviews-count').innerText = currentBook.comments.length;
-        input.value = '';
-        showToast('បានបញ្ជូនមតិយោបល់របស់អ្នកជោគជ័យ!', 'bi-chat-check-fill');
-      }
-    }
+let currentBook = null;
+let selectedRating = 5;
 
-    function toggleFollowAuthor(btn) {
-      if (btn.classList.contains('bg-sky-600/80')) {
-        btn.classList.remove('bg-sky-600/80');
-        btn.classList.add('bg-emerald-600');
-        btn.innerHTML = '<i class="bi bi-check2"></i> បានតាមដាន';
-        showToast('បានចុះឈ្មោះតាមដានស្ថាប័ននេះជោគជ័យ!', 'bi-person-check-fill');
-      } else {
-        btn.classList.add('bg-sky-600/80');
-        btn.classList.remove('bg-emerald-600');
-        btn.innerHTML = '+ តាមដាន';
-        showToast('បានឈប់តាមដាន', 'bi-person-dash');
-      }
-    }
+// ================= INIT & ROUTING =================
+window.addEventListener('DOMContentLoaded', () => { renderCards(); renderSchools(); animateCounters(); handleHashRouting(); });
+window.addEventListener('hashchange', handleHashRouting);
 
-    function toggleDetailBookmark() {
-      const btn = document.getElementById('detail-bookmark-btn');
-      const icon = btn.querySelector('i');
-      if (icon.classList.contains('bi-bookmark')) {
-        icon.classList.remove('bi-bookmark');
-        icon.classList.add('bi-bookmark-fill', 'text-amber-400');
-        showToast('បានរក្សាទុកក្នុងបញ្ជីសៀវភៅចំណាំរបស់អ្នក!', 'bi-bookmark-check-fill');
-      } else {
-        icon.classList.add('bi-bookmark');
-        icon.classList.remove('bi-bookmark-fill', 'text-amber-400');
-        showToast('បានដកចេញពីបញ្ជីចំណាំ', 'bi-bookmark-x');
-      }
-    }
+function handleHashRouting() {
+  const hash = window.location.hash;
+  if (hash.startsWith('#detail')) {
+    const id = new URLSearchParams(hash.split('?')[1] || '').get('id');
+    const found = BOOKS_DATA.find(b => b.id === id);
+    if (found) { renderDetailPage(found); return; }
+  }
+  showHomeView();
+}
+function showHomeView() {
+  document.getElementById('home-view').classList.remove('hidden');
+  document.getElementById('detail-view').classList.add('hidden');
+  document.title = "សាលាឌីជីថល - ថ្នាលអប់រំ និងចែករំលែកចំណេះដឹងឌីជីថលកម្ពុជា";
+}
+function navigateToHome() { window.location.hash = ''; showHomeView(); scrollToTop(); }
+function navigateToHomeAndScroll(id) {
+  if (!document.getElementById('detail-view').classList.contains('hidden')) { window.location.hash = ''; showHomeView(); }
+  setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:'smooth'}); }, 60);
+}
+function showDetailPage(id) { window.location.hash = '#detail?id=' + id; }
 
-    function shareCurrentBook() {
-      const shareUrl = window.location.href;
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(shareUrl).then(() => {
-          showToast('បានចម្លងតំណភ្ជាប់សៀវភៅនេះ (Link Copied)!', 'bi-clipboard-check');
-        }).catch(() => {
-          legacyCopy(shareUrl);
-        });
-      } else {
-        legacyCopy(shareUrl);
-      }
-    }
+// ================= HOME RENDER =================
+function renderCards() {
+  document.getElementById('latest-cards-grid').innerHTML = BOOKS_DATA.slice(0,4).map(b => cardHTML(b,false)).join('');
+  document.getElementById('popular-cards-grid').innerHTML = BOOKS_DATA.slice(4,8).map(b => cardHTML(b,true)).join('');
+}
+function cardHTML(b, popular) {
+  return `
+  <div class="book-card group bg-white rounded-2xl border border-slate-200/70 shadow-sm hover:shadow-card-hover hover:-translate-y-1.5 transition-all duration-300 flex flex-col overflow-hidden cursor-pointer"
+       onclick="showDetailPage('${b.id}')" data-title="${b.title}" data-author="${b.author}" data-type="${b.type}">
+    <div class="relative h-56 overflow-hidden card-zoom-wrap bg-slate-100">
+      <img src="${b.image}" alt="${b.title}" class="w-full h-full object-cover card-zoom-img" onerror="this.src='https://placehold.co/400x500/0284c7/ffffff?text=Sala+Digital'">
+      <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg text-[11px] font-semibold text-white shadow-sm ${b.categoryBadgeClass}">${popular ? '#ពេញនិយម • ' : ''}${b.categoryName}</span>
+      <button onclick="bookmarkItem(this,event)" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-slate-600 hover:text-amber-500 flex items-center justify-center shadow"><i class="bi bi-bookmark text-xs"></i></button>
+    </div>
+    <div class="p-4 flex-1 flex flex-col justify-between">
+      <div>
+        <h3 class="font-medium text-slate-800 text-sm line-clamp-2 leading-snug group-hover:text-sky-600 transition">${b.title}</h3>
+        <div class="flex items-center gap-2 mt-3 pt-3 border-t border-slate-100">
+          <img src="${b.authorAvatar}" class="w-6 h-6 rounded-full object-cover" alt="">
+          <span class="text-xs text-slate-600 font-medium truncate">${b.author}</span>
+          <i class="bi bi-patch-check-fill text-sky-500 text-xs ml-auto"></i>
+        </div>
+      </div>
+      <div class="flex items-center justify-between mt-3 text-xs text-slate-400">
+        <span><i class="bi bi-eye"></i> ${b.views} មើល</span>
+        <span class="text-sky-600 font-semibold group-hover:underline">មើលលម្អិត <i class="bi bi-arrow-right"></i></span>
+      </div>
+    </div>
+  </div>`;
+}
+function renderSchools() {
+  document.getElementById('schools-grid').innerHTML = SCHOOLS.map(s => `
+  <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-card-hover transition overflow-hidden flex flex-col">
+    <div class="h-32 bg-gradient-to-r ${s.grad}"></div>
+    <div class="px-6 pb-6 flex-1 flex flex-col">
+      <div class="flex justify-between items-end -mt-10 mb-3">
+        <div class="w-16 h-16 rounded-2xl bg-white p-1 shadow-md border border-slate-100 overflow-hidden"><img src="${s.logo}" class="w-full h-full object-cover rounded-xl" alt=""></div>
+        <button onclick="showToast('បានចុះឈ្មោះតាមដានសាលារួចរាល់!','bi-check2-all')" class="text-xs px-3.5 py-1.5 rounded-full border border-sky-500 text-sky-600 hover:bg-sky-50 font-medium">+ តាមដាន</button>
+      </div>
+      <h3 class="font-serifKhmer text-base font-bold mb-2">${s.name} <i class="bi bi-patch-check-fill text-sky-500 text-sm"></i></h3>
+      <p class="text-xs text-slate-600 leading-relaxed mb-4 line-clamp-2">${s.desc}</p>
+      <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+        <span><i class="bi bi-people"></i> ${s.stats[0]} &nbsp; <i class="bi bi-mortarboard"></i> ${s.stats[1]}</span>
+        <button onclick="showToast('សាលារៀន៖ ${s.name}','bi-building-check')" class="text-sky-600 font-semibold hover:underline">ចូលមើល <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>`).join('');
+}
 
-    function legacyCopy(val) {
-      const t = document.createElement("input");
-      document.body.appendChild(t);
-      t.value = val;
-      t.select();
-      document.execCommand("copy");
-      document.body.removeChild(t);
-      showToast('បានចម្លងតំណភ្ជាប់សៀវភៅនេះ!', 'bi-clipboard-check');
-    }
+// ================= DETAIL =================
+function renderDetailPage(b) {
+  currentBook = b;
+  document.title = b.title + ' - សាលាឌីជីថល';
+  document.getElementById('home-view').classList.add('hidden');
+  document.getElementById('detail-view').classList.remove('hidden');
+  window.scrollTo(0,0);
+  const $ = id => document.getElementById(id);
+  $('detail-breadcrumb-cat').innerText = b.categoryName;
+  $('detail-breadcrumb-title').innerText = b.title;
+  $('detail-hero-backdrop').src = b.image;
+  $('detail-cover-img').src = b.image;
+  $('detail-badge-category').innerText = b.categoryName;
+  $('detail-title').innerText = b.title;
+  $('detail-subtitle').innerText = b.subtitle;
+  $('detail-author-avatar').src = b.authorAvatar;
+  $('detail-author-name').innerText = b.author;
+  $('detail-author-role').innerText = b.authorRole;
+  $('detail-views-count').innerText = b.views;
+  $('detail-rating-score').innerText = b.rating;
+  $('detail-published-date').innerText = b.date;
+  $('detail-pages-count').innerHTML = `<i class="bi bi-layers"></i> ${b.pages} ទំព័រ`;
+  $('detail-file-size').innerHTML = `<i class="bi bi-hdd"></i> ${b.fileSize}`;
+  $('detail-download-count').innerText = b.downloads + '+';
+  $('detail-meta-id').innerText = 'SLD-' + b.id.toUpperCase();
+  $('detail-meta-type').innerText = b.categoryName;
+  $('detail-meta-downloads').innerText = b.downloads + ' លើក';
+  $('detail-overview-text').innerText = b.description;
+  $('detail-objectives-list').innerHTML = b.objectives.map(o => `<div class="flex items-start gap-2.5 p-3 rounded-2xl bg-emerald-50/60 border border-emerald-100 text-xs text-emerald-900"><i class="bi bi-check-circle-fill text-emerald-600 mt-0.5"></i><span>${o}</span></div>`).join('');
+  $('detail-total-chapters-count').innerText = b.chapters.length + ' ជំពូកសរុប';
+  $('detail-chapters-container').innerHTML = b.chapters.map((c,i) => `
+    <div class="p-4 rounded-2xl border border-slate-200/80 hover:border-sky-300 flex items-center justify-between gap-3">
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs shrink-0">${i+1}</div>
+        <div>
+          <div class="flex items-center gap-2"><span class="text-[11px] font-bold text-sky-600">${c.num}</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">${c.duration}</span></div>
+          <h4 class="text-sm font-bold mt-0.5">${c.title}</h4>
+          <p class="text-xs text-slate-500 mt-1">${c.preview}</p>
+        </div>
+      </div>
+      <button onclick="launchInteractiveReader()" class="shrink-0 text-xs px-3.5 py-1.5 rounded-xl border border-slate-200 hover:border-sky-500 text-sky-600 font-semibold"><i class="bi bi-book-half"></i> អាន</button>
+    </div>`).join('');
+  $('detail-resources-list').innerHTML = b.resources.map(r => `
+    <div class="p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between gap-3">
+      <div class="min-w-0"><h5 class="text-xs font-bold truncate">${r.name}</h5><span class="text-[10px] text-slate-400">${r.size} • ${r.type}</span></div>
+      <button onclick="downloadBookPdf()" class="shrink-0 px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold text-xs"><i class="bi bi-download"></i> ទាញយក</button>
+    </div>`).join('');
+  renderCommentsList();
+  $('related-items-container').innerHTML = BOOKS_DATA.filter(x => x.id !== b.id).slice(0,3).map(it => `
+    <div onclick="showDetailPage('${it.id}')" class="flex items-center gap-3 p-2 rounded-2xl hover:bg-slate-50 cursor-pointer">
+      <div class="w-14 h-16 rounded-xl overflow-hidden bg-slate-100 shrink-0"><img src="${it.image}" alt="" class="w-full h-full object-cover"></div>
+      <div class="min-w-0"><span class="text-[10px] font-semibold text-sky-600 block">${it.categoryName}</span><h5 class="text-xs font-bold truncate">${it.title}</h5></div>
+    </div>`).join('');
+  switchDetailTab('overview', document.querySelector('#detail-nav-tabs .detail-tab-btn'));
+}
+function renderCommentsList() {
+  if (!currentBook) return;
+  document.getElementById('tab-reviews-count').innerText = currentBook.comments.length;
+  document.getElementById('detail-comments-container').innerHTML = currentBook.comments.map(c => `
+    <div class="p-4 rounded-2xl bg-white border border-slate-100 shadow-sm space-y-2">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-500 text-white flex items-center justify-center font-bold text-[11px]">${c.name.charAt(0)}</div>
+          <div><h5 class="text-xs font-bold">${c.name}</h5><span class="text-[10px] text-slate-400">${c.date}</span></div>
+        </div>
+        <div class="text-amber-400 text-xs">${'<i class="bi bi-star-fill"></i>'.repeat(c.rating)}</div>
+      </div>
+      <p class="text-xs text-slate-600 leading-relaxed pl-9">${c.comment}</p>
+    </div>`).join('');
+}
+function switchDetailTab(tab, btn) {
+  document.querySelectorAll('.detail-tab-btn').forEach(b => { b.classList.remove('bg-sky-600','text-white'); b.classList.add('text-slate-600'); });
+  btn.classList.add('bg-sky-600','text-white'); btn.classList.remove('text-slate-600');
+  ['overview','syllabus','resources','reviews'].forEach(id => document.getElementById('tab-panel-' + id).classList.toggle('hidden', id !== tab));
+}
 
-    function downloadBookPdf() {
-      showToast(`កំពុងទាញយកឯកសារ PDF... (${currentBook ? currentBook.fileSize : '10 MB'})`, 'bi-cloud-arrow-down-fill');
-    }
+// ================= PDF READER (PDF.js) =================
+const PDFJS_VER = '3.11.174';
+const PDFJS_URL = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VER}/pdf.min.js`;
+const PDFJS_WORKER = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VER}/pdf.worker.min.js`;
+let pdfDoc = null, pdfPage = 1, pdfZoom = 1, pdfRendering = false, pdfPending = null, pdfToken = 0;
 
-    function downloadResource(name) {
-      showToast(`កំពុងទាញយក ${name}`, 'bi-file-earmark-arrow-down');
-    }
+function loadPdfJs() {
+  return new Promise((resolve, reject) => {
+    if (window.pdfjsLib) { pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER; return resolve(pdfjsLib); }
+    const s = document.createElement('script');
+    s.src = PDFJS_URL;
+    s.onload = () => { pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER; resolve(pdfjsLib); };
+    s.onerror = () => reject(new Error('pdf.js load failed'));
+    document.head.appendChild(s);
+  });
+}
 
-    // ================= LIVE SEARCH & FILTER =================
-    function handleLiveSearch(query) {
-      const q = query.toLowerCase().trim();
-      const cards = document.querySelectorAll('.book-card');
-      const clearBtn = document.getElementById('clear-search-btn');
+async function launchInteractiveReader() {
+  if (!currentBook) return;
+  const cfg = PDF_FILES[currentBook.id];
+  if (!cfg) { showToast('សៀវភៅនេះមិនទាន់មានឯកសារ PDF ទេ', 'bi-exclamation-circle'); return; }
 
-      if (clearBtn) {
-        if (q.length > 0) clearBtn.classList.remove('hidden');
-        else clearBtn.classList.add('hidden');
-      }
+  const token = ++pdfToken;
+  pdfDoc = null; pdfPage = 1; pdfZoom = 1; pdfPending = null;
+  document.getElementById('reader-modal-title').innerText = currentBook.title;
+  document.getElementById('reader-modal-author').innerText = currentBook.author + ' • ' + currentBook.categoryName;
+  document.getElementById('reader-zoom-level').innerText = '100%';
+  document.getElementById('reader-current-page-txt').innerText = '1';
+  document.getElementById('reader-total-pages-txt').innerText = '-';
+  document.getElementById('pdf-loading').classList.remove('hidden');
+  document.getElementById('pdf-canvas').classList.add('hidden');
+  document.getElementById('pdf-iframe').classList.add('hidden');
+  document.getElementById('pdf-iframe').src = 'about:blank';
 
-      cards.forEach(card => {
-        const title = (card.getAttribute('data-title') || '').toLowerCase();
-        const author = (card.getAttribute('data-author') || '').toLowerCase();
-        if (title.includes(q) || author.includes(q)) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    }
+  const modal = document.getElementById('reader-modal');
+  modal.classList.remove('hidden'); modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
 
-    function clearSearch() {
-      const input = document.getElementById('global-search');
-      if (input) {
-        input.value = '';
-        handleLiveSearch('');
-      }
-    }
+  try {
+    const lib = await loadPdfJs();
+    const doc = await lib.getDocument(cfg.url).promise;
+    if (token !== pdfToken) return;
+    pdfDoc = doc;
+    document.getElementById('pdf-loading').classList.add('hidden');
+    document.getElementById('pdf-canvas').classList.remove('hidden');
+    document.getElementById('reader-total-pages-txt').innerText = doc.numPages;
+    document.getElementById('detail-pages-count').innerHTML = `<i class="bi bi-layers"></i> ${doc.numPages} ទំព័រ`;
+    renderPdfPage(1);
+  } catch (err) {
+    console.error('PDF.js failed → iframe fallback', err);
+    if (token !== pdfToken) return;
+    document.getElementById('pdf-loading').classList.add('hidden');
+    const f = document.getElementById('pdf-iframe');
+    f.src = cfg.url; f.classList.remove('hidden');
+  }
+}
 
-    function quickFilterSearch(tag) {
-      const input = document.getElementById('global-search');
-      if (input) {
-        input.value = tag;
-        handleLiveSearch(tag);
-      }
-    }
+async function renderPdfPage(n) {
+  if (!pdfDoc) return;
+  if (pdfRendering) { pdfPending = n; return; }
+  pdfRendering = true;
+  try {
+    const page = await pdfDoc.getPage(n);
+    const box = document.getElementById('reader-stage-container');
+    const canvas = document.getElementById('pdf-canvas');
+    const base = page.getViewport({scale:1});
+    const cssScale = (Math.min(box.clientWidth - 32, 900) / base.width) * pdfZoom;
+    const dpr = window.devicePixelRatio || 1;
+    const vp = page.getViewport({scale: cssScale * dpr});
+    canvas.width = vp.width; canvas.height = vp.height;
+    canvas.style.width = (vp.width / dpr) + 'px';
+    canvas.style.height = (vp.height / dpr) + 'px';
+    await page.render({canvasContext: canvas.getContext('2d'), viewport: vp}).promise;
+    box.scrollTop = 0;
+    document.getElementById('reader-current-page-txt').innerText = n;
+  } catch (e) { console.error(e); }
+  finally {
+    pdfRendering = false;
+    if (pdfPending !== null) { const p = pdfPending; pdfPending = null; renderPdfPage(p); }
+  }
+}
 
-    function filterContent(type, btnElement) {
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('bg-sky-600', 'text-white', 'shadow-sm');
-        btn.classList.add('text-slate-600');
-      });
-      btnElement.classList.add('bg-sky-600', 'text-white', 'shadow-sm');
-      btnElement.classList.remove('text-slate-600');
+function prevReaderPage() {
+  if (pdfDoc && pdfPage > 1) { pdfPage--; renderPdfPage(pdfPage); }
+  else showToast('លោកអ្នកកំពុងស្ថិតនៅទំព័រដំបូងបង្អស់', 'bi-info-circle');
+}
+function nextReaderPage() {
+  if (pdfDoc && pdfPage < pdfDoc.numPages) { pdfPage++; renderPdfPage(pdfPage); }
+  else if (pdfDoc) showToast('លោកអ្នកបានមកដល់ទំព័របញ្ចប់នៃឯកសារ', 'bi-check2-circle');
+}
+function changeReaderZoom(d) {
+  pdfZoom = Math.max(0.5, Math.min(2.5, pdfZoom + d));
+  document.getElementById('reader-zoom-level').innerText = Math.round(pdfZoom * 100) + '%';
+  renderPdfPage(pdfPage);
+}
+function closeReaderModal() {
+  pdfToken++;
+  const modal = document.getElementById('reader-modal');
+  modal.classList.add('hidden'); modal.classList.remove('flex');
+  document.getElementById('pdf-iframe').src = 'about:blank';
+  document.body.style.overflow = '';
+}
+function toggleReaderFullscreen() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+  else document.exitFullscreen().catch(() => {});
+}
+window.addEventListener('resize', () => {
+  clearTimeout(window.__rz);
+  window.__rz = setTimeout(() => { if (pdfDoc && !document.getElementById('reader-modal').classList.contains('hidden')) renderPdfPage(pdfPage); }, 200);
+});
 
-      const cards = document.querySelectorAll('.book-card');
-      cards.forEach(card => {
-        const cardType = card.getAttribute('data-type');
-        if (type === 'all' || cardType === type) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    }
+// ================= DOWNLOAD PDF =================
+function downloadBookPdf() {
+  const cfg = currentBook && PDF_FILES[currentBook.id];
+  if (!cfg) { showToast('សៀវភៅនេះមិនទាន់មានឯកសារ PDF ទេ', 'bi-exclamation-circle'); return; }
+  const a = document.createElement('a');
+  a.href = cfg.url;
+  a.download = cfg.downloadName || 'document.pdf';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  showToast('កំពុងទាញយកឯកសារ PDF...', 'bi-cloud-arrow-down-fill');
+}
 
-    // ================= STATS COUNTER ANIMATION =================
-    function animateCounters() {
-      const counters = document.querySelectorAll('.counter');
-      const speed = 60;
+// ================= COMMENTS / INTERACTIONS =================
+function setCommentRating(n) {
+  selectedRating = n;
+  document.querySelectorAll('#review-star-selector i').forEach((ic,i) => ic.className = i < n ? 'bi bi-star-fill cursor-pointer' : 'bi bi-star cursor-pointer text-slate-300');
+}
+function submitUserComment() {
+  const input = document.getElementById('user-comment-input');
+  const text = input.value.trim();
+  if (!text) { showToast('សូមបញ្ចូលមតិយោបល់មុននឹងផ្ញើ', 'bi-exclamation-circle'); return; }
+  currentBook.comments.unshift({name:"អ្នកប្រើប្រាស់ សាលាឌីជីថល", date:"អម្បាញ់មិញ", rating:selectedRating, comment:text});
+  renderCommentsList(); input.value = '';
+  showToast('បានបញ្ជូនមតិយោបល់ជោគជ័យ!', 'bi-chat-check-fill');
+}
+function toggleFollowAuthor(btn) {
+  const on = btn.classList.toggle('bg-emerald-600');
+  btn.classList.toggle('bg-sky-600/80', !on);
+  btn.innerHTML = on ? '<i class="bi bi-check2"></i> បានតាមដាន' : '+ តាមដាន';
+  showToast(on ? 'បានចុះឈ្មោះតាមដានជោគជ័យ!' : 'បានឈប់តាមដាន', on ? 'bi-person-check-fill' : 'bi-person-dash');
+}
+function toggleDetailBookmark() {
+  const icon = document.querySelector('#detail-bookmark-btn i');
+  const on = icon.classList.contains('bi-bookmark');
+  icon.classList.toggle('bi-bookmark', !on); icon.classList.toggle('bi-bookmark-fill', on); icon.classList.toggle('text-amber-400', on);
+  showToast(on ? 'បានរក្សាទុកក្នុងបញ្ជីចំណាំ!' : 'បានដកចេញពីបញ្ជីចំណាំ', on ? 'bi-bookmark-check-fill' : 'bi-bookmark-x');
+}
+function bookmarkItem(btn, ev) {
+  ev.stopPropagation();
+  const icon = btn.querySelector('i');
+  const on = icon.classList.contains('bi-bookmark');
+  icon.classList.toggle('bi-bookmark', !on); icon.classList.toggle('bi-bookmark-fill', on); icon.classList.toggle('text-amber-500', on);
+  showToast(on ? 'បានរក្សាទុកក្នុងបញ្ជីចំណាំ' : 'បានដកចេញពីបញ្ជីចំណាំ', on ? 'bi-bookmark-check-fill' : 'bi-bookmark-x');
+}
+function shareCurrentBook() {
+  const url = window.location.href;
+  const done = () => showToast('បានចម្លងតំណភ្ជាប់!', 'bi-clipboard-check');
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(done).catch(() => legacyCopy(url, done));
+  else legacyCopy(url, done);
+}
+function legacyCopy(v, cb) {
+  const t = document.createElement('input'); document.body.appendChild(t);
+  t.value = v; t.select(); document.execCommand('copy'); document.body.removeChild(t); cb();
+}
 
-      counters.forEach(counter => {
-        const updateCount = () => {
-          const target = +counter.getAttribute('data-target');
-          const count = +counter.innerText.replace(/,/g, '');
-          const increment = Math.ceil(target / speed);
+// ================= SEARCH / FILTER =================
+function handleLiveSearch(q) {
+  q = q.toLowerCase().trim();
+  document.getElementById('clear-search-btn').classList.toggle('hidden', !q);
+  document.querySelectorAll('.book-card').forEach(c => {
+    const hit = (c.dataset.title || '').toLowerCase().includes(q) || (c.dataset.author || '').toLowerCase().includes(q);
+    c.classList.toggle('hidden', !hit);
+  });
+}
+function clearSearch() { document.getElementById('global-search').value = ''; handleLiveSearch(''); }
+function filterContent(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => { b.classList.remove('bg-sky-600','text-white'); b.classList.add('text-slate-600'); });
+  btn.classList.add('bg-sky-600','text-white'); btn.classList.remove('text-slate-600');
+  document.querySelectorAll('.book-card').forEach(c => c.classList.toggle('hidden', !(type === 'all' || c.dataset.type === type)));
+}
 
-          if (count < target) {
-            const nextVal = Math.min(count + increment, target);
-            counter.innerText = nextVal.toLocaleString();
-            setTimeout(updateCount, 25);
-          } else {
-            counter.innerText = target.toLocaleString();
-          }
-        };
-        updateCount();
-      });
-    }
+// ================= UI UTILITIES =================
+function animateCounters() {
+  document.querySelectorAll('.counter').forEach(el => {
+    const target = +el.dataset.target, step = Math.ceil(target / 60);
+    (function tick() {
+      const cur = +el.innerText.replace(/,/g,'');
+      if (cur < target) { el.innerText = Math.min(cur + step, target).toLocaleString(); setTimeout(tick, 25); }
+    })();
+  });
+}
+function openModal(id) {
+  const m = document.getElementById(id);
+  m.classList.remove('hidden'); m.classList.add('flex');
+  setTimeout(() => m.querySelector('.modal-enter').classList.add('modal-enter-active'), 10);
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  const m = document.getElementById(id);
+  m.querySelector('.modal-enter').classList.remove('modal-enter-active');
+  setTimeout(() => { m.classList.add('hidden'); m.classList.remove('flex'); document.body.style.overflow = ''; }, 200);
+}
+function showToast(msg, icon = 'bi-check-circle-fill') {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-message').innerText = msg;
+  document.getElementById('toast-icon').className = `bi ${icon} text-sky-400 text-lg`;
+  t.classList.remove('translate-y-20','opacity-0','pointer-events-none');
+  clearTimeout(window.__toast);
+  window.__toast = setTimeout(() => t.classList.add('translate-y-20','opacity-0','pointer-events-none'), 3500);
+}
+function scrollToTop() { window.scrollTo({top:0, behavior:'smooth'}); }
+function handleLoginSubmit(e) { e.preventDefault(); closeModal('login-modal'); showToast('ចូលគណនីបានជោគជ័យ!', 'bi-person-check-fill'); }
+function handleSchoolRegisterSubmit(e) { e.preventDefault(); closeModal('register-school-modal'); showToast('សំណើបង្កើតសាលាត្រូវបានបញ្ជូនដោយជោគជ័យ!', 'bi-envelope-check-fill'); }
 
-    // ================= GENERAL UI UTILITIES =================
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
-
-    function openModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (!modal) return;
-      modal.classList.remove('hidden');
-      setTimeout(() => {
-        const dialog = modal.querySelector('.modal-enter');
-        if (dialog) dialog.classList.add('modal-enter-active');
-      }, 10);
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (!modal) return;
-      const dialog = modal.querySelector('.modal-enter');
-      if (dialog) dialog.classList.remove('modal-enter-active');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
-      }, 200);
-    }
-
-    function openSchoolModal(name, stats, desc) {
-      showToast(`សាលារៀន៖ ${name}`, 'bi-building-check');
-    }
-
-    function showToast(message, iconClass = 'bi-check-circle-fill') {
-      const toast = document.getElementById('toast');
-      const msg = document.getElementById('toast-message');
-      const icon = document.getElementById('toast-icon');
-
-      if (!toast || !msg) return;
-
-      msg.innerText = message;
-      icon.className = `bi ${iconClass} text-sky-400 text-lg`;
-
-      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-      toast.classList.add('translate-y-0', 'opacity-100');
-
-      setTimeout(() => {
-        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3500);
-    }
-
-    function bookmarkItem(btn, event, bookId) {
-      event.stopPropagation();
-      const icon = btn.querySelector('i');
-      if (icon.classList.contains('bi-bookmark')) {
-        icon.classList.remove('bi-bookmark');
-        icon.classList.add('bi-bookmark-fill', 'text-amber-500');
-        showToast('បានរក្សាទុកក្នុងបញ្ជីចំណាំ', 'bi-bookmark-check-fill');
-      } else {
-        icon.classList.add('bi-bookmark');
-        icon.classList.remove('bi-bookmark-fill', 'text-amber-500');
-        showToast('បានដកចេញពីបញ្ជីចំណាំ', 'bi-bookmark-x');
-      }
-    }
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function handleLoginSubmit(e) {
-      e.preventDefault();
-      closeModal('login-modal');
-      showToast('ចូលគណនីបានជោគជ័យ! សូមស្វាគមន៍មកកាន់សាលាឌីជីថល', 'bi-person-check-fill');
-    }
-
-    function handleSchoolRegisterSubmit(e) {
-      e.preventDefault();
-      closeModal('register-school-modal');
-      showToast('សំណើបង្កើតសាលាត្រូវបានបញ្ជូនដោយជោគជ័យ!', 'bi-envelope-check-fill');
-    }
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeModal('login-modal');
-        closeModal('register-school-modal');
-        closeReaderModal();
-      }
-      if (e.key === 'ArrowRight' && !document.getElementById('reader-modal').classList.contains('hidden')) {
-        nextReaderPage();
-      }
-      if (e.key === 'ArrowLeft' && !document.getElementById('reader-modal').classList.contains('hidden')) {
-        prevReaderPage();
-      }
-    });
-  </script>
+window.addEventListener('keydown', e => {
+  const open = !document.getElementById('reader-modal').classList.contains('hidden');
+  if (e.key === 'Escape') { closeModal('login-modal'); closeModal('register-school-modal'); if (open) closeReaderModal(); }
+  if (open && e.key === 'ArrowRight') nextReaderPage();
+  if (open && e.key === 'ArrowLeft') prevReaderPage();
+});
+</script>
 </body>
 </html>
